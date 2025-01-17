@@ -117,16 +117,16 @@ public class VariableNamesTheme {
         System.out.println("Boolean - переменные\n");
 
         // Сотни равны?
-        boolean isEqualsHundreds = true;
-        System.out.println("Переменная boolean \"Сотни равны?\" " + isEqualsHundreds);
+        boolean isEqualHundreds = true;
+        System.out.println("Переменная boolean \"Сотни равны?\" " + isEqualHundreds);
 
         // Компьютер включен?
         boolean isComputerTurnOn = true; 
         System.out.println("Переменная boolean \"Компьютер включен?\" " + isComputerTurnOn);
 
         // Есть равные цифры?
-        boolean isEqualNums = false; 
-        System.out.println("Переменная boolean \"Есть равные цифры?\" " + isEqualNums); 
+        boolean isEqualDigits = false; 
+        System.out.println("Переменная boolean \"Есть равные цифры?\" " + isEqualDigits); 
 
         // Cоздано?
         boolean isCreated = true; 
