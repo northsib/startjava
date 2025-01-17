@@ -1,5 +1,3 @@
-import java.lang.String;
-
 public class VariableNamesTheme {
     public static void main(String[] args) {
         System.out.println("\nРазные переменные\n");
@@ -13,8 +11,8 @@ public class VariableNamesTheme {
         System.out.println("Сумма цифр = " + digitSum);
 
         // Произведение цифр
-        int productNums = 1 * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9;
-        System.out.println("Произведение цифр = " + productNums);
+        int numsProduct = 1 * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9;
+        System.out.println("Произведение цифр = " + numsProduct);
 
         // Максимальное число
         int maxNum = 211131213; 
@@ -41,8 +39,8 @@ public class VariableNamesTheme {
         System.out.println("Переменная хранит символ = " + symbol);
 
         // Код ошибки
-        String mistakeCode = "Код ошибки - 10";
-        System.out.println(mistakeCode);
+        String errorCode = "Код ошибки - 10";
+        System.out.println(errorCode);
 
         // Тип сообщения
         String messageType = "Тип собщения - текстовый";
@@ -93,8 +91,8 @@ public class VariableNamesTheme {
         System.out.println("Работник месяца - " + employeeOfMonth);
 
         // Название электронной книги
-        String ebookName = "\"Программирование для чайников\"";
-        System.out.println("Название электронной книги - " + ebookName);
+        String ebookTitle = "\"Программирование для чайников\"";
+        System.out.println("Название электронной книги - " + ebookTitle);
 
         // Размер
         int size = 48;
@@ -109,79 +107,88 @@ public class VariableNamesTheme {
         System.out.println("Текущее значение счётчика = " + counter);
         
         // Путь до файла
-        String pathToFile = "C:\\Program Files\\java";
-        System.out.println("Путь до файла: " + pathToFile);
+        String filePath = "C:\\Program Files\\java";
+        System.out.println("Путь до файла: " + filePath);
 
         // Количество чисел в каждой строке
-        int quantityNums = 123;
-        System.out.println("Количество чисел в каждой строке = " + quantityNums + "\n");
+        int numsInEachRow = 123;
+        System.out.println("Количество чисел в каждой строке = " + numsInEachRow + "\n");
 
         System.out.println("Boolean - переменные\n");
 
         // Сотни равны?
-        boolean isEqualsHundred = true;
-        System.out.println(isEqualsHundred);
+        boolean isEqualsHundreds = true;
+        System.out.println("Переменная boolean \"Сотни равны?\" " + isEqualsHundreds);
 
         // Компьютер включен?
         boolean isComputerTurnOn = true; 
-        System.out.println(isComputerTurnOn);
+        System.out.println("Переменная boolean \"Компьютер включен?\" " + isComputerTurnOn);
 
         // Есть равные цифры?
-        boolean isEqualsNum = false; 
-        System.out.println(isEqualsNum); 
+        boolean isEqualNums = false; 
+        System.out.println("Переменная boolean \"Есть равные цифры?\" " + isEqualNums); 
 
         // Cоздано?
         boolean isCreated = true; 
-        System.out.println(isCreated);
+        System.out.println("Переменная boolean \"Cоздано?\" " + isCreated);
 
         // Пустое?
         boolean isEmpty = false; 
-        System.out.println(isEmpty);
+        System.out.println("Переменная boolean \"Пустое?\" " + isEmpty);
 
         // Активное?
         boolean isActive = true;
-        System.out.println(isActive);
+        System.out.println("Переменная boolean \"Активное?\" " + isActive);
 
         // Новое?
         boolean isNew = false; 
-        System.out.println(isNew);
+        System.out.println("Переменная boolean \"Новое?\" " + isNew);
 
         // Электронная почта действительная?
         boolean isValidEmail = true; 
+        System.out.print("Переменная boolean \"Электронная почта действительная?\" ");
         System.out.println(isValidEmail);
 
         // Имеются уникальные строки?
         boolean isUniqueStrings = true; 
+        System.out.print("Переменная boolean \"Имеются уникальные строки?\" ");
         System.out.println(isUniqueStrings + "\n");
 
         System.out.println("Аббревиатуры\n");
 
         // Старый universally unique identifier
         String oldUuid = "oldUuid";
-        System.out.println(oldUuid);
+        System.out.print("Переменная string, которая содержит аббревиатуру: ");
+        System.out.println("\"Старый universally unique identifier\" - " + oldUuid);
 
         // Производитель оперативной памяти
         String ramManufacturer = "ramManufacturer";
-        System.out.println(ramManufacturer);
+        System.out.print("Переменная string, которая содержит аббревиатуру: ");
+        System.out.println("\"Производитель оперативной памяти\" - " + ramManufacturer);
 
         // Емкость жесткого диска
         String hddCapacity = "hddCapacity";
-        System.out.println(hddCapacity);
+        System.out.print("Переменная string, которая содержит аббревиатуру: ");
+        System.out.println("\"Емкость жесткого диска\" - " + hddCapacity);
 
         // Протокол передачи гипертекста
         String http = "http";
-        System.out.println(http);
+        System.out.print("Переменная string, которая содержит аббревиатуру: ");
+        System.out.println("\"Протокол передачи гипертекста\" - " + http);
 
         // Сокращенный uniform resource locator
         String shortUrl = "shortUrl";
-        System.out.println(shortUrl);
+        System.out.print("Переменная string, которая содержит аббревиатуру: ");
+        System.out.println("\"Сокращенный uniform resource locator\" - " + shortUrl);
 
         // Новый идентификатор клиента
-        String newClientId = "newClientId";
-        System.out.println(newClientId);
+        String newCid = "newClientId";
+        System.out.print("Переменная string, которая содержит аббревиатуру: ");
+        System.out.println("\"Новый идентификатор клиента\" - " + newCid);
 
         // American standard code for information interchange
         String ascii = "ascii";
-        System.out.println(ascii);
+        System.out.print("Переменная string, которая содержит аббревиатуру: ");
+        System.out.println("\"American standard code for information interchange\" - " + ascii);
     }
 }
