@@ -1,194 +1,196 @@
-public class VariableNamesTheme {
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
+public class VariablesTheme {
     public static void main(String[] args) {
-        System.out.println("\nРазные переменные\n");
+        // 1. Вывод характеристик компьютера
+        System.out.println("\n1. Вывод характеристик компьютера\n");
+
+        String cpuName = "Intel 9700KF";
+        System.out.println("Название процессора - " + cpuName);
+
+        byte coresCount = 8;
+        System.out.println("Количество ядер - " + coresCount);
+
+        short windowsVersion = 10;
+        System.out.println("Установлена операционная система Windows " + windowsVersion); 
+
+        int ramAmount = 32;
+        System.out.println("Количество оперативной памяти - " + ramAmount + " GB");
+
+        long threadsCount = 8;
+        System.out.println("Количество потоков - " + threadsCount);
+
+        float cpuFrequency = 3.6f;
+        System.out.println("Частота процессора - " + cpuFrequency + " GHz");
+
+        double hddCapacity = 1.2d;
+        System.out.println("Емкость жесткого диска - " + hddCapacity + " Tb");
+
+        char ramSlots = '4';
+        System.out.println("Количество слотов оперативной памяти - " + ramSlots);
+
+        boolean hasJava = true; 
+        System.out.println("На компьютере установлена Java - " + hasJava + "\n");
+
+        // 2. Расчет стоимости товара со скидкой
+        System.out.println("2. Расчёт стоимости товара со скидкой\n");
+
+        float penCost = 105.5f;
+        float bookCost = 235.83f;
+        float discount = 0.11f;
+
+        System.out.println("Стоимость ручки без скидки = " + penCost + " рублей");
+        System.out.println("Стоимость книги без скидки = " + bookCost + " рублей");
+        System.out.println("Сумма скидки составила = " + ((penCost + bookCost) * discount) + 
+                " рублей");
+
+        float newPenCost = penCost - (penCost * discount);
+        System.out.println("Стоимость ручки со скидкой = " + newPenCost + " рублей");
+        float newBookCost = bookCost - (bookCost * discount);
+        System.out.println("Стоимость книги со скидкой = " + newBookCost + " рублей\n");
         
-        // Цифра
-        int num = 1;
-        System.out.println("Цифра = " + num);
+        // 3. Вывод слова JAVA
+        System.out.println("3. Вывод слова JAVA\n");
 
-        // Сумма чисел
-        int digitSum = 1 + 2 + 3 + 4 + 5 + 6 + 7 + 8 + 9 + 10;
-        System.out.println("Сумма цифр = " + digitSum);
+        System.out.println("   J    A    V     V    A");
+        System.out.println("   J   A A    V   V    A A");
+        System.out.println("J  J  AAAAA    V V    AAAAA");
+        System.out.println(" JJ  A     A    V    A     A\n");
 
-        // Произведение цифр
-        int numsProduct = 1 * 2 * 3 * 4 * 5 * 6 * 7 * 8 * 9;
-        System.out.println("Произведение цифр = " + numsProduct);
-
-        // Максимальное число
-        int maxNum = 211131213; 
-        System.out.println("Максимальное число = " + maxNum);
-
-        // Количество десятков
-        int tenCount = maxNum / 10;
-        System.out.println("Количество десятков = " + tenCount);
-
-        // Вес собаки
-        int dogWeight = 25;
-        System.out.println("Вес собаки = " + dogWeight);
-
-        // Исходное число
-        int originalNum = 1; 
-        System.out.println("Исходное число = " + originalNum);
-
-        // Процент по вкладу
-        int depositPercent = 25; 
-        System.out.println("Процент по вкладу = " + depositPercent);
-
-        // Переменная хранит символ &
-        char symbol = '&'; 
-        System.out.println("Переменная хранит символ = " + symbol);
-
-        // Код ошибки
-        String errorCode = "Код ошибки - 10";
-        System.out.println(errorCode);
-
-        // Тип сообщения
-        String messageType = "Тип собщения - текстовый";
-        System.out.println(messageType);
-
-        // Число нулей
-        int zeroCount = 2;
-        System.out.println("Число нулей = " + zeroCount);
-
-        // Уникальное число
-        int uniqueNum = 3;
-        System.out.println("Уникальное число = " + uniqueNum);
-
-        // Случайное число
-        int randomNum = 7;
-        System.out.println("Случайное число = " + randomNum);
-
-        // Математическое выражение
-        int mathSum = 147 + 97;
-        System.out.println("Сумма чисел 147 и 97 будет равна " + mathSum);
-
-        // Счет в игре         
-        String score = "1 - 0";
-        System.out.println("Счёт в игре " + score);
-
-        // Максимальная длина
-        int maxLong = 1000; 
-        System.out.println("Максимальная длина = " + maxLong + " метров");
-
-        // Пункт меню
-        String menuItem = "Гриль блюда";
-        System.out.println("Пункт меню: " + menuItem);
-
-        // Стоимость кофе
-        int cofeePrice = 250;
-        System.out.println("Стоимость кофе = " + cofeePrice + " рублей");
-
-        // Начальная дата
-        String initialDate = "01/01/2025";
-        System.out.println("Начальная дата: " + initialDate);
-
-        // Окончание диапазона
-        int endRange = 999;
-        System.out.println("Окончание диапазона = " + endRange);
-
-        // Имя работника месяца
-        String employeeOfMonth = "Геннадий";
-        System.out.println("Работник месяца - " + employeeOfMonth);
-
-        // Название электронной книги
-        String ebookTitle = "\"Программирование для чайников\"";
-        System.out.println("Название электронной книги - " + ebookTitle);
-
-        // Размер
-        int size = 48;
-        System.out.println("Размер футболки - " + size);
-
-        // Вместимость
-        int capacity = 121;
-        System.out.println("Вместимость корабля - " + capacity + " место");
-
-        // Счетчик
-        int counter = 0;
-        System.out.println("Текущее значение счётчика = " + counter);
+        // 4. Вывод min и max значений целых числовых типов
+        System.out.println("4. Вывод min и max значений целых числовых типов \n");
         
-        // Путь до файла
-        String filePath = "C:\\Program Files\\java";
-        System.out.println("Путь до файла: " + filePath);
+        byte maxByte = Byte.MAX_VALUE;
+        System.out.println("Максимальное значение byte = " + maxByte++);
+        System.out.println("Максимальное значение byte после инкремента на единицу = " + maxByte--);
+        System.out.println("Максимальное значение byte после декремента на единицу = " + maxByte);
+        System.out.println();
+        
+        short maxShort = Short.MAX_VALUE;
+        System.out.println("Максимальное значение short = " + maxShort++);
+        System.out.println("Максимальное значение short после инкремента на единицу = " + 
+                maxShort--);
+        System.out.println("Максимальное значение short после декремента на единицу = " + maxShort);
+        System.out.println();
 
-        // Количество чисел в каждой строке
-        int numsInEachRow = 123;
-        System.out.println("Количество чисел в каждой строке = " + numsInEachRow + "\n");
+        int maxInt = Integer.MAX_VALUE;
+        System.out.println("Максимальное значение int = " + maxInt++);
+        System.out.println("Максимальное значение int после инкремента на единицу = " + maxInt--);
+        System.out.println("Максимальное значение int после декремента на единицу = " + maxInt);
+        System.out.println();
+        
+        long maxLong = Long.MAX_VALUE;
+        System.out.println("Максимальное значение long = " + maxLong++);
+        System.out.println("Максимальное значение long после инкремента на единицу = " + maxLong--);
+        System.out.println("Максимальное значение long после декремента на единицу = " + maxLong);
+        System.out.println();
 
-        System.out.println("Boolean - переменные\n");
+        char maxChar = Character.MAX_VALUE + 0;
+        System.out.println("Максимальное значение char = " + (int) maxChar);
+        System.out.println("Максимальное значение char после инкремента на единицу = " + 
+                (int) ++maxChar);
+        System.out.println("Максимальное значение char после декремента на единицу = " + 
+                (int) --maxChar + "\n");
 
-        // Сотни равны?
-        boolean isEqualHundreds = true;
-        System.out.println("Переменная boolean \"Сотни равны?\" " + isEqualHundreds);
+        // 5. Перестановка значений переменных
+        System.out.println("5. Перестановка значений переменных\n");
 
-        // Компьютер включен?
-        boolean isComputerTurnOn = true; 
-        System.out.println("Переменная boolean \"Компьютер включен?\" " + isComputerTurnOn);
+        int a = 2;
+        int b = 5;
+        System.out.println("Значение переменной a = " + a + " , значение переменной b = " + b);
 
-        // Есть равные цифры?
-        boolean isEqualDigits = false; 
-        System.out.println("Переменная boolean \"Есть равные цифры?\" " + isEqualDigits); 
+        int swap = a;
+        a = b; 
+        b = swap;
+        System.out.println("При помощи третьей переменной swap, мы переставили значения a и b " + 
+                "местами, a = " + a + ", b = " + b);
 
-        // Cоздано?
-        boolean isCreated = true; 
-        System.out.println("Переменная boolean \"Cоздано?\" " + isCreated);
+        a += b;
+        b = a - b;
+        a -= b;
+        System.out.println("При помощи арифметических операций, мы переставили значения a и b " + 
+                "местами, a = " + a + ", b = " + b);
 
-        // Пустое?
-        boolean isEmpty = false; 
-        System.out.println("Переменная boolean \"Пустое?\" " + isEmpty);
+        a ^= b;
+        b ^= a;
+        a ^= b; 
+        System.out.println("При помощи побитовой операции, мы переставили значения a и b " + 
+                "местами, a = " + a + ", b = " + b + "\n");
 
-        // Активное?
-        boolean isActive = true;
-        System.out.println("Переменная boolean \"Активное?\" " + isActive);
+        // 6. Вывод символов и их кодов
+        System.out.println("6. Вывод символов и их кодов\n");
 
-        // Новое?
-        boolean isNew = false; 
-        System.out.println("Переменная boolean \"Новое?\" " + isNew);
+        char dollar = '$';
+        System.out.println("Код символа - " + (int) dollar + ", знак символа - $");
+        char asterisk = '*';
+        System.out.println("Код символа - " + (int) asterisk + ", знак символа - *");
+        char atSign = '@';
+        System.out.println("Код символа - " + (int) atSign + ", знак символа - @");
+        char caret = '^';
+        System.out.println("Код символа - " + (int) caret + ", знак символа - ^");
+        char tilde = '~';
+        System.out.println("Код символа - " + (int) tilde + ", знак символа - ~\n");
 
-        // Электронная почта действительная?
-        boolean isValidEmail = true; 
-        System.out.print("Переменная boolean \"Электронная почта действительная?\" ");
-        System.out.println(isValidEmail);
+        // 7. Вывод в консоль ASCII-арт Дюка
+        System.out.println("7. Вывод в консоль ASCII-арт Дюка\n");
 
-        // Имеются уникальные строки?
-        boolean isUniqueStrings = true; 
-        System.out.print("Переменная boolean \"Имеются уникальные строки?\" ");
-        System.out.println(isUniqueStrings + "\n");
+        char slash = '/';
+        char backslash = '\\';
+        char underscore = '_';
+        char openParenthesis = '(';
+        char closeParenthesis = ')';
 
-        System.out.println("Аббревиатуры\n");
+        System.out.println("    " + slash + backslash);
+        System.out.println("   " + slash + "  " + backslash);
+        System.out.println("  " + slash + underscore + openParenthesis + closeParenthesis + 
+                underscore + "" + backslash);
+        System.out.println(" " + slash + "      " + backslash);
+        System.out.println(slash + "" + underscore + "" + underscore + "" + underscore + 
+                "" + slash + "" + backslash + "" + underscore + "" + underscore + "" + 
+                underscore + "" + backslash + "\n");
 
-        // Старый universally unique identifier
-        String oldUuid = "oldUuid";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Старый universally unique identifier\" - " + oldUuid);
+        // 8. Манипуляции с сотнями, десятками и единицами числа
+        System.out.println("8. Манипуляции с сотнями, десятками и единицами числа\n");
 
-        // Производитель оперативной памяти
-        String ramManufacturer = "ramManufacturer";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Производитель оперативной памяти\" - " + ramManufacturer);
+        int num = 123;
+        int hundredsCount = num / 100;
+        int tensCount = (num % 100) / 10;
+        int onesCount = num % 10; 
+        System.out.println("Число 123 содержит:");
+        System.out.println("  сотен - " + hundredsCount);
+        System.out.println("  десятков - " + tensCount);
+        System.out.println("  единиц - " + onesCount);
+        int digitSum = hundredsCount + tensCount + onesCount;
+        System.out.println("Сумма разрядов = " + digitSum);
+        int digitProduce = hundredsCount * tensCount * onesCount;
+        System.out.println("Произведение разрядов = " + digitProduce + "\n");
 
-        // Емкость жесткого диска
-        String hddCapacity = "hddCapacity";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Емкость жесткого диска\" - " + hddCapacity);
+        // 9. Перевод секунд в часы, минуты и секунды
+        System.out.println("9. Перевод секунд в часы, минуты и секунды\n");
 
-        // Протокол передачи гипертекста
-        String http = "http";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Протокол передачи гипертекста\" - " + http);
+        int timeInSeconds = 86399;
+        int hh = timeInSeconds / 3600;
+        int mm = (timeInSeconds % 3600) / 60; 
+        int ss = timeInSeconds % 60;
+        System.out.println("Время - " + hh + ":" + mm + ":" + ss + "\n");
 
-        // Сокращенный uniform resource locator
-        String shortUrl = "shortUrl";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Сокращенный uniform resource locator\" - " + shortUrl);
+        // 10. Расчёт стоимости товара со скидкой через BigDecimal
+        System.out.println("10. Расчёт стоимости товара со скидкой через BigDecimal\n");
 
-        // Новый идентификатор клиента
-        String newCid = "newClientId";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Новый идентификатор клиента\" - " + newCid);
-
-        // American standard code for information interchange
-        String ascii = "ascii";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"American standard code for information interchange\" - " + ascii);
+        var penCost1 = new BigDecimal("105.50");
+        var bookCost1 = new BigDecimal("235.83");
+        var discount1 = new BigDecimal("0.11");
+        System.out.println("Стоимость ручки без скидки = " + penCost1 + " рублей");
+        System.out.println("Стоимость книги без скидки = " + bookCost1 + " рублей");
+        System.out.println("Сумма скидки составила = " + 
+                penCost1.add(bookCost1).multiply(discount1).setScale(2, RoundingMode.HALF_UP) + 
+                " рублей");
+        var newPenCost1 = penCost1.subtract(penCost1.multiply(discount1).setScale(
+                2, RoundingMode.HALF_UP));
+        var newBookCost1 = bookCost1.subtract(bookCost1.multiply(discount1).setScale(
+                2, RoundingMode.HALF_UP));
+        System.out.println("Стоимость ручки со скидкой = " + newPenCost1 + " рублей");
+        System.out.println("Стоимость книги со скидкой = " + newBookCost1 + " рублей\n");
     }
 }
