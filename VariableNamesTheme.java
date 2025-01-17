@@ -158,37 +158,37 @@ public class VariableNamesTheme {
 
         // Старый universally unique identifier
         String oldUuid = "oldUuid";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Старый universally unique identifier\" - " + oldUuid);
+        System.out.println("Переменная string, которая содержит аббревиатуру: " + 
+                "\"Старый universally unique identifier\" - " + oldUuid);
 
         // Производитель оперативной памяти
         String ramManufacturer = "ramManufacturer";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Производитель оперативной памяти\" - " + ramManufacturer);
+        System.out.print("Переменная string, которая содержит аббревиатуру: " + 
+                "\"Производитель оперативной памяти\" - " + ramManufacturer);
 
         // Емкость жесткого диска
         String hddCapacity = "hddCapacity";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Емкость жесткого диска\" - " + hddCapacity);
+        System.out.print("Переменная string, которая содержит аббревиатуру: " + 
+                "\"Емкость жесткого диска\" - " + hddCapacity);
 
         // Протокол передачи гипертекста
         String http = "http";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Протокол передачи гипертекста\" - " + http);
+        System.out.print("Переменная string, которая содержит аббревиатуру: " + 
+                "\"Протокол передачи гипертекста\" - " + http);
 
         // Сокращенный uniform resource locator
         String shortUrl = "shortUrl";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Сокращенный uniform resource locator\" - " + shortUrl);
+        System.out.print("Переменная string, которая содержит аббревиатуру: " + 
+                "\"Сокращенный uniform resource locator\" - " + shortUrl);
 
         // Новый идентификатор клиента
         String newCid = "newClientId";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"Новый идентификатор клиента\" - " + newCid);
+        System.out.print("Переменная string, которая содержит аббревиатуру: " + 
+                "\"Новый идентификатор клиента\" - " + newCid);
 
         // American standard code for information interchange
         String ascii = "ascii";
-        System.out.print("Переменная string, которая содержит аббревиатуру: ");
-        System.out.println("\"American standard code for information interchange\" - " + ascii);
+        System.out.print("Переменная string, которая содержит аббревиатуру: " + 
+                "\"American standard code for information interchange\" - " + ascii);
     }
 }
