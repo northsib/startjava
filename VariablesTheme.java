@@ -6,11 +6,11 @@ public class VariablesTheme {
         // 1. Вывод характеристик компьютера
         System.out.println("\n1. Вывод характеристик компьютера\n");
 
-        String cpuName = "Intel 9700KF";
-        System.out.println("Название процессора - " + cpuName);
+        int cpuIntelModel = 9700;
+        System.out.println("Название процессора - Intel " + cpuIntelModel + "KF");
 
-        byte coresCount = 8;
-        System.out.println("Количество ядер - " + coresCount);
+        byte coreCount = 8;
+        System.out.println("Количество ядер - " + coreCount);
 
         short windowsVersion = 10;
         System.out.println("Установлена операционная система Windows " + windowsVersion); 
@@ -18,8 +18,8 @@ public class VariablesTheme {
         int ramAmount = 32;
         System.out.println("Количество оперативной памяти - " + ramAmount + " GB");
 
-        long threadsCount = 8;
-        System.out.println("Количество потоков - " + threadsCount);
+        long threadCount = 8;
+        System.out.println("Количество потоков - " + threadCount);
 
         float cpuFrequency = 3.6f;
         System.out.println("Частота процессора - " + cpuFrequency + " GHz");
@@ -31,10 +31,10 @@ public class VariablesTheme {
         System.out.println("Количество слотов оперативной памяти - " + ramSlots);
 
         boolean hasJava = true; 
-        System.out.println("На компьютере установлена Java - " + hasJava + "\n");
+        System.out.println("На компьютере установлена Java - " + hasJava);
 
         // 2. Расчет стоимости товара со скидкой
-        System.out.println("2. Расчёт стоимости товара со скидкой\n");
+        System.out.println("\n2. Расчёт стоимости товара со скидкой\n");
 
         float penCost = 105.5f;
         float bookCost = 235.83f;
@@ -42,59 +42,54 @@ public class VariablesTheme {
 
         System.out.println("Стоимость ручки без скидки = " + penCost + " рублей");
         System.out.println("Стоимость книги без скидки = " + bookCost + " рублей");
-        System.out.println("Сумма скидки составила = " + ((penCost + bookCost) * discount) + 
-                " рублей");
+        System.out.println("Сумма скидки составила = " + 
+                ((penCost + bookCost) * discount) + " рублей");
 
-        float newPenCost = penCost - (penCost * discount);
-        System.out.println("Стоимость ручки со скидкой = " + newPenCost + " рублей");
-        float newBookCost = bookCost - (bookCost * discount);
-        System.out.println("Стоимость книги со скидкой = " + newBookCost + " рублей\n");
+        float discountedPenCost = penCost - (penCost * discount);
+        System.out.println("Стоимость ручки со скидкой = " + discountedPenCost + " рублей");
+        float discountedBookCost = bookCost - (bookCost * discount);
+        System.out.println("Стоимость книги со скидкой = " + discountedBookCost + " рублей");
         
         // 3. Вывод слова JAVA
-        System.out.println("3. Вывод слова JAVA\n");
+        System.out.println("\n3. Вывод слова JAVA\n");
 
         System.out.println("   J    A    V     V    A");
         System.out.println("   J   A A    V   V    A A");
         System.out.println("J  J  AAAAA    V V    AAAAA");
-        System.out.println(" JJ  A     A    V    A     A\n");
+        System.out.println(" JJ  A     A    V    A     A");
 
         // 4. Вывод min и max значений целых числовых типов
-        System.out.println("4. Вывод min и max значений целых числовых типов \n");
+        System.out.println("\n4. Вывод min и max значений целых числовых типов \n");
         
         byte maxByte = Byte.MAX_VALUE;
         System.out.println("Максимальное значение byte = " + maxByte++);
         System.out.println("Максимальное значение byte после инкремента на единицу = " + maxByte--);
         System.out.println("Максимальное значение byte после декремента на единицу = " + maxByte);
-        System.out.println();
         
         short maxShort = Short.MAX_VALUE;
-        System.out.println("Максимальное значение short = " + maxShort++);
-        System.out.println("Максимальное значение short после инкремента на единицу = " + 
-                maxShort--);
+        System.out.println("\nМаксимальное значение short = " + maxShort++);
+        System.out.println("Максимальное значение short после инкремента на единицу = " + maxShort--);
         System.out.println("Максимальное значение short после декремента на единицу = " + maxShort);
-        System.out.println();
 
         int maxInt = Integer.MAX_VALUE;
-        System.out.println("Максимальное значение int = " + maxInt++);
+        System.out.println("\nМаксимальное значение int = " + maxInt++);
         System.out.println("Максимальное значение int после инкремента на единицу = " + maxInt--);
         System.out.println("Максимальное значение int после декремента на единицу = " + maxInt);
-        System.out.println();
         
         long maxLong = Long.MAX_VALUE;
-        System.out.println("Максимальное значение long = " + maxLong++);
+        System.out.println("\nМаксимальное значение long = " + maxLong++);
         System.out.println("Максимальное значение long после инкремента на единицу = " + maxLong--);
         System.out.println("Максимальное значение long после декремента на единицу = " + maxLong);
-        System.out.println();
 
         char maxChar = Character.MAX_VALUE + 0;
-        System.out.println("Максимальное значение char = " + (int) maxChar);
+        System.out.println("\nМаксимальное значение char = " + (int) maxChar);
         System.out.println("Максимальное значение char после инкремента на единицу = " + 
                 (int) ++maxChar);
         System.out.println("Максимальное значение char после декремента на единицу = " + 
-                (int) --maxChar + "\n");
+                (int) --maxChar);
 
         // 5. Перестановка значений переменных
-        System.out.println("5. Перестановка значений переменных\n");
+        System.out.println("\n5. Перестановка значений переменных\n");
 
         int a = 2;
         int b = 5;
@@ -116,10 +111,10 @@ public class VariablesTheme {
         b ^= a;
         a ^= b; 
         System.out.println("При помощи побитовой операции, мы переставили значения a и b " + 
-                "местами, a = " + a + ", b = " + b + "\n");
+                "местами, a = " + a + ", b = " + b);
 
         // 6. Вывод символов и их кодов
-        System.out.println("6. Вывод символов и их кодов\n");
+        System.out.println("\n6. Вывод символов и их кодов\n");
 
         char dollar = '$';
         System.out.println("Код символа - " + (int) dollar + ", знак символа - $");
@@ -130,10 +125,10 @@ public class VariablesTheme {
         char caret = '^';
         System.out.println("Код символа - " + (int) caret + ", знак символа - ^");
         char tilde = '~';
-        System.out.println("Код символа - " + (int) tilde + ", знак символа - ~\n");
+        System.out.println("Код символа - " + (int) tilde + ", знак символа - ~");
 
         // 7. Вывод в консоль ASCII-арт Дюка
-        System.out.println("7. Вывод в консоль ASCII-арт Дюка\n");
+        System.out.println("\n7. Вывод в консоль ASCII-арт Дюка\n");
 
         char slash = '/';
         char backslash = '\\';
@@ -144,27 +139,26 @@ public class VariablesTheme {
         System.out.println("    " + slash + backslash);
         System.out.println("   " + slash + "  " + backslash);
         System.out.println("  " + slash + underscore + openParenthesis + closeParenthesis + 
-                underscore + "" + backslash);
+                underscore + backslash);
         System.out.println(" " + slash + "      " + backslash);
-        System.out.println(slash + "" + underscore + "" + underscore + "" + underscore + 
-                "" + slash + "" + backslash + "" + underscore + "" + underscore + "" + 
-                underscore + "" + backslash + "\n");
+        System.out.println("" + slash + underscore + underscore + underscore + 
+                slash + backslash + underscore + underscore + underscore + backslash);
 
         // 8. Манипуляции с сотнями, десятками и единицами числа
-        System.out.println("8. Манипуляции с сотнями, десятками и единицами числа\n");
+        System.out.println("\n8. Манипуляции с сотнями, десятками и единицами числа\n");
 
         int num = 123;
-        int hundredsCount = num / 100;
-        int tensCount = (num % 100) / 10;
-        int onesCount = num % 10; 
-        System.out.println("Число 123 содержит:");
-        System.out.println("  сотен - " + hundredsCount);
-        System.out.println("  десятков - " + tensCount);
-        System.out.println("  единиц - " + onesCount);
-        int digitSum = hundredsCount + tensCount + onesCount;
+        int hundredCount = num / 100;
+        int tenCount = (num % 100) / 10;
+        int oneCount = num % 10; 
+        System.out.println("Число " + num + " содержит:");
+        System.out.println("  сотен - " + hundredCount);
+        System.out.println("  десятков - " + tenCount);
+        System.out.println("  единиц - " + oneCount);
+        int digitSum = hundredCount + tenCount + oneCount;
         System.out.println("Сумма разрядов = " + digitSum);
-        int digitProduce = hundredsCount * tensCount * onesCount;
-        System.out.println("Произведение разрядов = " + digitProduce + "\n");
+        int digitProduct = hundredCount * tenCount * oneCount;
+        System.out.println("Произведение разрядов = " + digitProduct + "\n");
 
         // 9. Перевод секунд в часы, минуты и секунды
         System.out.println("9. Перевод секунд в часы, минуты и секунды\n");
@@ -184,13 +178,16 @@ public class VariablesTheme {
         System.out.println("Стоимость ручки без скидки = " + penCost1 + " рублей");
         System.out.println("Стоимость книги без скидки = " + bookCost1 + " рублей");
         System.out.println("Сумма скидки составила = " + 
-                penCost1.add(bookCost1).multiply(discount1).setScale(2, RoundingMode.HALF_UP) + 
-                " рублей");
-        var newPenCost1 = penCost1.subtract(penCost1.multiply(discount1).setScale(
-                2, RoundingMode.HALF_UP));
-        var newBookCost1 = bookCost1.subtract(bookCost1.multiply(discount1).setScale(
-                2, RoundingMode.HALF_UP));
-        System.out.println("Стоимость ручки со скидкой = " + newPenCost1 + " рублей");
-        System.out.println("Стоимость книги со скидкой = " + newBookCost1 + " рублей\n");
+                penCost1.add(bookCost1)
+                .multiply(discount1)
+                .setScale(2, RoundingMode.HALF_UP) + " рублей");
+        var discountedPenCost1 = penCost1.subtract(
+                penCost1.multiply(discount1)
+                .setScale(2, RoundingMode.HALF_UP));
+        var discountedBookCost1 = bookCost1.subtract(
+                bookCost1.multiply(discount1)
+                .setScale(2, RoundingMode.HALF_UP));
+        System.out.println("Стоимость ручки со скидкой = " + discountedPenCost1 + " рублей");
+        System.out.println("Стоимость книги со скидкой = " + discountedBookCost1 + " рублей");
     }
 }
