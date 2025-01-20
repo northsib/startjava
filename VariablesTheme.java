@@ -81,7 +81,7 @@ public class VariablesTheme {
         System.out.println("Максимальное значение long после инкремента на единицу = " + maxLong--);
         System.out.println("Максимальное значение long после декремента на единицу = " + maxLong);
 
-        char maxChar = Character.MAX_VALUE + 0;
+        char maxChar = Character.MAX_VALUE;
         System.out.println("\nМаксимальное значение char = " + (int) maxChar);
         System.out.println("Максимальное значение char после инкремента на единицу = " + 
                 (int) ++maxChar);
