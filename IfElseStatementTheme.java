@@ -7,7 +7,7 @@ public class IfElseStatementTheme {
         System.out.println("\n1. Перевод псевдокода на язык Java\n");
 
         String selectedGender = "Мужской";
-        if (!(selectedGender == "Мужской")) {
+        if (!selectedGender.equals("Мужской")) {
             System.out.println("Ваш пол - женский");
         } else {
             System.out.println("Ваш пол - мужской");
@@ -55,14 +55,16 @@ public class IfElseStatementTheme {
         int checkedNum = 0;
         if (checkedNum == 0) {
             System.out.println("Проверяемое число равно 0");
-        } else if (checkedNum % 2 == 1) {
-            System.out.println(checkedNum + " является положительным и нечётным");
-        } else if (checkedNum % 2 == -1) {
-            System.out.println(checkedNum + " является отрицательным и нечётным");
-        } else if ((checkedNum % 2 == 0) && (checkedNum > 0)) {
-            System.out.println(checkedNum + " является положительным и чётным");
-        } else if (checkedNum < 0) {
-            System.out.println(checkedNum + " является отрицательным и чётным");
+        } else {
+            if (checkedNum % 2 == 1) {
+                System.out.println(checkedNum + " является положительным и нечётным");
+            } else if (checkedNum % 2 == -1) {
+                System.out.println(checkedNum + " является отрицательным и нечётным");
+            } else if ((checkedNum % 2 == 0) && (checkedNum > 0)) {
+                System.out.println(checkedNum + " является положительным и чётным");
+            } else {
+                System.out.println(checkedNum + " является отрицательным и чётным");
+            } 
         }
 
         // 4. Поиск одинаковых цифр в числах
@@ -70,149 +72,108 @@ public class IfElseStatementTheme {
 
         int num3 = 123;
         int num4 = 223;
-        int hundredCountNum3 = num3 / 100;
-        int tenCountNum3 = (num3 % 100) / 10;
-        int oneCountNum3 = num3 % 10;
-        int hundredCountNum4 = num4 / 100;
-        int tenCountNum4 = (num4 % 100) / 10;
-        int oneCountNum4 = num4 % 10;
-        
-        if ((hundredCountNum3 == hundredCountNum4) || (tenCountNum3 == tenCountNum4) || (
-                oneCountNum3 == oneCountNum4)) {
-            if ((hundredCountNum3 == hundredCountNum4) && (tenCountNum3 == tenCountNum4) && (
-                    oneCountNum3 == oneCountNum4)) {
-                System.out.println("Введенные Вами числа равны");
-            } else if ((hundredCountNum3 == hundredCountNum4) && (tenCountNum3 == tenCountNum4)) {
-                System.out.println("У чисел " + num3 + " и " + num4 + 
-                        " равное количество сотен - " + hundredCountNum3 + 
-                        " и равное количество десятков - " + tenCountNum3);
-            } else if ((hundredCountNum3 == hundredCountNum4) && (oneCountNum3 == oneCountNum4)) {
-                System.out.println("У чисел " + num3 + " и " + num4 + 
-                        " равное количество сотен - " + hundredCountNum3 + 
-                        " и равное количество единиц - " + oneCountNum3);
-            } else if ((tenCountNum3 == tenCountNum4) && (oneCountNum3 == oneCountNum4)) {
-                System.out.println("У чисел " + num3 + " и " + num4 + 
-                        " равное количество десятков - " + tenCountNum3 + 
-                        " и равное количество единиц - " + oneCountNum3);
-            } else if (hundredCountNum3 == hundredCountNum4) {
-                System.out.println("У чисел " + num3 + " и " + num4 + 
-                        " равное количество сотен - " + hundredCountNum3);
-            } else if (tenCountNum3 == tenCountNum4) {
-                System.out.println("У чисел " + num3 + " и " + num4 + 
-                        " равное количество десятков - " + tenCountNum3);
-            } else if (oneCountNum3 == oneCountNum4) {
-                System.out.println("У чисел " + num3 + " и " + num4 + 
-                        " равное количество единиц - " + oneCountNum3);
-            }
-        } else {
+
+        if ((num3 / 100 != num4 / 100) && ((num3 % 100) / 10 != (num4 % 100) / 10) &&
+                (num3 % 10 != num4 % 10)) {
             System.out.println("Равных цифр в разрядах чисел нет");
+        } else {
+            if (num3 / 100 == num4 / 100) {
+                System.out.println("У чисел " + num3 + " и " + num4 +
+                        " равное количество сотен - " + num3 / 100);
+            }
+            if ((num3 % 100) / 10 == (num4 % 100) / 10) {
+                System.out.println("У чисел " + num3 + " и " + num4 +
+                        " равное количество десятков - " + (num3 % 100) / 10);
+            }
+            if (num3 % 10 == num4 % 10) {
+                System.out.println("У чисел " + num3 + " и " + num4 +
+                        " равное количество единиц - " + num3 % 10);
+            }
         }
 
         // 5. Определение символа по его коду
         System.out.println("\n5. Определение символа по его коду\n");
 
-        char checkedSymbol = 'a';
-        int symbolDecimal = (int) checkedSymbol;
+        char checkedSymbol = '\u0057';
 
-        if (48 <= symbolDecimal && symbolDecimal <= 57) {
+        if ((int) '0' <= (int) checkedSymbol && (int) checkedSymbol <= (int) '9') {
             System.out.println(checkedSymbol + " - это цифра");
-        } else if (65 <= symbolDecimal && symbolDecimal <= 90) {
+        } else if ((int) 'A' <= (int) checkedSymbol && (int) checkedSymbol <= (int) 'Z') {
             System.out.println(checkedSymbol + " - это большая буква");
-        } else if (97 <= symbolDecimal && symbolDecimal <= 122) {
+        } else if ((int) 'a' <= (int) checkedSymbol && (int) checkedSymbol <= (int) 'z') {
             System.out.println(checkedSymbol + " - это маленькая буква");
         } else {
             System.out.println(checkedSymbol + " - это не цифра и не буква");
         }
 
-        // 6. Подсчет начисленных банком %
-        System.out.println("\n6. Подсчет начисленных банком\n");
+        // 6. Подсчет начисленных банком процентов
+        System.out.println("\n6. Подсчет начисленных банком процентов\n");
 
-        BigDecimal moneyOnDeposit = new BigDecimal("321123.59");
-        System.out.println("На вклад внесено " + moneyOnDeposit + " рублей");
-        if (moneyOnDeposit.compareTo(new BigDecimal("100000")) < 0) {
-            BigDecimal depositInterest = new BigDecimal("0.05");
-            BigDecimal accruedEarnings = moneyOnDeposit.multiply(depositInterest)
-                    .setScale(2, RoundingMode.HALF_UP);
-            System.out.println("Сумма начисленного процента составит - " + 
-                    accruedEarnings + " рублей");
-            System.out.println("Итоговая сумма на вкладе составит - " + 
-                    moneyOnDeposit.add(accruedEarnings) + " рублей");
-        } else if (0 < moneyOnDeposit.compareTo(new BigDecimal("100000")) && 
-                moneyOnDeposit.compareTo(new BigDecimal("300000")) < 0) {
-            BigDecimal depositInterest = new BigDecimal("0.07");
-            BigDecimal accruedEarnings = moneyOnDeposit.multiply(depositInterest)
-                    .setScale(2, RoundingMode.HALF_UP);
-            System.out.println("Сумма начисленного процента составит - " + 
-                    accruedEarnings + " рублей");
-            System.out.println("Итоговая сумма на вкладе составит - " + 
-                    moneyOnDeposit.add(accruedEarnings) + " рублей");
-        } else if (moneyOnDeposit.compareTo(new BigDecimal("300000")) > 0) {
-            BigDecimal depositInterest = new BigDecimal("0.10");
-            BigDecimal accruedEarnings = moneyOnDeposit.multiply(depositInterest)
-                    .setScale(2, RoundingMode.HALF_UP);
-            System.out.println("Сумма начисленного процента составит - " + 
-                    accruedEarnings + " рублей");
-            System.out.println("Итоговая сумма на вкладе составит - " + 
-                    moneyOnDeposit.add(accruedEarnings) + " рублей");
+        float moneyOnDeposit1 = 321123.59f;
+        float depositInterest1 = 0f;
+        if (0 <= moneyOnDeposit1 && moneyOnDeposit1 <= 100000) {
+            depositInterest1 = 0.05f;
+        } else if (100000 < moneyOnDeposit1 && moneyOnDeposit1 <= 300000) {
+            depositInterest1 = 0.07f;
+        } else if (300000 < moneyOnDeposit1) {
+            depositInterest1 = 0.10f;
         }
+        System.out.println("На вклад внесено " + moneyOnDeposit1 + " рублей, " +
+                "\nсумма начисленного процента составила - " + 
+                moneyOnDeposit1 * depositInterest1 + " рублей, " +
+                "\nитоговая сумма на вкладе составит - " + 
+                (moneyOnDeposit1 + moneyOnDeposit1 * depositInterest1) + " рублей");
 
         // 7. Определение оценки по предметам
         System.out.println("\n7. Определение оценки по предметам\n");
 
-        BigDecimal historyProcent = new BigDecimal("84");
-        BigDecimal historyAssesment = new BigDecimal("0"); 
-        if (historyProcent.compareTo(new BigDecimal("60")) <= 0) {
-            historyAssesment = new BigDecimal("2");
-            System.out.println("оценка по истории - " + historyAssesment);
+        float historyProcent = 59f;
+        float historyAssesment = 0f;
+        if (historyProcent <= 60) {
+            historyAssesment = 2;
+        } else if (60 < historyProcent && historyProcent <= 73) {
+            historyAssesment = 3;
+        } else if (73 < historyProcent && historyProcent <= 91) {
+            historyAssesment = 4;
+        } else if (91 < historyProcent) {
+            historyAssesment = 5;
         }
-        if (0 < historyProcent.compareTo(new BigDecimal("60")) && 
-                historyProcent.compareTo(new BigDecimal("73")) <= 0) {
-            historyAssesment = new BigDecimal("3");
-            System.out.println("оценка по истории - " + historyAssesment);
+        System.out.println("оценка по истории - " + historyAssesment);
+        float programmingProcent = 92f;
+        float programmingAssesment = 0f;
+        if (programmingProcent <= 60) {
+            programmingAssesment = 2;
+        } else if (60 < programmingProcent && programmingProcent <= 73) {
+            programmingAssesment = 3;
+        } else if (73 < programmingProcent && programmingProcent <= 91) {
+            programmingAssesment = 4;
+        } else if (91 < programmingProcent) {
+            programmingAssesment = 5;
         }
-        if (0 < historyProcent.compareTo(new BigDecimal("73")) && 
-                historyProcent.compareTo(new BigDecimal("91")) <= 0) {
-            historyAssesment = new BigDecimal("4");
-            System.out.println("оценка по истории - " + historyAssesment);
-        }
-        if (0 < historyProcent.compareTo(new BigDecimal("91"))) {
-            historyAssesment = new BigDecimal("5");
-            System.out.println("оценка по истории - " + historyAssesment);
-        }
-
-        BigDecimal programmingProcent = new BigDecimal("79");
-        BigDecimal programmingAssesment = new BigDecimal("0");
-        if (programmingProcent.compareTo(new BigDecimal("60")) <= 0) {
-            programmingAssesment = new BigDecimal("2");
-            System.out.println("оценка по программированию - " + programmingAssesment);
-        } 
-        if (0 < programmingProcent.compareTo(new BigDecimal("60")) && 
-                programmingProcent.compareTo(new BigDecimal("73")) <= 0) {
-            programmingAssesment = new BigDecimal("3");
-            System.out.println("оценка по программированию - " + programmingAssesment);
-        } 
-        if (0 < programmingProcent.compareTo(new BigDecimal("73")) && 
-                programmingProcent.compareTo(new BigDecimal("91")) <= 0) {
-            programmingAssesment = new BigDecimal("4");
-            System.out.println("оценка по программированию - " + programmingAssesment);
-        }
-        if (0 < programmingProcent.compareTo(new BigDecimal("91"))) {
-            programmingAssesment = new BigDecimal("5");
-            System.out.println("оценка по программированию - " + programmingAssesment);
-        }
-        BigDecimal averageAssesment = historyAssesment.add(programmingAssesment)
-                .divide(new BigDecimal("2"), 1, RoundingMode.HALF_UP);
-        System.out.println("Средний балл по предметам составил " + averageAssesment);
-        BigDecimal averageProcent = historyProcent.add(programmingProcent)
-                .divide(new BigDecimal("2"), 2, RoundingMode.HALF_UP);
-        System.out.println("Средний процент по предметам составил " + averageProcent);
+        System.out.println("оценка по программированию - " + programmingAssesment);
+        System.out.println("Средний балл по предметам составил - " + 
+                (historyAssesment + programmingAssesment) / 2);
+        System.out.println("Средний процент по предметам составил - " + 
+                (historyProcent + programmingProcent) / 2);
 
         // 8. Расчет годовой прибыли
         System.out.println("\n8. Расчет годовой прибыли\n");
+        float monthlySale1 = 13025.233f;
+        float monthlyRentPrice1 = 5123.018f;
+        float monthlyProduction1 = 9001.729f;
+        float profit1 = (monthlySale1 - (monthlyRentPrice1 + monthlyProduction1)) * 12;
+        if (profit1 <= 0) {
+            System.out.println("Прибыль за год: " + profit1 + " руб.");
+        } else {
+            System.out.println("Прибыль за год: +" + profit1 + " руб.");
+        }
 
-        BigDecimal monthlySale = new BigDecimal("14000");
-        BigDecimal monthlyRentPrice = new BigDecimal("5000");
-        BigDecimal monthlyProduction = new BigDecimal("9000");
+        // 9. Расчет годовой прибыли (с использованием BigDecimal)
+        System.out.println("\n9. Расчет годовой прибыли (с использованием BigDecimal)\n");
+
+        BigDecimal monthlySale = new BigDecimal("13025.233");
+        BigDecimal monthlyRentPrice = new BigDecimal("5123.018");
+        BigDecimal monthlyProduction = new BigDecimal("9001.729");
 
         BigDecimal annualSales = monthlySale.multiply(new BigDecimal("12"))
                 .setScale(2, RoundingMode.HALF_UP);
@@ -222,12 +183,32 @@ public class IfElseStatementTheme {
                 .setScale(2, RoundingMode.HALF_UP);
         BigDecimal totalInput = annualRentPrice.add(annualProduction);
         BigDecimal profit = annualSales.subtract(totalInput);
-        if (profit.compareTo(new BigDecimal("0")) == 0) {
+        if (profit.compareTo(new BigDecimal("0")) <= 0) {
             System.out.println("Прибыль за год: " + profit + " руб.");
-        } else if (profit.compareTo(new BigDecimal("0")) > 0) {
+        } else {
             System.out.println("Прибыль за год: +" + profit + " руб.");
-        } else if (profit.compareTo(new BigDecimal("0")) < 0) {
-            System.out.println("Прибыль за год: " + profit + " руб.");
+        } 
+        
+        // 10. Подсчет начисленных банком процентов (с использованием BigDecimal)
+        System.out.println("\n10. Подсчет начисленных банком процентов " +
+                "(с использованием BigDecimal)\n");
+
+        BigDecimal moneyOnDeposit = new BigDecimal("321123.59");
+        BigDecimal depositInterest = new BigDecimal("0.00");
+        if (0 <= moneyOnDeposit.compareTo(BigDecimal.valueOf(0)) && 
+                moneyOnDeposit.compareTo(BigDecimal.valueOf(100000)) <= 0) {
+            depositInterest = new BigDecimal("0.05");
+        } else if (0 < moneyOnDeposit.compareTo(BigDecimal.valueOf(100000)) && 
+                moneyOnDeposit.compareTo(BigDecimal.valueOf(300000)) < 0) {
+            depositInterest = new BigDecimal("0.07");
+        } else if (moneyOnDeposit.compareTo(BigDecimal.valueOf(300000)) >= 0) {
+            depositInterest = new BigDecimal("0.10");
         }
+        BigDecimal accruedEarnings = moneyOnDeposit.multiply(depositInterest)
+                    .setScale(2, RoundingMode.HALF_UP);
+        System.out.println("На вклад внесено " + moneyOnDeposit + " рублей, " +
+                "\nсумма начисленного процента составила - " + accruedEarnings + 
+                " рублей,\nитоговая сумма на вкладе составит - " + 
+                moneyOnDeposit.add(accruedEarnings) + " рублей");
     }
 }
