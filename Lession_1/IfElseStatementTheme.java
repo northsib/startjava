@@ -106,7 +106,7 @@ public class IfElseStatementTheme {
 
         if (checkedSymbol >= '0' && checkedSymbol <= '9') {
             System.out.println(checkedSymbol + " - это цифра");
-        } else if (checkedSymbol >= 'A' && checkedSymbol <='Z') {
+        } else if (checkedSymbol >= 'A' && checkedSymbol <= 'Z') {
             System.out.println(checkedSymbol + " - это большая буква");
         } else if (checkedSymbol >= 'a' && checkedSymbol <= 'z') {
             System.out.println(checkedSymbol + " - это маленькая буква");
