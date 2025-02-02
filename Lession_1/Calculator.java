@@ -1,9 +1,9 @@
 public class Calculator { 
     public static void main(String[] args) {
-        int a = 201;
-        int b = 10;
+        int a = 18;
+        int b = 5;
         int result = 0;
-        char mathOperator = '%';
+        char mathOperator = '+';
 
         if (a < 0 && b < 0) {
             System.out.println("Введено неверное значение чисел А и В");
