@@ -124,11 +124,11 @@ public class IfElseStatementTheme {
         } else if (moneyOnDeposit1 > 300000) {
             depositInterest1 = 0.10f;
         }
+        float accruedEarnings1 = moneyOnDeposit1 * depositInterest1;
         System.out.println("На вклад внесено " + moneyOnDeposit1 + " рублей, " +
-                "\nсумма начисленного процента составила - " + 
-                moneyOnDeposit1 * depositInterest1 + " рублей, " +
-                "\nитоговая сумма на вкладе составит - " + 
-                (moneyOnDeposit1 + moneyOnDeposit1 * depositInterest1) + " рублей");
+                "\nсумма начисленного процента составила - " + accruedEarnings1 + 
+                " рублей, \nитоговая сумма на вкладе составит - " + 
+                (moneyOnDeposit1 + accruedEarnings1) + " рублей");
 
         // 7. Определение оценки по предметам
         System.out.println("\n7. Определение оценки по предметам\n");
@@ -160,10 +160,17 @@ public class IfElseStatementTheme {
 
         // 8. Расчет годовой прибыли
         System.out.println("\n8. Расчет годовой прибыли\n");
+
         float monthlySale1 = 13025.233f;
         float monthlyRentPrice1 = 5123.018f;
         float monthlyProduction1 = 9001.729f;
-        float profit1 = (monthlySale1 - (monthlyRentPrice1 + monthlyProduction1)) * 12;
+
+        float annualSales1 = monthlySale1 * 12;
+        float annualRentPrice1 = monthlyRentPrice1 * 12;
+        float annualProduction1 = monthlyProduction1 * 12;
+        float totalInput1 = annualRentPrice1 + annualProduction1;
+        float profit1 = annualSales1 - totalInput1;
+
         if (profit1 <= 0) {
             System.out.println("Прибыль за год: " + profit1 + " руб.");
         } else {
