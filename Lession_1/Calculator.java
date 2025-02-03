@@ -13,37 +13,37 @@ public class Calculator {
         } else if (b <= 0) {
             System.out.println("Введено неверное значение числа В");
         } else {
-                switch (mathOperator) {
-                    case '+':
-                        result = a + b;
-                        break;
-                    case '-':
-                        result = a - b;
-                        break;
-                    case '*':
-                        result = a * b;
-                        break;
-                    case '/':
-                        if (b <= 0) {
-                            System.out.println("На ноль делить нельзя!");
-                        } else {
+            switch (mathOperator) {
+                case '+':
+                    result = a + b;
+                    break;
+                case '-':
+                    result = a - b;
+                    break;
+                case '*':
+                    result = a * b;
+                    break;
+                case '/':
+                    if (b == 0) {
+                        System.out.println("На ноль делить нельзя!");
+                    } else {
                         result = a / b;
-                        }
-                        break;
-                    case '^':
-                        int i = 1;
-                        result = a;
-                        while (i < b) {
-                            result *= a; 
-                            i++;
-                        }
-                        break;
-                    case '%':
-                        result = a % b;
-                        break;
-                    default:
-                        System.out.println("Введен неверный математический оператор!");
-                }
+                    }
+                    break;
+                case '^':
+                    int i = 1;
+                    result = a;
+                    while (i < b) {
+                        result *= a; 
+                        i++;
+                    }
+                    break;
+                case '%':
+                    result = a % b;
+                    break;
+                default:
+                    System.out.println("Введен неверный математический оператор!");
+            }
             System.out.println(a + " " + mathOperator + " " + b + " = " + result);
         }
     }
