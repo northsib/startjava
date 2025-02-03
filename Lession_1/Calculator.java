@@ -1,6 +1,6 @@
 public class Calculator { 
     public static void main(String[] args) {
-        System.out.println("Используйте только натуральные числа (1, 2, 3.... n + 1, n)");
+        System.out.println("Используйте только натуральные числа: 1, 2, 3...");
         int a = 18;
         int b = 3;
         int result = 0;
@@ -31,11 +31,9 @@ public class Calculator {
                     }
                     break;
                 case '^':
-                    int i = 1;
                     result = a;
-                    while (i < b) {
-                        result *= a; 
-                        i++;
+                    for (int i = 1; i < b; i++) {
+                        result *= a;
                     }
                     break;
                 case '%':
@@ -43,6 +41,7 @@ public class Calculator {
                     break;
                 default:
                     System.out.println("Введен неверный математический оператор!");
+                    return;
             }
             System.out.println(a + " " + mathOperator + " " + b + " = " + result);
         }
