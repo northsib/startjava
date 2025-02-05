@@ -13,8 +13,6 @@ public class RpsGameFormatting {
         int position1 = r.nextInt(1, 100);
         String sign1 = rock;
 
-        System.out.println(position1);
-
         if (position1 > 66) {
             sign1 = paper;
         } else if (position1 > 33) {
@@ -22,7 +20,6 @@ public class RpsGameFormatting {
         }
 
         System.out.println("Ход " + name1 + ": ");
-        System.out.println(sign1);
 
         for (int i = 0; i < 5; i++) {
             System.out.print(rock + "\r");
@@ -42,10 +39,8 @@ public class RpsGameFormatting {
 
         if (position2 > 66) {
             sign2 = paper;
-        } else {
-            if (position2 > 33) {
-                sign2 = scissors;
-            }
+        } else if (position2 > 33) {
+            sign2 = scissors;
         }
 
         System.out.println("Ход " + name2 + ": ");

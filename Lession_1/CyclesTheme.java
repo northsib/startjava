@@ -4,88 +4,88 @@ public class CyclesTheme {
         // 1. Подсчет суммы четных и нечетных чисел
         System.out.println("\n1. Подсчет суммы четных и нечетных чисел\n");
 
-        int a1 = -10;
-        int b1 = 21; 
-        int x = 0;
-        int y = 0;
-        int i = a1;
+        int startInterval = -10;
+        int endInterval = 21; 
+        int evenNumberSum = 0;
+        int oddNumberSum = 0;
+        int i = startInterval;
 
         do {
             if (i % 2 == 0) {
-                x += i;
+                evenNumberSum += i;
             } else {
-                y += i;
+                oddNumberSum += i;
             }
             i++;
-        } while (i < b1);
-        System.out.println("В отрезке [" + a1 + ", " + b1 + "] сумма четных чисел = " + 
-                x + ", а нечетных = " + y);
+        } while (i < endInterval);
+        System.out.println("В отрезке [" + startInterval + ", " + endInterval + 
+                "] сумма четных чисел = " + evenNumberSum + ", а нечетных = " + oddNumberSum);
         
         // 2. Вывод чисел между min и max в порядке убывания
         System.out.println("\n2. Вывод чисел между min и max в порядке убывания\n");
 
-        int a2 = 4;
-        int b2 = 5;
-        int c2 = -5;
-        int maxNum = 0;
-        int minNum = 0;
+        int randomNumber1 = 4;
+        int randomNumber2 = 5;
+        int randomNumber3 = -5;
+        int maxNumber = 0;
+        int minNumber = 0;
 
-        if (a2 > b2 && a2 > c2) {
-            maxNum = a2;
-        } else if (b2 > c2) {
-            maxNum = b2;
+        if (randomNumber1 > randomNumber2 && randomNumber1 > randomNumber3) {
+            maxNumber = randomNumber1;
+        } else if (randomNumber2 > randomNumber3) {
+            maxNumber = randomNumber2;
         } else {
-            maxNum = c2;
+            maxNumber = randomNumber3;
         }
 
-        if (a2 < b2 && a2 < c2) {
-            minNum = a2;
-        } else if (b2 < c2) {
-            minNum = b2;
+        if (randomNumber1 < randomNumber2 && randomNumber1 < randomNumber3) {
+            minNumber = randomNumber1;
+        } else if (randomNumber2 < randomNumber3) {
+            minNumber = randomNumber2;
         } else {
-            minNum = c2;
+            minNumber = randomNumber3;
         }
-        System.out.println("Числа в интервале (" + minNum + ", " + maxNum + ") " + 
+        System.out.println("Числа в интервале (" + minNumber + ", " + maxNumber + ") " + 
                 "в порядке убывания:");
-        for (int i2 = (maxNum - 1); i2 > minNum; i2--) {
-            System.out.print(i2 + " ");
+        for (i = (maxNumber - 1); i > minNumber; i--) {
+            System.out.print(i + " ");
         }
 
         // 3. Вывод реверсивного числа и суммы его цифр
         System.out.println("\n\n3. Вывод реверсивного числа и суммы его цифр\n");
 
         int originalNumber = 7986541;
-        int a3 = originalNumber;
+        i = originalNumber;
         int sum = 0;
         System.out.print("Исходное число " + originalNumber + " в обратном порядке: ");
-        while (a3 > 0) {
-            int numCount = a3 % 10;
+        while (i > 0) {
+            int numCount = i % 10;
             sum += numCount;
             System.out.print(numCount);
-            a3 = a3 / 10;
+            i = i / 10;
         }
         System.out.println("\nСумма цифр в разрядах числа " + originalNumber + " = " + sum);
 
         // 4. Вывод чисел в несколько строк
         System.out.println("\n4. Вывод чисел в несколько строк");
-        int a4 = -10;
-        int b4 = 30;
-        int maxNum4 = 0;
-        int minNum4 = 0;
+        int rangeStart = -10;
+        int rangeEnd = 30;
+        maxNumber = 0;
+        minNumber = 0;
         int numberPerLine = 0;
-        if (a4 < b4) {
-            minNum4 = a4;
-            maxNum4 = b4;
+        if (rangeStart < rangeEnd) {
+            minNumber = rangeStart;
+            maxNumber = rangeEnd;
         } else {
-            minNum4 = b4;
-            maxNum4 = a4;
+            minNumber = rangeEnd;
+            maxNumber = rangeStart;
         } 
-        for (int i5 = minNum4; i5 < maxNum4; i5++) {
+        for (i = minNumber; i < maxNumber; i++) {
             if (numberPerLine % 5 == 0) {
                 System.out.println();
             }
             numberPerLine++;
-            System.out.printf("%5d ", i5);
+            System.out.printf("%5d ", i);
         }
 
         while (numberPerLine % 5 != 0) {
@@ -95,19 +95,21 @@ public class CyclesTheme {
 
         // 5. Проверка количества двоек числа на четность/нечетность
         System.out.println("\n\n5. Проверка количества двоек числа на четность/нечетность\n");
-        int num5 = 3242592;
-        int i5 = num5;
+        originalNumber = 3242592;
+        i = originalNumber;
         int twoCounter = 0;
-        while (i5 > 0) {
-            if (i5 % 10 == 2) {
+        while (i > 0) {
+            if (i % 10 == 2) {
                 twoCounter++;
             }
-            i5 = i5 / 10;
+            i = i / 10;
         }
         if (twoCounter % 2 != 0) {
-            System.out.println("В числе " + num5 + " нечетное (" + twoCounter + ") количество двоек"); 
+            System.out.println("В числе " + originalNumber + " нечетное (" + twoCounter + 
+                    ") количество двоек"); 
         } else {
-            System.out.println("В числе " + num5 + " четное (" + twoCounter + ") количество двоек");
+            System.out.println("В числе " + originalNumber + " четное (" + twoCounter + 
+                    ") количество двоек");
         }
 
         // 6. Вывод геометрических фигур
@@ -118,8 +120,8 @@ public class CyclesTheme {
         int squareOfRectangle = lenghtOfRectangle * widhtOfRectangle;
         char asterisk = '*';
 
-        for (int i6 = 0; i6 < squareOfRectangle; i6++) {
-            if (i6 % lenghtOfRectangle == 0) {
+        for (i = 0; i < squareOfRectangle; i++) {
+            if (i % lenghtOfRectangle == 0) {
                 System.out.println();
             }
             System.out.print(asterisk);
@@ -128,43 +130,43 @@ public class CyclesTheme {
 
         char number = '#';
         int cathetusTriangle1 = 5;
-        int i7 = cathetusTriangle1;
-        int j7 = 1;
-        while (i7 >= 1) {
-            while (j7 <= i7) {
+        i = cathetusTriangle1;
+        int j = 1;
+        while (i >= 1) {
+            while (j <= i) {
                 System.out.print(number);
-                j7++;
+                j++;
             }
             System.out.println();
-            i7--;
-            j7 = 1;
+            i--;
+            j = 1;
         }
         System.out.println();
 
         char dollar = '$';
         int triangleHeight = 5;
-        int i8 = 1;
-        int j8 = 1;
+        i = 1;
+        j = 1;
         
         do {
             do {
                 System.out.print(dollar);
-                j8++;
-            } while (j8 <= i8);
+                j++;
+            } while (j <= i);
             System.out.println();
-            i8++;
-            j8 = 1;
-        } while (i8 < triangleHeight);
+            i++;
+            j = 1;
+        } while (i < triangleHeight);
 
         do {
             do {
                 System.out.print(dollar);
-                j8++;
-            } while (j8 <= i8);
+                j++;
+            } while (j <= i);
             System.out.println();
-            j8 = 1;
-            i8--;
-        } while (i8 >= 1);
+            j = 1;
+            i--;
+        } while (i >= 1);
 
         // 7. Вывод ASCII-символов
         System.out.println("\n7. Вывод ASCII-символов\n");
@@ -173,12 +175,12 @@ public class CyclesTheme {
         int symbolCode2 = 47;
         System.out.println("Decimal Character Description");
 
-        for (int i9 = symbolCode1; i9 <= symbolCode2; i9++) {
-            char ch = (char) i9;
+        for (i = symbolCode1; i <= symbolCode2; i++) {
+            char printChar = (char) i;
             String charDescription;
-            if (i9 % 2 == 1) {
-                charDescription = Character.getName(ch);
-                System.out.printf("%4d%9s%10s%-5s%n", i9, ch, "", charDescription);
+            if (i % 2 == 1) {
+                charDescription = Character.getName(printChar);
+                System.out.printf("%4d%9s%10s%-5s%n", i, printChar, "", charDescription);
             }
         }
         System.out.println("\nDecimal Character Description");
@@ -186,12 +188,12 @@ public class CyclesTheme {
         symbolCode1 = 97;
         symbolCode2 = 122;
 
-        for (int i9 = symbolCode1; i9 <= symbolCode2; i9++) {
-            char ch = (char) i9;
+        for (i = symbolCode1; i <= symbolCode2; i++) {
+            char printChar = (char) i;
             String charDescription;
-            if (i9 % 2 == 0) {
-                charDescription = Character.getName(ch);
-                System.out.printf("%4d%9s%10s%-5s%n", i9, ch, "", charDescription);
+            if (i % 2 == 0) {
+                charDescription = Character.getName(printChar);
+                System.out.printf("%4d%9s%10s%-5s%n", i, printChar, "", charDescription);
             }
         }
 
@@ -199,13 +201,13 @@ public class CyclesTheme {
         System.out.println("\n8. Проверка, является ли число палиндромом\n");
 
         int palindromeDigit = 1234321;
-        int originalNumber1 = palindromeDigit;
+        originalNumber = palindromeDigit;
         int reverseNumber = 0;
 
-        while (originalNumber1 > 0) {
-            int lastNum = originalNumber1 % 10;
-            originalNumber1 = originalNumber1 / 10;
-            reverseNumber = reverseNumber * 10 + lastNum;
+        while (originalNumber > 0) {
+            int lastNumber = originalNumber % 10;
+            originalNumber = originalNumber / 10;
+            reverseNumber = reverseNumber * 10 + lastNumber;
         }
 
         if (palindromeDigit == reverseNumber) {
@@ -217,93 +219,63 @@ public class CyclesTheme {
         // 9. Проверка, является ли число счастливым
         System.out.println("\n9. Проверка, является ли число счастливым\n");
 
-        int luckyNumber = 550055;
-        int numCount1 = 0;
-        int i10 = luckyNumber;
-        int firstThreeSum = 0;
-        int lastThreeSum = 0;
-        int trueLastDigits = 0;
-        int firstDigits = 0;
+        int luckyNumber = 442055;
+        int numCount = 0;
+        i = luckyNumber;
 
-        while (i10 > 0) {
-            i10 = i10 / 10;
-            numCount1++;
+        while (i > 0) {
+            i = i / 10;
+            numCount++;
         }
-
-        if (numCount1 < 6 || numCount1 > 6) {
+        if (numCount < 6 || numCount > 6) {
             System.out.println("Введено неверное значение");
-        } else {
-            i10 = luckyNumber;
-            int counter1 = numCount1 / 2;
-            while (counter1 > 0) {
-                int lastNum = i10 % 10;
-                lastThreeSum = lastThreeSum + lastNum;
-                i10 = i10 / 10;
-                counter1--;
-            }
-
-            int lastDigits = 0;
-            i10 = luckyNumber;
-            for (int i11 = 1; i11 <= (numCount1 / 2); i11++) {
-                int lastNum = i10 % 10;
-                i10 = i10 / 10;
-                lastDigits = lastDigits * 10 + lastNum;
-            }
-
-            i10 = lastDigits;
-            while (i10 > 0) {
-                int lastNum = i10 % 10;
-                i10 = i10 / 10; 
-                trueLastDigits = trueLastDigits * 10 + lastNum;
-            }
-
-            i10 = luckyNumber;
-            int reverseNumber2 = 0;
-            while (i10 > 0) {
-                int lastNum = i10 % 10;
-                i10 = i10 / 10;
-                reverseNumber2 = reverseNumber2 * 10 + lastNum;
-            }
-
-            i10 = reverseNumber2;
-            int counter2 = numCount1 / 2;
-            while (counter2 > 0) {
-                int lastNum = i10 % 10;
-                firstThreeSum = firstThreeSum + lastNum;
-                i10 = i10 / 10;
-                counter2--;
-            }
-
-            i10 = reverseNumber2;
-            for (int i11 = 1; i11 <= (numCount1 / 2); i11++) {
-                int lastNum = i10 % 10;
-                i10 = i10 / 10;
-                firstDigits = firstDigits * 10 + lastNum;
-            }
-            if (firstThreeSum == lastThreeSum) {
-                System.out.println("Число " + luckyNumber + " счастливое");
-                if (trueLastDigits < 100) {
-                    System.out.println("сумма цифр 0" + trueLastDigits + " = " + lastThreeSum);
-                } else {
-                    System.out.println("сумма цифр " + trueLastDigits + " = " + lastThreeSum);
-                }
-                System.out.println("сумма цифр " + firstDigits + " = " + firstThreeSum);
-            } else {
-                System.out.println("Число " + luckyNumber + " не счастливое");
-            }
+            return;
         }
+
+        int lastThreeNumbers = luckyNumber % 1000;
+        int firstThreeNumbers = luckyNumber / 1000;
+
+        int lastThreeSum = 0; 
+        for (i = 0; i < 3; i++) {
+            int lastNumber = lastThreeNumbers % 10;
+            lastThreeSum += lastNumber;
+            lastThreeNumbers = lastThreeNumbers / 10;
+        }
+
+        int firstThreeSum = 0; 
+        for (i = 0; i < 3; i++) {
+            int lastNumber = firstThreeNumbers % 10;
+            firstThreeSum += lastNumber;
+            firstThreeNumbers = firstThreeNumbers / 10;
+        }
+
+        lastThreeNumbers = luckyNumber % 1000;
+        firstThreeNumbers = luckyNumber / 1000;
+
+        if (firstThreeSum == lastThreeSum) {
+            System.out.println("Число " + luckyNumber + " счастливое");
+            if (lastThreeNumbers < 100) {
+                System.out.println("сумма цифр 0" + lastThreeNumbers + " = " + lastThreeSum);
+            } else {
+                System.out.println("сумма цифр " + lastThreeNumbers + " = " + lastThreeSum);
+            }
+            System.out.println("сумма цифр " + firstThreeNumbers + " = " + firstThreeSum);
+        } else {
+            System.out.println("Число " + luckyNumber + " не счастливое");
+        }
+
         // 10. Вывод таблицы умножения Пифагора
         System.out.println("\n10. Вывод таблицы умножения Пифагора\n");
 
-        for (int i11 = 1; i11 <= 9; i11++) {
-            if (i11 > 1 && i11 <= 2) {
+        for (i = 1; i <= 9; i++) {
+            if (i > 1 && i <= 2) {
                 System.out.println("---------------------------");
             }
-            for (int j11 = 1; j11 <= 9; j11++) {
-                int digitProduce = i11 * j11;
+            for (j = 1; j <= 9; j++) {
+                int digitProduce = i * j;
                 if (digitProduce == 1) {
                     System.out.print("   ");
-                } else if (j11 > 1 && j11 <= 2) {
+                } else if (j > 1 && j <= 2) {
                     System.out.print(" | ");
                 } else {
                     System.out.printf("%3d", digitProduce);

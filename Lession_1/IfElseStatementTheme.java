@@ -52,19 +52,21 @@ public class IfElseStatementTheme {
         // 3. Проверка числа
         System.out.println("\n3. Проверка числа\n");
 
-        int checkedNum = 0;
+        int checkedNum = -113;
         if (checkedNum == 0) {
             System.out.println("Проверяемое число равно 0");
+            return;
+        } 
+        if (checkedNum % 2 == 0) {
+            System.out.print(checkedNum + " - является чётным");
         } else {
-            if (checkedNum % 2 == 1) {
-                System.out.println(checkedNum + " является положительным и нечётным");
-            } else if (checkedNum % 2 == -1) {
-                System.out.println(checkedNum + " является отрицательным и нечётным");
-            } else if ((checkedNum % 2 == 0) && (checkedNum > 0)) {
-                System.out.println(checkedNum + " является положительным и чётным");
-            } else {
-                System.out.println(checkedNum + " является отрицательным и чётным");
-            } 
+            System.out.print(checkedNum + " - является нечётным");
+        }
+
+        if (checkedNum > 0) {
+            System.out.println(" и положительным");
+        } else {
+            System.out.println(" и отрицательным");
         }
 
         // 4. Поиск одинаковых цифр в числах
@@ -135,21 +137,21 @@ public class IfElseStatementTheme {
 
         float historyPercent = 59f;
         float historyGrade = 2f;
-        if (60 < historyPercent && historyPercent <= 73) {
+        if (historyPercent < 60 && historyPercent <= 73) {
             historyGrade = 3;
-        } else if (73 < historyPercent && historyPercent <= 91) {
+        } else if (historyPercent < 73 && historyPercent <= 91) {
             historyGrade = 4;
-        } else if (91 < historyPercent) {
+        } else if (historyPercent < 91) {
             historyGrade = 5;
         }
         System.out.println("оценка по истории - " + historyGrade);
         float programmingPercent = 92f;
         float programmingGrade = 2f;
-        if (60 < programmingPercent && programmingPercent <= 73) {
+        if (programmingPercent < 60 && programmingPercent <= 73) {
             programmingGrade = 3;
-        } else if (73 < programmingPercent && programmingPercent <= 91) {
+        } else if (programmingPercent < 73 && programmingPercent <= 91) {
             programmingGrade = 4;
-        } else if (91 < programmingPercent) {
+        } else if (programmingPercent < 91) {
             programmingGrade = 5;
         }
         System.out.println("оценка по программированию - " + programmingGrade);
@@ -165,11 +167,7 @@ public class IfElseStatementTheme {
         float monthlyRentPrice1 = 5123.018f;
         float monthlyProduction1 = 9001.729f;
 
-        float annualSales1 = monthlySale1 * 12;
-        float annualRentPrice1 = monthlyRentPrice1 * 12;
-        float annualProduction1 = monthlyProduction1 * 12;
-        float totalInput1 = annualRentPrice1 + annualProduction1;
-        float profit1 = annualSales1 - totalInput1;
+        float profit1 = 12 * (monthlySale1 - monthlyRentPrice1 - monthlyProduction1);
 
         if (profit1 <= 0) {
             System.out.println("Прибыль за год: " + profit1 + " руб.");
@@ -184,14 +182,9 @@ public class IfElseStatementTheme {
         BigDecimal monthlyRentPrice = new BigDecimal("5123.018");
         BigDecimal monthlyProduction = new BigDecimal("9001.729");
 
-        BigDecimal annualSales = monthlySale.multiply(BigDecimal.valueOf(12))
-                .setScale(2, RoundingMode.HALF_UP);
-        BigDecimal annualRentPrice = monthlyRentPrice.multiply(BigDecimal.valueOf(12))
-                .setScale(2, RoundingMode.HALF_UP);
-        BigDecimal annualProduction = monthlyProduction.multiply(BigDecimal.valueOf(12))
-                .setScale(2, RoundingMode.HALF_UP);
-        BigDecimal totalInput = annualRentPrice.add(annualProduction);
-        BigDecimal profit = annualSales.subtract(totalInput);
+        BigDecimal profit = (monthlySale.subtract(monthlyRentPrice)).subtract(monthlyProduction)
+                .multiply(BigDecimal.valueOf(12)).setScale(2, RoundingMode.HALF_UP);
+
         if (profit.compareTo(BigDecimal.ZERO) <= 0) {
             System.out.println("Прибыль за год: " + profit + " руб.");
         } else {
