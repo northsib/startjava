@@ -52,21 +52,20 @@ public class IfElseStatementTheme {
         // 3. Проверка числа
         System.out.println("\n3. Проверка числа\n");
 
-        int checkedNum = -113;
+        int checkedNum = 0;
         if (checkedNum == 0) {
             System.out.println("Проверяемое число равно 0");
-            return;
-        } 
-        if (checkedNum % 2 == 0) {
-            System.out.print(checkedNum + " - является чётным");
         } else {
-            System.out.print(checkedNum + " - является нечётным");
-        }
-
-        if (checkedNum > 0) {
-            System.out.println(" и положительным");
-        } else {
-            System.out.println(" и отрицательным");
+            if (checkedNum % 2 == 0) {
+                System.out.print(checkedNum + " - является чётным");
+            } else {
+                System.out.print(checkedNum + " - является нечётным");
+            }
+            if (checkedNum > 0) {
+                System.out.println(" и положительным");
+            } else {
+                System.out.println(" и отрицательным");
+            }
         }
 
         // 4. Поиск одинаковых цифр в числах
@@ -137,21 +136,21 @@ public class IfElseStatementTheme {
 
         float historyPercent = 59f;
         float historyGrade = 2f;
-        if (historyPercent < 60 && historyPercent <= 73) {
+        if (historyPercent > 60 && historyPercent <= 73) {
             historyGrade = 3;
-        } else if (historyPercent < 73 && historyPercent <= 91) {
+        } else if (historyPercent > 73 && historyPercent <= 91) {
             historyGrade = 4;
-        } else if (historyPercent < 91) {
+        } else if (historyPercent > 91) {
             historyGrade = 5;
         }
         System.out.println("оценка по истории - " + historyGrade);
         float programmingPercent = 92f;
         float programmingGrade = 2f;
-        if (programmingPercent < 60 && programmingPercent <= 73) {
+        if (programmingPercent > 60 && programmingPercent <= 73) {
             programmingGrade = 3;
-        } else if (programmingPercent < 73 && programmingPercent <= 91) {
+        } else if (programmingPercent > 73 && programmingPercent <= 91) {
             programmingGrade = 4;
-        } else if (programmingPercent < 91) {
+        } else if (programmingPercent > 91) {
             programmingGrade = 5;
         }
         System.out.println("оценка по программированию - " + programmingGrade);
@@ -182,7 +181,7 @@ public class IfElseStatementTheme {
         BigDecimal monthlyRentPrice = new BigDecimal("5123.018");
         BigDecimal monthlyProduction = new BigDecimal("9001.729");
 
-        BigDecimal profit = (monthlySale.subtract(monthlyRentPrice)).subtract(monthlyProduction)
+        BigDecimal profit = monthlySale.subtract(monthlyRentPrice).subtract(monthlyProduction)
                 .multiply(BigDecimal.valueOf(12)).setScale(2, RoundingMode.HALF_UP);
 
         if (profit.compareTo(BigDecimal.ZERO) <= 0) {
