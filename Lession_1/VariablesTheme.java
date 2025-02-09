@@ -155,10 +155,8 @@ public class VariablesTheme {
         System.out.println("  сотен - " + hundredCount);
         System.out.println("  десятков - " + tenCount);
         System.out.println("  единиц - " + oneCount);
-        int digitSum = hundredCount + tenCount + oneCount;
-        System.out.println("Сумма разрядов = " + digitSum);
-        int digitProduct = hundredCount * tenCount * oneCount;
-        System.out.println("Произведение разрядов = " + digitProduct + "\n");
+        System.out.println("Сумма разрядов = " + (hundredCount + tenCount + oneCount));
+        System.out.println("Произведение разрядов = " + (hundredCount * tenCount * oneCount) + "\n");
 
         // 9. Перевод секунд в часы, минуты и секунды
         System.out.println("9. Перевод секунд в часы, минуты и секунды\n");

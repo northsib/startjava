@@ -6,11 +6,11 @@ public class RpsGameFormatting {
         String rock = "R";
         String scissors = "S";
         String paper = "P";
+        Random randomNumber = new Random();
 
         // Ход первого игрока
         String name1 = "HEL";
-        Random r = new Random();
-        int position1 = r.nextInt(1, 100);
+        int position1 = randomNumber.nextInt(1, 100);
         String sign1 = rock;
 
         if (position1 > 66) {
@@ -34,7 +34,7 @@ public class RpsGameFormatting {
 
         // Ход второго игрока
         String name2 = "WALLE";
-        int position2 = r.nextInt(1, 100);
+        int position2 = randomNumber.nextInt(1, 100);
         String sign2 = rock;
 
         if (position2 > 66) {

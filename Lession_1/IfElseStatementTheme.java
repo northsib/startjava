@@ -34,19 +34,19 @@ public class IfElseStatementTheme {
         } else if (firstLetterName == 'I') {
             System.out.println("Первая буква вашего имени - I");
         } else {
-            System.out.println("Первая буква вашего имени - не M и не I, а другая");
+            System.out.println("Первая буква вашего имени - не M и не I, а " + firstLetterName);
         }
 
         // 2. Поиск большего числа
         System.out.println("\n2. Поиск большего числа\n");
-        int num1 = 123;
-        int num2 = 223;
-        if (num1 > num2) {
-            System.out.println("Число " + num1 + " больше, чем " + num2);
-        } else if (num1 < num2) {
-            System.out.println("Число " + num2 + " больше, чем " + num1);
+        int firstNumber = 123;
+        int secondNumber = 223;
+        if (firstNumber > secondNumber) {
+            System.out.println("Число " + firstNumber + " больше, чем " + secondNumber);
+        } else if (firstNumber < secondNumber) {
+            System.out.println("Число " + secondNumber + " больше, чем " + firstNumber);
         } else {
-            System.out.println("Числа " + num1 + " и " + num2 + " равны");
+            System.out.println("Числа " + firstNumber + " и " + secondNumber + " равны");
         }
 
         // 3. Проверка числа
@@ -71,32 +71,30 @@ public class IfElseStatementTheme {
         // 4. Поиск одинаковых цифр в числах
         System.out.println("\n4. Поиск одинаковых цифр в числах\n");
 
-        int num3 = 123;
-        int num4 = 223;
+        firstNumber = 123;
+        secondNumber = 223;
 
-        int hundredCountNum3 = num3 / 100;
-        int tenCountNum3 = (num3 % 100) / 10;
-        int oneCountNum3 = num3 % 10;
+        int firstHundredCount = firstNumber / 100;
+        int firstTenCount = (firstNumber % 100) / 10;
+        int firstOneCount = firstNumber % 10;
 
-        int hundredCountNum4 = num4 / 100;
-        int tenCountNum4 = (num4 % 100) / 10;
-        int oneCountNum4 = num4 % 10;
+        int secondHundredCount = secondNumber / 100;
+        int secondTenCount = (secondNumber % 100) / 10;
+        int secondOneCount = secondNumber % 10;
 
-        if (hundredCountNum3 != hundredCountNum4 && tenCountNum3 != tenCountNum4 &&
-                oneCountNum3 != oneCountNum4) {
+        if (firstHundredCount != secondHundredCount && firstTenCount != secondTenCount &&
+                firstOneCount != secondOneCount) {
             System.out.println("Равных цифр в разрядах чисел нет");
         } else {
-            if (hundredCountNum3 == hundredCountNum4) {
-                System.out.println("У чисел " + num3 + " и " + num4 +
-                        " сотни равны - " + hundredCountNum3);
+            System.out.println("У чисел " + firstNumber + " и " + secondNumber + ":");
+            if (firstHundredCount == secondHundredCount) {
+                System.out.println("Сотни равны - " + firstHundredCount);
             }
-            if (tenCountNum3 == tenCountNum4) {
-                System.out.println("У чисел " + num3 + " и " + num4 +
-                        " равное количество десятков - " + tenCountNum3);
+            if (firstTenCount == secondTenCount) {
+                System.out.println("Десятки равны - " + firstTenCount);
             }
-            if (oneCountNum3 == oneCountNum4) {
-                System.out.println("У чисел " + num3 + " и " + num4 +
-                        " равное количество единиц - " + oneCountNum3);
+            if (firstOneCount == secondOneCount) {
+                System.out.println("Единицы равны - " + firstOneCount);
             }
         }
 
@@ -120,9 +118,10 @@ public class IfElseStatementTheme {
 
         float moneyOnDeposit1 = 321123.59f;
         float depositInterest1 = 0.5f;
-        if (moneyOnDeposit1 > 100000 && moneyOnDeposit1 <= 300000) {
+        if (moneyOnDeposit1 > 100000) {
             depositInterest1 = 0.07f;
-        } else if (moneyOnDeposit1 > 300000) {
+        } 
+        if (moneyOnDeposit1 > 300000) {
             depositInterest1 = 0.10f;
         }
         float accruedEarnings1 = moneyOnDeposit1 * depositInterest1;
@@ -136,23 +135,28 @@ public class IfElseStatementTheme {
 
         float historyPercent = 59f;
         float historyGrade = 2f;
-        if (historyPercent > 60 && historyPercent <= 73) {
+        if (historyPercent > 60) {
             historyGrade = 3;
-        } else if (historyPercent > 73 && historyPercent <= 91) {
+        } 
+        if (historyPercent > 73) {
             historyGrade = 4;
-        } else if (historyPercent > 91) {
+        }
+        if (historyPercent > 91) {
             historyGrade = 5;
         }
         System.out.println("оценка по истории - " + historyGrade);
         float programmingPercent = 92f;
         float programmingGrade = 2f;
-        if (programmingPercent > 60 && programmingPercent <= 73) {
+        if (programmingPercent > 60) {
             programmingGrade = 3;
-        } else if (programmingPercent > 73 && programmingPercent <= 91) {
+        }
+        if (programmingPercent > 73) {
             programmingGrade = 4;
-        } else if (programmingPercent > 91) {
+        }
+        if (programmingPercent > 91) {
             programmingGrade = 5;
         }
+
         System.out.println("оценка по программированию - " + programmingGrade);
         System.out.println("Средний балл по предметам составил - " + 
                 (historyGrade + programmingGrade) / 2);
@@ -196,10 +200,10 @@ public class IfElseStatementTheme {
 
         BigDecimal moneyOnDeposit = new BigDecimal("321123.59");
         BigDecimal depositInterest = new BigDecimal("0.05");
-        if ((moneyOnDeposit.compareTo(BigDecimal.valueOf(100000)) > 0) && 
-                moneyOnDeposit.compareTo(BigDecimal.valueOf(300000)) < 0) {
+        if (moneyOnDeposit.compareTo(BigDecimal.valueOf(100000)) >= 0) {
             depositInterest = new BigDecimal("0.07");
-        } else if (moneyOnDeposit.compareTo(BigDecimal.valueOf(300000)) >= 0) {
+        } 
+        if (moneyOnDeposit.compareTo(BigDecimal.valueOf(300000)) >= 0) {
             depositInterest = new BigDecimal("0.10");
         }
         BigDecimal accruedEarnings = moneyOnDeposit.multiply(depositInterest)
