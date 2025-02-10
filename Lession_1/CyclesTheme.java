@@ -58,7 +58,7 @@ public class CyclesTheme {
             int remainder = tempNumber % 10;
             sum += remainder;
             System.out.print(remainder);
-            tempNumber = tempNumber / 10;
+            tempNumber /= 10;
         }
         System.out.println("\nСумма цифр в разрядах числа " + originalNumber + " = " + sum);
 
@@ -189,8 +189,8 @@ public class CyclesTheme {
         int reversedNumber = 0;
 
         while (tempNumber > 0) {
-            reversedNumber = reversedNumber * 10 + tempNumber % 10;
-            tempNumber = tempNumber / 10;
+            reversedNumber *= 10 + tempNumber % 10;
+            tempNumber /= 10;
         }
 
         if (inputNumber == reversedNumber) {
@@ -203,29 +203,14 @@ public class CyclesTheme {
         System.out.println("\n9. Проверка, является ли число счастливым\n");
 
         int luckyNumber = 442055;
-        int numCount = 0;
-        tempNumber = luckyNumber;
-
-        while (tempNumber > 0) {
-            tempNumber = tempNumber / 10;
-            numCount++;
-        }
-        if (numCount < 6 || numCount > 6) {
-            System.out.println("Введено неверное значение");
-            return;
-        }
-
         int lastThreeNumbers = luckyNumber % 1000;
         int firstThreeNumbers = luckyNumber / 1000;
-
         int lastThreeSum = 0; 
+        int firstThreeSum = 0; 
+
         for (int i = 0; i < 3; i++) {
             lastThreeSum += lastThreeNumbers % 10;
             lastThreeNumbers = lastThreeNumbers / 10;
-        }
-
-        int firstThreeSum = 0; 
-        for (int i = 0; i < 3; i++) {
             firstThreeSum += firstThreeNumbers % 10;
             firstThreeNumbers = firstThreeNumbers / 10;
         }
@@ -235,11 +220,9 @@ public class CyclesTheme {
 
         if (firstThreeSum == lastThreeSum) {
             System.out.println("Число " + luckyNumber + " счастливое");
-            if (lastThreeNumbers < 100) {
-                System.out.println("сумма цифр 0" + lastThreeNumbers + " = " + lastThreeSum);
-            } else {
-                System.out.println("сумма цифр " + lastThreeNumbers + " = " + lastThreeSum);
-            }
+            System.out.println("сумма цифр " + 
+                            String.format("%03d", lastThreeNumbers) + 
+                            " = " + lastThreeSum);
             System.out.println("сумма цифр " + firstThreeNumbers + " = " + firstThreeSum);
         } else {
             System.out.println("Число " + luckyNumber + " не счастливое");
