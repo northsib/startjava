@@ -1,27 +1,83 @@
 public class Wolf {
-    String name = "Клык";
-    String sex = "Мужской";
-    float weight = 39.7f;
-    int age = 8;
-    String color = "Тёмно-серый";
+    private String name = "Клык";
+    private String sex = "Мужской";
+    private float weight = 39.7f;
+    private int age = 8;
+    private String color = "Тёмно-серый";
 
-    void move() {
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        if (name == "") {
+            System.out.println("Пустая строка");
+        } else {
+            this.name = name;
+        }
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex;
+    }
+
+    public float getWeight() {
+        return weight;
+    } 
+
+    public void setWeight(float weight) {
+        if (weight < 0 && weight > 50) {
+            System.out.println("некорректное значение");
+        } else {
+            this.weight = weight;
+        }
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        if (age < 0 && age > 8) {
+            System.out.println("некорректное значение");
+        } else {
+            this.age = age;
+        }
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        if (color == "") {
+            System.out.println("Пустая строка");
+        } else {
+            this.color = color;
+        }
+    }
+
+    public void move() {
         System.out.println(name + " идёт");
     }
 
-    void sit() {
+    public void sit() {
         System.out.println(name + " сидит");
     }
 
-    void run() {
+    public void run() {
         System.out.println(name + " бежит");
     }
 
-    void howl() {
+    public void howl() {
         System.out.println(name + " воет");
     }
 
-    void hunt() {
+    public void hunt() {
         System.out.println(name + " охотится");
     }
 }
