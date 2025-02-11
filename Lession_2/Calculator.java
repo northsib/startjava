@@ -42,13 +42,11 @@ public class Calculator {
                 if (secondNumber == 0) {
                     System.out.println("Ошибка: делить на ноль нельзя");
                     break;
-                } else if (secondNumber > firstNumber) {
+                } else {
                     float floatFirstNumber = (float) firstNumber;
                     float floatSecondNumber = (float) secondNumber;
                     result = floatFirstNumber / floatSecondNumber;
-                } else {
-                    result = firstNumber / secondNumber;
-                }
+                } 
                 break;
             case '^':
                 if (secondNumber >= 0) {
