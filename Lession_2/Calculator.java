@@ -3,6 +3,7 @@ public class Calculator{
     private int secondNumber = 0;
     private char mathOperator = '+';
     private float result = 0;
+    private boolean isActive = true;
 
     public int getFirstNumber() {
         return firstNumber;
@@ -71,10 +72,20 @@ public class Calculator{
         }
     }
 
+    public boolean getIsActive() {
+        return isActive;
+    }
+
+    public void setIsActive(boolean isActive) {
+        this.isActive = isActive;
+    }
+
     public void getResult() {
         if (mathOperator == '+' || mathOperator == '-' || mathOperator == '*' || 
             mathOperator == '/' || mathOperator == '^' || mathOperator == '%') {
             System.out.println(result);
+        } else if (mathOperator == '/' && secondNumber == 0) {
+
         } else {
 
         }
