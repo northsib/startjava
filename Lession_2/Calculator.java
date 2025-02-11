@@ -82,7 +82,7 @@ public class Calculator {
                     System.out.println("Ответ: " + floatResult);
                 } else {
                     result = 1;
-                    for (int i = 1; i < secondNumber; i++) {
+                    for (int i = 1; i <= secondNumber; i++) {
                         result *= firstNumber;
                     }
                     System.out.println("Ответ: " + result);
