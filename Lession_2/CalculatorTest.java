@@ -34,6 +34,8 @@ public class CalculatorTest {
                 } 
             }
             calculator.setIsCorrectAnswer(true);
-        } 
+
+        }
+        scanner.close();
     }
 }
