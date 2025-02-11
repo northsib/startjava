@@ -2,8 +2,11 @@ public class Calculator {
     private int firstNumber = 0;
     private int secondNumber = 0;
     private char mathOperator = '+';
-    private float result = 0;
+    private int result = 0;
+    private float floatResult = 0;
+    private boolean isCorrectMathOperator = false;
     private boolean isActive = true;
+    private boolean isCorrectAnswer = true;
 
     public int getFirstNumber() {
         return firstNumber;
@@ -26,48 +29,70 @@ public class Calculator {
     }
 
     public void setMathOperator(char mathOperator) {
-        this.mathOperator = mathOperator;
+        switch (mathOperator) {
+            case '+':
+            case '-':
+            case '*':
+            case '/':
+            case '^':
+            case '%':
+                this.mathOperator = mathOperator;
+                isCorrectMathOperator = true;
+                break;
+            default:
+                System.out.println("Ошибка: операция '" + mathOperator + "' не поддерживается");
+        }
+    }
 
+    public void result() {
         switch (mathOperator) {
             case '+':
                 result = firstNumber + secondNumber;
+                System.out.println("Ответ: " + result);
                 break;
             case '-':
                 result = firstNumber - secondNumber;
+                System.out.println("Ответ: " + result);
                 break;
             case '*':
                 result = firstNumber * secondNumber;
+                System.out.println("Ответ: " + result);
                 break;
             case '/':
                 if (secondNumber == 0) {
                     System.out.println("Ошибка: делить на ноль нельзя");
-                    break;
+                } else if (firstNumber < secondNumber || (firstNumber % secondNumber) > 0) {
+                    floatResult = (float) firstNumber / (float) secondNumber;
+                    System.out.println("Ответ: " + floatResult);
                 } else {
-                    float floatFirstNumber = (float) firstNumber;
-                    float floatSecondNumber = (float) secondNumber;
-                    result = floatFirstNumber / floatSecondNumber;
-                } 
-                break;
+                    result = firstNumber / secondNumber;
+                    System.out.println("Ответ: " + result);
+                }
+                break; 
             case '^':
-                if (secondNumber >= 0) {
+                if (secondNumber == 0) {
                     result = 1;
-                    for (int i = 1; i <= secondNumber; i++) {
-                        result *= firstNumber;
-                    }
-                } else {
-                    float denominator = 1;
-                    for (int i = -1; i >= secondNumber; i--) {
+                    System.out.println("Ответ: " + result);
+                } else if (secondNumber < 0) {
+                    int denominator = firstNumber;
+                    for (int i = -1; i > secondNumber; i--) {
                         denominator *= firstNumber;
                     }
-                    result = 1 / denominator;
+                    floatResult = 1 / (float) denominator;
+                    System.out.println("Ответ: " + floatResult);
+                } else {
+                    result = 1;
+                    for (int i = 1; i < secondNumber; i++) {
+                        result *= firstNumber;
+                    }
+                    System.out.println("Ответ: " + result);
                 }
                 break;
             case '%':
                 result = firstNumber % secondNumber;
+                System.out.println("Ответ: " + result);
                 break;
             default:
-                System.out.println("Ошибка: операция '" + mathOperator + "' не поддерживается");
-                return;
         }
     }
 
@@ -79,11 +104,19 @@ public class Calculator {
         this.isActive = isActive;
     }
 
-    public void getResult() {
-        if (mathOperator == '+' || mathOperator == '-' || 
-                mathOperator == '*' || (mathOperator == '/' && secondNumber != 0) || 
-                mathOperator == '^' || mathOperator == '%') {
-            System.out.println("Ответ :" + result);
-        }
+    public boolean getIsCorrectMathOperator() {
+        return isCorrectMathOperator;
+    }
+
+    public void setIsCorrectMathOperator(boolean isCorrectMathOperator) {
+        this.isCorrectMathOperator = isCorrectMathOperator;
+    }
+
+    public boolean getIsCorrectAnswer() {
+        return isCorrectAnswer;
+    }
+
+    public void setIsCorrectAnswer(boolean isCorrectAnswer) {
+        this.isCorrectAnswer = isCorrectAnswer;
     }
 }
