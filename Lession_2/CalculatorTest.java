@@ -7,32 +7,35 @@ public class CalculatorTest {
         while (calculator.getIsActive()) {
             System.out.print("Введите первое число: ");
             int a = scanner.nextInt();
-
             System.out.print("Введите знак операции (+, -, *, /, ^, %): ");
-            char ch = scanner.next().charAt(0);
-
+            final char ch = scanner.next().charAt(0);
             System.out.print("Введите второе число: ");
             int b = scanner.nextInt();
 
             calculator.setFirstNumber(a);
-
             calculator.setSecondNumber(b);
-
             calculator.setMathOperator(ch);
             calculator.getResult();
-
+            boolean isCorrect = true;
+            while (isCorrect) {
+            
             System.out.println("Хотите продолжить вычисления? [yes/no]:");
-            scanner.nextLine();
+
             String userChoose = scanner.nextLine();
 
+            
+            
             if (userChoose.equalsIgnoreCase("yes")) {
                 calculator.setIsActive(true);
+                isCorrect = false;
+
             } else if (userChoose.equalsIgnoreCase("no")) {
                 calculator.setIsActive(false);
+                isCorrect = false;
             } else {
-                return;
+                isCorrect = true;
             }
-
+        }
         } 
     }
 }

@@ -1,4 +1,4 @@
-public class Calculator{
+public class Calculator {
     private int firstNumber = 0;
     private int secondNumber = 0;
     private char mathOperator = '+';
@@ -41,6 +41,7 @@ public class Calculator{
             case '/':
                 if (secondNumber == 0) {
                     System.out.println("Ошибка: делить на ноль нельзя");
+                    break;
                 } else if (secondNumber > firstNumber) {
                     float floatFirstNumber = (float) firstNumber;
                     float floatSecondNumber = (float) secondNumber;
@@ -57,7 +58,7 @@ public class Calculator{
                     }
                 } else {
                     float denominator = 1;
-                    for (int i = -1; i >= secondNumber; i--){
+                    for (int i = -1; i >= secondNumber; i--) {
                         denominator *= firstNumber;
                     }
                     result = 1 / denominator;
@@ -81,13 +82,10 @@ public class Calculator{
     }
 
     public void getResult() {
-        if (mathOperator == '+' || mathOperator == '-' || mathOperator == '*' || 
-            mathOperator == '/' || mathOperator == '^' || mathOperator == '%') {
-            System.out.println(result);
-        } else if (mathOperator == '/' && secondNumber == 0) {
-
-        } else {
-
+        if (mathOperator == '+' || mathOperator == '-' || 
+                mathOperator == '*' || (mathOperator == '/' && secondNumber != 0) || 
+                mathOperator == '^' || mathOperator == '%') {
+            System.out.println("Ответ :" + result);
         }
     }
 }
