@@ -19,6 +19,8 @@ public class CalculatorTest {
 
             calculator.result();
 
+            scanner.nextLine();
+
             while (calculator.getIsCorrectAnswer()) {
                 System.out.println("Хотите продолжить вычисления? [yes/no]:");
                 String userChoose = scanner.nextLine();
