@@ -4,37 +4,43 @@ public class CalculatorTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
+        boolean isCalculatorActive = true;
 
-        while (calculator.getIsActive()) {
+        while (isCalculatorActive) {
             System.out.print("Введите первое число: ");
             calculator.setFirstNumber(scanner.nextInt());
-
-            while (!calculator.getIsCorrectMathOperator()) {
+            
+            boolean isCorrectMathOperator = false;
+            while (!isCorrectMathOperator) {
                 System.out.print("Введите знак операции (+, -, *, /, ^, %): ");
-                calculator.setMathOperator(scanner.next().charAt(0));
+                char mathOperator = scanner.next().charAt(0);
+                if (calculator.setMathOperator(mathOperator)) {
+                    isCorrectMathOperator = true;
+                } else {
+                    isCorrectMathOperator = false;
+                }
             }
 
             System.out.print("Введите второе число: ");
             calculator.setSecondNumber(scanner.nextInt());
 
-            calculator.result();
+            calculator.calculate();
 
             scanner.nextLine();
 
-            while (calculator.getIsCorrectAnswer()) {
+            boolean isCorrectAnswer = false;
+
+            while (!isCorrectAnswer) {
                 System.out.println("Хотите продолжить вычисления? [yes/no]:");
                 String userChoose = scanner.nextLine();
                 if (userChoose.equalsIgnoreCase("yes")) {
-                    calculator.setIsActive(true);
-                    calculator.setIsCorrectMathOperator(false);
-                    calculator.setIsCorrectAnswer(false);
+                    isCalculatorActive = true;
+                    isCorrectAnswer = true;
                 } else if (userChoose.equalsIgnoreCase("no")) {
-                    calculator.setIsActive(false);
-                    calculator.setIsCorrectAnswer(false);
-                } 
+                    isCalculatorActive = false;
+                    isCorrectAnswer = true;
+                }
             }
-            calculator.setIsCorrectAnswer(true);
-
         }
         scanner.close();
     }
