@@ -4,20 +4,17 @@ public class CalculatorTest {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Calculator calculator = new Calculator();
-        boolean isCalculatorActive = true;
+        String userChoose = "yes";
 
-        while (isCalculatorActive) {
+        while (userChoose.equalsIgnoreCase("yes")) {
             System.out.print("Введите первое число: ");
             calculator.setFirstNumber(scanner.nextInt());
             
-            boolean isCorrectMathOperator = false;
-            while (!isCorrectMathOperator) {
+            while (true) {
                 System.out.print("Введите знак операции (+, -, *, /, ^, %): ");
                 char mathOperator = scanner.next().charAt(0);
                 if (calculator.setMathOperator(mathOperator)) {
-                    isCorrectMathOperator = true;
-                } else {
-                    isCorrectMathOperator = false;
+                    break;
                 }
             }
 
@@ -28,19 +25,10 @@ public class CalculatorTest {
 
             scanner.nextLine();
 
-            boolean isCorrectAnswer = false;
-
-            while (!isCorrectAnswer) {
+            do {
                 System.out.println("Хотите продолжить вычисления? [yes/no]:");
-                String userChoose = scanner.nextLine();
-                if (userChoose.equalsIgnoreCase("yes")) {
-                    isCalculatorActive = true;
-                    isCorrectAnswer = true;
-                } else if (userChoose.equalsIgnoreCase("no")) {
-                    isCalculatorActive = false;
-                    isCorrectAnswer = true;
-                }
-            }
+                userChoose = scanner.nextLine();
+            } while (!userChoose.equalsIgnoreCase("yes") && !userChoose.equalsIgnoreCase("no"));
         }
         scanner.close();
     }

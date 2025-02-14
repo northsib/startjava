@@ -2,28 +2,13 @@ public class Calculator {
     private int firstNumber;
     private int secondNumber;
     private char mathOperator = '1';
-    // private boolean isCorrectMathOperator = false;
-    // private boolean isActive = true;
-    // private boolean isCorrectAnswer = true;
-
-    public int getFirstNumber() {
-        return firstNumber;
-    }
 
     public void setFirstNumber(int firstNumber) {
         this.firstNumber = firstNumber;
     }
 
-    public int getSecondNumber() {
-        return secondNumber;
-    }
-
     public void setSecondNumber(int secondNumber) {
         this.secondNumber = secondNumber;
-    }
-
-    public char getMathOperator() {
-        return mathOperator;
     }
 
     public boolean setMathOperator(char mathOperator) {
@@ -60,30 +45,29 @@ public class Calculator {
                     System.out.println("Ошибка: делить на ноль нельзя");
                     return;
                 } else if (firstNumber < secondNumber || (firstNumber % secondNumber) > 0) {
-                    floatResult = (float) firstNumber / (float) secondNumber;
+                    floatResult = (float) firstNumber / secondNumber;
                 } else {
                     result = firstNumber / secondNumber;
                 }
                 break; 
             case '^':
-                if (secondNumber > 0) {
-                    result = 1;
-                    for (int i = 1; i <= secondNumber; i++) {
-                        result *= firstNumber;
-                    }
-                } else if (secondNumber < 0) {
-                    floatResult = 1;
-                    for (int i = -1; i >= secondNumber; i--) {
-                        floatResult /= firstNumber;
-                    }
-                } else if (secondNumber == 0) {
-                    result = 1;
+                int absoluteSecondNumber;
+                if (secondNumber < 0) {
+                    absoluteSecondNumber = -secondNumber;
+                } else {
+                    absoluteSecondNumber = secondNumber;
+                }
+                result = 1;
+                for (int i = 1; i <= secondNumber; i++) {
+                    result *= firstNumber;
+                }
+                if (secondNumber < 0) {
+                    floatResult = 1 / (float) result;
                 }
                 break;
             case '%':
                 result = firstNumber % secondNumber;
                 break;
-            default:
         }
         if (floatResult != 0) {
             System.out.println("Ответ: " + floatResult);
