@@ -6,7 +6,7 @@ public class CalculatorTest {
         Calculator calculator = new Calculator();
         String userChoose = "yes";
 
-        while (userChoose.equalsIgnoreCase("yes")) {
+        while (userChoose.equals("yes")) {
             System.out.print("Введите первое число: ");
             calculator.setFirstNumber(scanner.nextInt());
             
@@ -20,15 +20,16 @@ public class CalculatorTest {
 
             System.out.print("Введите второе число: ");
             calculator.setSecondNumber(scanner.nextInt());
-
             calculator.calculate();
-
             scanner.nextLine();
 
-            do {
+            while (true) {
                 System.out.println("Хотите продолжить вычисления? [yes/no]:");
-                userChoose = scanner.nextLine();
-            } while (!userChoose.equalsIgnoreCase("yes") && !userChoose.equalsIgnoreCase("no"));
+                userChoose = scanner.nextLine().toLowerCase();
+                if (userChoose.equals("yes") || userChoose.equals("no")) {
+                    break;
+                } 
+            }
         }
         scanner.close();
     }

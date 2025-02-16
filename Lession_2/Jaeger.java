@@ -2,10 +2,8 @@ public class Jaeger {
     private String modelName;
     private String mark;
     private String origin;
-
     private float height;
     private int weight;
-
     private int speed;
     private int strength;
     private int armor;
@@ -13,8 +11,8 @@ public class Jaeger {
     public Jaeger() {
     }
 
-    public Jaeger(String modelName, String mark, String origin, float height, int weight, 
-            int speed, int strength, int armor) {
+    public Jaeger(String modelName, String mark, String origin, float height, 
+            int weight, int speed, int strength, int armor) {
         this.modelName = modelName;
         this.mark = mark;
         this.origin = origin;
@@ -69,9 +67,8 @@ public class Jaeger {
     public String scanKaiju(String target) {
         if ("kaiju".equalsIgnoreCase(target)) {
             return "Сканирую... ! ! !Тревога! ! ! Обнаружен Кайдзю! ! !";
-        } else {
-            return "Сканирую... ничего не обнаружено";
-        }
+        } 
+        return "Сканирую... ничего не обнаружено";
     }
 
     public void useVortexCannon() {

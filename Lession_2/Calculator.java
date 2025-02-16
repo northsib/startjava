@@ -1,7 +1,9 @@
 public class Calculator {
     private int firstNumber;
     private int secondNumber;
-    private char mathOperator = '1';
+    private char mathOperator;
+    private int result;
+    private float floatResult;
 
     public void setFirstNumber(int firstNumber) {
         this.firstNumber = firstNumber;
@@ -28,8 +30,6 @@ public class Calculator {
     }
 
     public void calculate() {
-        int result = 0;
-        float floatResult = 0;
         switch (mathOperator) {
             case '+':
                 result = firstNumber + secondNumber;
@@ -44,26 +44,18 @@ public class Calculator {
                 if (secondNumber == 0) {
                     System.out.println("Ошибка: делить на ноль нельзя");
                     return;
-                } else if (firstNumber < secondNumber || (firstNumber % secondNumber) > 0) {
-                    floatResult = (float) firstNumber / secondNumber;
-                } else {
-                    result = firstNumber / secondNumber;
                 }
-                break; 
+                result = firstNumber / secondNumber;
+                floatResult = (firstNumber < secondNumber || (firstNumber % secondNumber) > 0) ? 
+                        (float) firstNumber / secondNumber : 0;
+                break;
             case '^':
-                int absoluteSecondNumber;
-                if (secondNumber < 0) {
-                    absoluteSecondNumber = -secondNumber;
-                } else {
-                    absoluteSecondNumber = secondNumber;
-                }
+                int absoluteSecondNumber = Math.abs(secondNumber);
                 result = 1;
-                for (int i = 1; i <= secondNumber; i++) {
-                    result *= firstNumber;
+                for (int i = 1; i <= absoluteSecondNumber; i++) {
+                    result = result * firstNumber;
                 }
-                if (secondNumber < 0) {
-                    floatResult = 1 / (float) result;
-                }
+                floatResult = secondNumber < 0 ? 1 / (float) result : 0;
                 break;
             case '%':
                 result = firstNumber % secondNumber;
@@ -76,4 +68,3 @@ public class Calculator {
         }
     }
 }
-
