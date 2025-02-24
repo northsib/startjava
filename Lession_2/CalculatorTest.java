@@ -23,13 +23,10 @@ public class CalculatorTest {
             calculator.calculate();
             scanner.nextLine();
 
-            while (true) {
+            do {
                 System.out.println("Хотите продолжить вычисления? [yes/no]:");
                 userChoose = scanner.nextLine().toLowerCase();
-                if (userChoose.equals("yes") || userChoose.equals("no")) {
-                    break;
-                } 
-            }
+            } while (!userChoose.equals("yes") && !userChoose.equals("no"));
         }
         scanner.close();
     }

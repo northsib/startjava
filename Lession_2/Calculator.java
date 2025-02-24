@@ -3,7 +3,6 @@ public class Calculator {
     private int secondNumber;
     private char mathOperator;
     private int result;
-    private float floatResult;
 
     public void setFirstNumber(int firstNumber) {
         this.firstNumber = firstNumber;
@@ -30,6 +29,7 @@ public class Calculator {
     }
 
     public void calculate() {
+        float floatResult = 0;
         switch (mathOperator) {
             case '+':
                 result = firstNumber + secondNumber;
@@ -53,7 +53,7 @@ public class Calculator {
                 int absoluteSecondNumber = Math.abs(secondNumber);
                 result = 1;
                 for (int i = 1; i <= absoluteSecondNumber; i++) {
-                    result = result * firstNumber;
+                    result *= firstNumber;
                 }
                 floatResult = secondNumber < 0 ? 1 / (float) result : 0;
                 break;
