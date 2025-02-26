@@ -1,30 +1,25 @@
 public class Player {
-    private String playerName;
-    private int playerNumber;
+    private String name;
+    private int number;
 
-    public Player(String playerName) {
-        this.playerName = playerName;
+    public Player(String name) {
+        this.name = name;
     }
 
-    public boolean setPlayerNumber(int playerNumber) {
-        if (playerNumber < 1 || playerNumber > 100) {
+    public String getName() {
+        return name;
+    }
+
+    public int getNumber() {
+        return number;
+    }
+
+    public boolean setNumber(int number) {
+        if (number < 1 || number > 100) {
             System.out.println("Ошибка: загаданное число должно быть от 1 до 100");
             return false;
-        } else {
-            this.playerNumber = playerNumber;
-            return true;
         }
-    }
-
-    public void getPlayerInfo() {
-        System.out.println("Имя игрока - " + playerName + ", введенное число - " + playerNumber);
-    }
-
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    public int getPlayerNumber() {
-        return playerNumber;
+        this.number = number;
+        return true;
     }
 }
