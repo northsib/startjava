@@ -17,17 +17,17 @@ public class GuessNumber {
 
     public void play() {
         while (true) {
-            int inputNumber = checkInputNumber();
+            int inputNumber = inputNumber();
             if (checkGuess(inputNumber)) {
                 System.out.println("Поздравляем! Игрок " + currentPlayer.getName() + 
                         " отгадал загаданное число - " + guessNumber);
                 break;
             }
-            currentPlayer = (currentPlayer == player1) ? player2 : player1;
+            switchPlayer();
         }
     }
 
-    private int checkInputNumber() {
+    private int inputNumber() {
         System.out.println(currentPlayer.getName() + ", загадайте число от 1 до 100");
         int inputNumber = scanner.nextInt();
         
@@ -38,14 +38,18 @@ public class GuessNumber {
     }
 
     private boolean checkGuess(int inputNumber) {
+        if (inputNumber == guessNumber) {
+            return true;
+        }
         if (inputNumber > guessNumber) {
             System.out.println(inputNumber + " больше, чем загаданное число");
             return false;
-        } else if (inputNumber < guessNumber) {
-            System.out.println(inputNumber + " меньше, чем загаданное число");
-            return false;
-        } else {
-            return true;
         }
+        System.out.println(inputNumber + " меньше, чем загаданное число");
+        return false;
+    }
+
+    private void switchPlayer() {
+        currentPlayer = (currentPlayer == player1) ? player2 : player1;
     }
 }
