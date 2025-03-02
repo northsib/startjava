@@ -24,14 +24,14 @@ public class MethodInvoker {
 
     public static void execBooleanMethods() {
         BooleanMethods bm = new BooleanMethods();
-        bm.isActiveProgram();
-        bm.isDeletedFile();
-        bm.hasUniqueDigit();
-        bm.isLetterInput();
-        bm.hasEqualsDigits();
-        bm.hasRemainingLives();
-        bm.isEmpty();
-        bm.isValidFilePath();
-        bm.fileExists();
+        System.out.println(bm.isActiveProgram());
+        System.out.println(bm.isDeletedFile());
+        System.out.println(bm.hasUniqueDigit());
+        System.out.println(bm.isLetterInput());
+        System.out.println(bm.hasEqualsDigits());
+        System.out.println(bm.hasRemainingLives());
+        System.out.println(bm.isEmpty());
+        System.out.println(bm.isValidFilePath());
+        System.out.println(bm.fileExists());
     }
 }
