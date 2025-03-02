@@ -1,37 +1,37 @@
 public class MethodInvoker {
     public static void main(String[] args) {
-        invokeNonBooleanMethods();
-        invokeBooleanMethods();
+        execNonBooleanMethods();
+        execBooleanMethods();
     }
 
-    public static void invokeNonBooleanMethods() {
-        NonBooleanMethods nonBooleanMethods = new NonBooleanMethods();
-        nonBooleanMethods.findLongestWord();
-        nonBooleanMethods.selectMenuOption();
-        nonBooleanMethods.calculateAverageMarks();
-        nonBooleanMethods.countUniqueWords();
-        nonBooleanMethods.showError();
-        nonBooleanMethods.syncCloudData();
-        nonBooleanMethods.restoreFromBackup();
-        nonBooleanMethods.pauseFileDownload();
-        nonBooleanMethods.factoryReset();
-        nonBooleanMethods.writeContentToFile();
-        nonBooleanMethods.convertTemperature();
-        nonBooleanMethods.inputMathExpression();
-        nonBooleanMethods.determineWinner();
-        nonBooleanMethods.findBookByName();
+    public static void execNonBooleanMethods() {
+        NonBooleanMethods nonBm = new NonBooleanMethods();
+        nonBm.findLongestWord();
+        nonBm.selectMenuOption();
+        nonBm.calculateAverageMarks();
+        nonBm.countUniqueWords();
+        nonBm.showError();
+        nonBm.syncCloudData();
+        nonBm.restoreFromBackup();
+        nonBm.pauseFileDownload();
+        nonBm.factoryReset();
+        nonBm.writeContentToFile();
+        nonBm.convertTemperature();
+        nonBm.inputMathExpression();
+        nonBm.determineWinner();
+        nonBm.findBookByName();
     }
 
-    public static void invokeBooleanMethods() {
-        BooleanMethods booleanMethods = new BooleanMethods();
-        booleanMethods.isProgramActive();
-        booleanMethods.isFileDeleted();
-        booleanMethods.hasUniqueDigit();
-        booleanMethods.isAlphaInput();
-        booleanMethods.hasEqualsDigits();
-        booleanMethods.hasRemainingLives();
-        booleanMethods.isWhitespaceString();
-        booleanMethods.isValidFilePath();
-        booleanMethods.fileExists();
+    public static void execBooleanMethods() {
+        BooleanMethods bm = new BooleanMethods();
+        bm.isActiveProgram();
+        bm.isDeletedFile();
+        bm.hasUniqueDigit();
+        bm.isLetterInput();
+        bm.hasEqualsDigits();
+        bm.hasRemainingLives();
+        bm.isEmpty();
+        bm.isValidFilePath();
+        bm.fileExists();
     }
 }

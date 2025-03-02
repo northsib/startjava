@@ -1,53 +1,63 @@
 public class BooleanMethods {
-    public boolean isProgramActive() {
-        System.out.println("\n" + MethodCallerInfo.getCurrentMethodName() + 
-                "() -> программа выполняется далее или завершается?\n");
-        return true;
+    public boolean isActiveProgram() {
+        System.out.println("\n" + MethodName.getCurrent() + 
+                "() -> программа выполняется далее или завершается? " + 
+                String.valueOf(true) + "\n");
+        return false;
     }
 
-    public boolean isFileDeleted() {
-        System.out.println(MethodCallerInfo.getCurrentMethodName() + "() -> удалился ли файл?\n");
+    public boolean isDeletedFile() {
+        System.out.println(MethodName.getCurrent() + "() -> удалился ли файл? " + 
+                String.valueOf(true) + "\n");
         return true;
     }
 
     public boolean hasUniqueDigit() {
-        System.out.println(MethodCallerInfo.getCurrentMethodName() + "() -> содержит ли уникальную цифру?\n");
+        System.out.println(MethodName.getCurrent() + "() -> содержит ли уникальную цифру? " + 
+                String.valueOf(true) + "\n");
         return true;
     }
 
-    public boolean isAlphaInput() {
-        System.out.println(MethodCallerInfo.getCurrentMethodName() + "() -> введена ли буква?\n");
+    public boolean isLetterInput() {
+        System.out.println(MethodName.getCurrent() + "() -> введена ли буква? " + 
+                String.valueOf(true) + "\n");
         return true;
     }
 
     public boolean hasEqualsDigits() {
-        System.out.println(MethodCallerInfo.getCurrentMethodName() + "() -> содержатся ли равные цифры?\n");
+        System.out.println(MethodName.getCurrent() + "() -> содержатся ли равные цифры? " + 
+                String.valueOf(true) + "\n");
         return true;
     }
 
     public boolean hasRemainingLives() {
-        System.out.println(MethodCallerInfo.getCurrentMethodName() + "() -> остались ли попытки (в игре)?\n");
+        System.out.println(MethodName.getCurrent() + "() -> остались ли попытки (в игре)? " + 
+                String.valueOf(true) + "\n");
         return true;
     }
 
-    public boolean isWhitespaceString() {
-        System.out.println(MethodCallerInfo.getCurrentMethodName() + 
-                "() -> состоит ли строка из пробелов?\n");
+    public boolean isEmpty() {
+        System.out.println(MethodName.getCurrent() + 
+                "() -> состоит ли строка из пробелов? " + 
+                String.valueOf(true) + "\n");
         return true;
     }
 
     public boolean isEvenRoll() {
-        System.out.println(MethodCallerInfo.getCurrentMethodName() + "() -> выпало ли чётное число?\n");
+        System.out.println(MethodName.getCurrent() + "() -> выпало ли чётное число? " + 
+                String.valueOf(true) + "\n");
         return true;
     }
 
     public boolean isValidFilePath() {
-        System.out.println(MethodCallerInfo.getCurrentMethodName() + "() -> путь к файлу действительный?\n");
+        System.out.println(MethodName.getCurrent() + "() -> путь к файлу действительный? " + 
+                String.valueOf(true) + "\n");
         return true;
     }
 
     public boolean fileExists() {
-        System.out.println(MethodCallerInfo.getCurrentMethodName() + "() -> файл существует?\n");
+        System.out.println(MethodName.getCurrent() + "() -> файл существует? " + 
+                String.valueOf(true) + "\n");
         return true;
     }
 }

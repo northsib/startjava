@@ -43,9 +43,9 @@ public class GuessNumber {
         }
         if (inputNumber > guessNumber) {
             System.out.println(inputNumber + " больше, чем загаданное число");
-            return false;
+        } else {
+            System.out.println(inputNumber + " меньше, чем загаданное число");
         }
-        System.out.println(inputNumber + " меньше, чем загаданное число");
         return false;
     }
 
