@@ -4,7 +4,7 @@ public class Calculator {
     public static void main(String[] args) {
         System.out.println("Используйте только натуральные числа: 1, 2, 3...");
         int firstNumber = 18;
-        int secondNumber = 0;
+        int secondNumber = 2;
         int result = 0;
         char mathOperator = '^';
 
