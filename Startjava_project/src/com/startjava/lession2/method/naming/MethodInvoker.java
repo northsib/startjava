@@ -1,3 +1,5 @@
+package com.startjava.lession2.method.naming;
+
 public class MethodInvoker {
     public static void main(String[] args) {
         execNonBooleanMethods();

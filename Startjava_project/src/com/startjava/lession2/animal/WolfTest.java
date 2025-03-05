@@ -1,3 +1,5 @@
+package com.startjava.lession2.animal;
+
 public class WolfTest {
     public static void main(String[] args) {
         Wolf wolf = new Wolf();

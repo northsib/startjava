@@ -1,3 +1,4 @@
+package com.startjava.lession1.base;
 
 public class CyclesTheme {
     public static void main(String[] args) {

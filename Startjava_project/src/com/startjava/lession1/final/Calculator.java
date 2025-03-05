@@ -1,3 +1,5 @@
+package com.startjava.lession1.final_;
+
 public class Calculator { 
     public static void main(String[] args) {
         System.out.println("Используйте только натуральные числа: 1, 2, 3...");

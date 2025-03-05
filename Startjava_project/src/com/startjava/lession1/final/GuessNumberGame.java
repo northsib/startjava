@@ -1,3 +1,5 @@
+package com.startjava.lession1.final_;
+
 public class GuessNumberGame { 
     public static void main(String[] args) {
         int numberToGuess = 20;

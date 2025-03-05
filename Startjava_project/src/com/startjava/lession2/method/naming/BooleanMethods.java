@@ -1,3 +1,5 @@
+package com.startjava.lession2.method.naming;
+
 public class BooleanMethods {
     public boolean isActiveProgram() {
         System.out.print("\n" + MethodName.getCurrent() + 
