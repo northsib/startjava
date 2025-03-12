@@ -1,4 +1,4 @@
-package com.startjava.lession2_3.method.naming;
+package com.startjava.lession2_3_4.method.naming;
 
 public class BooleanMethods {
     public boolean isActiveProgram() {

@@ -1,4 +1,4 @@
-package com.startjava.lession2_3.rps;
+package com.startjava.lession2_3_4.rps;
 
 import java.util.Random;
 import java.util.Scanner;
