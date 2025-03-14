@@ -11,16 +11,16 @@ public class Factorial {
 
     private static void calculateFactorial (long... numbers) {
         if (numbers == null) {
-            System.out.println("null");
+            System.out.println("null\n");
             return;
         }
         if (numbers.length == 0) {
-            System.out.println("Массив нулевой длины");
+            System.out.println("Массив нулевой длины\n");
             return;
         }
 
         long[] factorials = new long[numbers.length];
-//        String[] factorialExpression = new String[numbers.length];
+        String[] factorialExpression = new String[numbers.length];
 
         for (int i = 0; i < numbers.length; i++) {
             if (numbers[i] < 0) {
@@ -28,69 +28,24 @@ public class Factorial {
                 continue;
             }
             long factorial = 1;
+            String expression = "";
             for (int j = 1; j <= numbers[i]; j++) {
                 factorial *= j;
+                expression += (j > 1 ? " * " : "") + j;
             }
             factorials[i] = factorial;
+            factorialExpression[i] = expression;
         }
 
         for (int i = 0; i < factorials.length; i++) {
-            if (factorials[i] == -1) {
-                System.out.print("Ошибка: факториал " + numbers[i] + "! не определен");
-                if (i < (factorials.length - 1)) {
-                    System.out.print(", ");
-                }
-                continue;
-            }
-            System.out.print(factorials[i]);
-            if (i < (factorials.length - 1)) {
-                System.out.print(", ");
+            if (factorials[i] == 1) {
+                System.out.printf(numbers[i] + "! = 1\n");
+            } else {
+                System.out.println((factorials[i] == -1 ?
+                        "Ошибка: факториал " + numbers[i] + "! не определен" :
+                        numbers[i] + "! = " + factorialExpression[i] + " = " + factorials[i]));
             }
         }
         System.out.println();
     }
 }
-
-/*
-private static void calculateFactorial(long... numbers) {
-    if (numbers == null) {
-        System.out.println("null");
-        return;
-    }
-    if (numbers.length == 0) {
-        System.out.println("Массив нулевой длины");
-        return;
-    }
-
-    long[] factorials = new long[numbers.length];
-    String[] expressions = new String[numbers.length];
-
-    for (int i = 0; i < numbers.length; i++) {
-        if (numbers[i] < 0) {
-            factorials[i] = -1;
-            continue;
-        }
-
-        long factorial = 1;
-        String expression = "";
-
-        for (int j = 1; j <= numbers[i]; j++) {
-            factorial *= j;
-            expression += (j > 1 ? " * " : "") + j;
-        }
-
-        factorials[i] = factorial;
-        expressions[i] = expression;
-    }
-
-    for (int i = 0; i < factorials.length; i++) {
-        System.out.print((factorials[i] == -1 ?
-            "Ошибка: факториал " + numbers[i] + "! не определен" :
-            numbers[i] + "! = " + expressions[i] + " = " + factorials[i]));
-
-        if (i < factorials.length - 1) {
-            System.out.print(", ");
-        }
-    }
-    System.out.println();
- */
