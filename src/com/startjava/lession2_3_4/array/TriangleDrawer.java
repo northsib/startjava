@@ -14,10 +14,10 @@ public class TriangleDrawer {
         }
         int height = end - (start - 1);
         char startPrint = ascending ? end : start;
-        char endPrint = ascending ? end : start;
+//        char endPrint = ascending ? start : end;
 
         for (int i = 0; i < height; i++) {
-            char currentChar = (char) (ascending ? startPrint - i : endPrint + i);
+            char currentChar = (char) (ascending ? startPrint - i : startPrint + i);
             StringBuilder spaces = new StringBuilder();
             spaces.append(" ".repeat(Math.max(0, (height - 1) - i)));
             StringBuilder chars = new StringBuilder();
