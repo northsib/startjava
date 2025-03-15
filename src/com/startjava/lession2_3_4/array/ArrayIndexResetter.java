@@ -7,9 +7,9 @@ public class ArrayIndexResetter {
         int[] indexes = {-1, 15, 0, 14};
 
         float[] floats1 = createArray();
-        resetExceedingFloats(floats1,indexes[0]);
+        resetExceedingFloats(floats1, indexes[0]);
         float[] floats2 = createArray();
-        resetExceedingFloats(floats2,indexes[1]);
+        resetExceedingFloats(floats2, indexes[1]);
         float[] floats3 = createArray();
         resetExceedingFloats(floats3, indexes[2]);
         float[] floats4 = createArray();
@@ -27,7 +27,7 @@ public class ArrayIndexResetter {
         return floats;
     }
 
-    public static void resetExceedingFloats (float[] floats, int index) {
+    public static void resetExceedingFloats(float[] floats, int index) {
         if (index < 0 || index >= floats.length) {
             System.out.println("Ошибка: индекс массива выходит за пределы массива\n");
             return;
@@ -47,7 +47,7 @@ public class ArrayIndexResetter {
         System.out.println();
     }
 
-    public static void printArray (float[] floats) {
+    public static void printArray(float[] floats) {
         for (int i = 0; i < floats.length; i++) {
             if (i == 8) {
                 System.out.println();

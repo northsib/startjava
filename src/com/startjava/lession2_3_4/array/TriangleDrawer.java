@@ -14,7 +14,6 @@ public class TriangleDrawer {
         }
         int height = end - (start - 1);
         char startPrint = ascending ? end : start;
-//        char endPrint = ascending ? start : end;
 
         for (int i = 0; i < height; i++) {
             char currentChar = (char) (ascending ? startPrint - i : startPrint + i);
