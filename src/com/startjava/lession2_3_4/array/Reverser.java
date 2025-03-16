@@ -2,7 +2,7 @@ package com.startjava.lession2_3_4.array;
 
 import java.util.Arrays;
 
-public class ArrayReverser {
+public class Reverser {
     public static void main(String[] args) {
         int[] emptyArray = {};
         int[] reversed = reverse(emptyArray);
@@ -32,18 +32,14 @@ public class ArrayReverser {
         int[] reversed = new int[numbers.length];
         int index = numbers.length;
         for (int number : numbers) {
-            reversed[index - 1] = number;
-            index--;
+            reversed[--index] = number;
         }
         return reversed;
     }
 
     private static void printResult(int[] numbers, int[] reversed) {
-        StringBuilder originalOutput = new StringBuilder("До реверса: ");
-        originalOutput.append(Arrays.toString(numbers)).append("\n");
-
-        StringBuilder reverseOutput = new StringBuilder("После реверса: ");
-        reverseOutput.append(Arrays.toString(reversed)).append("\n");
+        String originalOutput = "До реверса: " + Arrays.toString(numbers) + "\n";
+        String reverseOutput = "После реверса: " + Arrays.toString(reversed) + "\n";
 
         int padding = reverseOutput.length();
 
