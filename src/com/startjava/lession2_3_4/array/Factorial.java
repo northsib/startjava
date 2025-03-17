@@ -66,7 +66,7 @@ public class Factorial {
                 factorialExpression.append(j > 1 ? " * " + j : j);
             }
             System.out.println(factorialExpression.append(" = ").append(factorials[i]));
-            factorialExpression = new StringBuilder();
+            factorialExpression.setLength(0);
         }
         System.out.println();
     }
