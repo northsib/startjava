@@ -38,12 +38,7 @@ public class Reverser {
     }
 
     private static void printResult(int[] numbers, int[] reversed) {
-        String originalOutput = "До реверса: " + Arrays.toString(numbers) + "\n";
-        String reverseOutput = "После реверса: " + Arrays.toString(reversed) + "\n";
-
-        int padding = reverseOutput.length();
-
-        System.out.printf("%" + padding + "s", originalOutput);
-        System.out.println(reverseOutput);
+        System.out.println("   До реверса: " + Arrays.toString(numbers));
+        System.out.println("После реверса: " + Arrays.toString(reversed) + "\n");
     }
 }
