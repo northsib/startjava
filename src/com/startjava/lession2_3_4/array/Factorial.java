@@ -51,6 +51,7 @@ public class Factorial {
             return;
         }
 
+        StringBuilder factorialExpression = new StringBuilder();
         for (int i = 0; i < original.length; i++) {
             if (factorials[i] == 1) {
                 System.out.println(original[i] + "! = 1");
@@ -60,11 +61,12 @@ public class Factorial {
                 System.out.println("Ошибка: факториал " + original[i] + "! не определен");
                 continue;
             }
-            StringBuilder factorialExpression = new StringBuilder();
+            factorialExpression.append(original[i]).append("! = ");
             for (int j = 1; j <= original[i]; j++) {
                 factorialExpression.append(j > 1 ? " * " + j : j);
             }
-            System.out.println(original[i] + "! = " + factorialExpression + " = " + factorials[i]);
+            System.out.println(factorialExpression.append(" = ").append(factorials[i]));
+            factorialExpression = new StringBuilder();
         }
         System.out.println();
     }
