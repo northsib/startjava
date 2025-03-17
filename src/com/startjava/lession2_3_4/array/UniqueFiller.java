@@ -1,39 +1,25 @@
 package com.startjava.lession2_3_4.array;
 
-public class ArrayUniqueFiller {
+public class UniqueFiller {
     public static void main(String[] args) {
-        int start = -30;
-        int end = -10;
         int numbersPerLine = 23;
-        int[] unique = create(start, end, numbersPerLine);
+        int[] unique = fill(-30, -10, numbersPerLine);
         print(unique, numbersPerLine);
 
-        start = 10;
-        end = 50;
-        numbersPerLine = 10;
-        unique = create(start, end, numbersPerLine);
+        unique = fill(10, 50, numbersPerLine = 10);
         print(unique, numbersPerLine);
 
-        start = -34;
-        end = -34;
-        numbersPerLine = 0;
-        unique = create(start, end, numbersPerLine);
+        unique = fill(-34, -34, numbersPerLine = 0);
         print(unique, numbersPerLine);
 
-        start = -1;
-        end = 2;
-        numbersPerLine = -3;
-        unique = create(start, end, numbersPerLine);
+        unique = fill(-1, 2, numbersPerLine = -3);
         print(unique, numbersPerLine);
 
-        start = 5;
-        end = -8;
-        numbersPerLine = 2;
-        unique = create(start, end, numbersPerLine);
+        unique = fill(5, -8, numbersPerLine = 2);
         print(unique, numbersPerLine);
     }
 
-    private static int[] create(int start, int end, int numbersPerLine) {
+    private static int[] fill(int start, int end, int numbersPerLine) {
         if (numbersPerLine < 1) {
             System.out.println("\nОшибка: количество чисел в строке не должно быть < 1 (" +
                     numbersPerLine + ")");
@@ -43,27 +29,31 @@ public class ArrayUniqueFiller {
             System.out.println("\nОшибка: левая граница (" + start + ") > правой (" + end + ")\n");
             return null;
         }
-        int arraySize = (int) (0.75 * (end - start + 1));
-        if (arraySize <= 0) {
-            System.out.println("\nОшибка: длина массива должна быть > 0 (" + arraySize + ")\n");
+        int length = (int) (0.75 * (end - start + 1));
+        if (length <= 0) {
+            System.out.println("\nОшибка: длина массива должна быть > 0 (" + length + ")\n");
             return null;
         }
-        int[] uniqueNumbers = new int[arraySize];
-        int[] usedNumbers = new int[end - start + 1];
+        int[] uniqueNumbers = new int[length];
         int numbersCounter = 0;
 
-        while (numbersCounter < arraySize) {
+        while (numbersCounter < length) {
             int randomNumber = start > 0 ? (int) (Math.random() * (end - start + 1) + start) :
                     (int) (Math.random() * (end - start + 1) + start - 1);
-            int index = randomNumber - start;
-            if (usedNumbers[index] == 0) {
+            boolean isUnique = true;
+            for (int i = 0; i < numbersCounter; i++) {
+                if (uniqueNumbers[i] == randomNumber) {
+                    isUnique = false;
+                    break;
+                }
+            }
+            if (isUnique) {
                 uniqueNumbers[numbersCounter] = randomNumber;
-                usedNumbers[index] = 1;
                 numbersCounter++;
             }
         }
 
-        for (int i = 1; i < arraySize; i++) {
+        for (int i = 1; i < length; i++) {
             int currentNumber = uniqueNumbers[i];
             int j = i - 1;
             while (j >= 0 && currentNumber < uniqueNumbers[j]) {
