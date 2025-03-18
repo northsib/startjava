@@ -1,5 +1,8 @@
 package com.startjava.lession2_3_4.array;
 
+import java.util.Arrays;
+import java.util.Random;
+
 public class UniqueFiller {
     public static void main(String[] args) {
         int numbersPerLine = 23;
@@ -38,8 +41,8 @@ public class UniqueFiller {
         int numbersCounter = 0;
 
         while (numbersCounter < length) {
-            int randomNumber = start > 0 ? (int) (Math.random() * (end - start + 1) + start) :
-                    (int) (Math.random() * (end - start + 1) + start - 1);
+            Random random = new Random();
+            int randomNumber = random.nextInt(start, end + 1);
             boolean isUnique = true;
             for (int i = 0; i < numbersCounter; i++) {
                 if (uniqueNumbers[i] == randomNumber) {
@@ -52,16 +55,7 @@ public class UniqueFiller {
                 numbersCounter++;
             }
         }
-
-        for (int i = 1; i < length; i++) {
-            int currentNumber = uniqueNumbers[i];
-            int j = i - 1;
-            while (j >= 0 && currentNumber < uniqueNumbers[j]) {
-                uniqueNumbers[j + 1] = uniqueNumbers[j];
-                j--;
-            }
-            uniqueNumbers[j + 1] = currentNumber;
-        }
+        Arrays.sort(uniqueNumbers);
         return uniqueNumbers;
     }
 
