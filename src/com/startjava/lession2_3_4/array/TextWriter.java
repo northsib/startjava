@@ -1,31 +1,27 @@
 package com.startjava.lession2_3_4.array;
 
-import java.util.Arrays;
-
 public class TextWriter {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         String[] texts = {
-                "Тестируем массив просто я так хочу",
                 "Java - это C++, из которого убрали все пистолеты, ножи и дубинки. - James Gosling",
-                "Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его. - Robert Martin",
-                "null",
+                "Чтобы написать чистый код, мы сначала пишем грязный код, " +
+                        "затем рефакторим его. - Robert Martin",
+                null,
                 ""
         };
 
         for (String text : texts) {
-            System.out.println("Исходный текст: " + text);
             String result = processText(text);
-            System.out.println("Обработанный текст: " + result);
-            System.out.println("--------------------------------------");
+            print(result);
             System.out.println();
         }
     }
 
     private static String processText(String text) {
-        String[] words = text.split(" ");
-        if (words.length == 0) {
+        if (text == null || text.isEmpty()) {
             return null;
         }
+        String[] words = text.split(" ");
         String longest = words[0];
         String shortest = words[0];
 
@@ -41,9 +37,6 @@ public class TextWriter {
                 longest = cleanWord;
             }
         }
-        System.out.println(shortest);
-        System.out.println(longest);
-        System.out.println(Arrays.toString(words));
 
         int shortIndex = returnIndex(words, shortest);
         int longIndex = returnIndex(words, longest);
@@ -71,6 +64,19 @@ public class TextWriter {
             }
         }
         return index;
+    }
+
+    private static void print(String text) throws InterruptedException {
+        if (text == null || text.isEmpty()) {
+            System.out.println("Передана пустая строка, либо null");
+            return;
+        }
+        char[] chars = text.toCharArray();
+        for (char symbols : chars) {
+            System.out.print(symbols);
+            Thread.sleep(100);
+        }
+        System.out.println();
     }
 }
 
