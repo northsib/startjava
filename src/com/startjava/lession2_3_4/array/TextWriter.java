@@ -5,6 +5,7 @@ import java.util.Arrays;
 public class TextWriter {
     public static void main(String[] args) {
         String[] texts = {
+                "Тестируем массив просто я так хочу",
                 "Java - это C++, из которого убрали все пистолеты, ножи и дубинки. - James Gosling",
                 "Чтобы написать чистый код, мы сначала пишем грязный код, затем рефакторим его. - Robert Martin",
                 "null",
@@ -31,7 +32,7 @@ public class TextWriter {
         for (String word : words) {
             String cleanWord = word.replaceAll("\\p{Punct}", "");
             if (cleanWord.length() < shortest.length()) {
-                if (cleanWord.length() == 0) {
+                if (cleanWord.isEmpty()) {
                     continue;
                 }
                 shortest = cleanWord;
@@ -43,44 +44,33 @@ public class TextWriter {
         System.out.println(shortest);
         System.out.println(longest);
         System.out.println(Arrays.toString(words));
-        int minLength = shortest.length();
-        int maxLength = longest.length();
 
-        // Создаем StringBuilder для результата
+        int shortIndex = returnIndex(words, shortest);
+        int longIndex = returnIndex(words, longest);
+
         StringBuilder result = new StringBuilder();
 
-        // Проходим по исходному тексту, разделяя на части
-        int start = 0;
-        while (start < text.length()) {
-            // Находим начало и конец слова или знака препинания
-            int end = start;
-            while (end < text.length() && !Character.isWhitespace(text.charAt(end))) {
-                end++;
+        int start = Math.min(shortIndex, longIndex);
+        int end = Math.max(shortIndex, longIndex);
+        for (int i = 0; i < words.length; i++) {
+            if (i < start || i > end) {
+                result.append(words[i]).append(" ");
             }
-
-            String part = text.substring(start, end);
-
-            // Убираем знаки препинания из части для проверки
-            String cleanPart = part.replaceAll("\\p{Punct}", "");
-
-            // Проверяем длину слова
-            if (cleanPart.length() >= minLength && cleanPart.length() <= maxLength) {
-                result.append(part.toUpperCase());
-            } else {
-                result.append(part.toLowerCase());
-            }
-
-            // Переходим к следующей части
-            start = end;
-            while (start < text.length() && Character.isWhitespace(text.charAt(start))) {
-                result.append(text.charAt(start));
-                start++;
+            if (i >= start && i <= end) {
+                result.append(words[i].toUpperCase()).append(" ");
             }
         }
-
         return result.toString();
     }
 
-
+    private static int returnIndex(String[] words, String word) {
+        int index = 0;
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].contains(word)) {
+                index = i;
+            }
+        }
+        return index;
+    }
 }
 
