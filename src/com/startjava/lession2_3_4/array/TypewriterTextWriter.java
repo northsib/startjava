@@ -1,18 +1,18 @@
 package com.startjava.lession2_3_4.array;
 
-public class TextWriter {
+public class TypewriterTextWriter {
     public static void main(String[] args) throws InterruptedException {
         String[] texts = {
-                "Java - это C++, из которого убрали все пистолеты, ножи и дубинки. - James Gosling",
+                "Java - это C++, из которого убрали все пистолеты, ножи и дубинки. \n- James Gosling",
                 "Чтобы написать чистый код, мы сначала пишем грязный код, " +
-                        "затем рефакторим его. - Robert Martin",
+                        "затем рефакторим его. \n- Robert Martin",
                 null,
                 ""
         };
 
         for (String text : texts) {
             String result = processText(text);
-            print(result);
+            type(result);
             System.out.println();
         }
     }
@@ -26,20 +26,20 @@ public class TextWriter {
         String shortest = words[0];
 
         for (String word : words) {
-            String cleanWord = word.replaceAll("\\p{Punct}", "");
-            if (cleanWord.length() < shortest.length()) {
+            String cleanWord = word.replaceAll("\\p{P}", "");
+            if (shortest.length() > cleanWord.length()) {
                 if (cleanWord.isEmpty()) {
                     continue;
                 }
                 shortest = cleanWord;
             }
-            if (cleanWord.length() > longest.length()) {
+            if (longest.length() < cleanWord.length()) {
                 longest = cleanWord;
             }
         }
 
-        int shortIndex = returnIndex(words, shortest);
-        int longIndex = returnIndex(words, longest);
+        int shortIndex = findIndex(words, shortest);
+        int longIndex = findIndex(words, longest);
 
         StringBuilder result = new StringBuilder();
 
@@ -56,7 +56,7 @@ public class TextWriter {
         return result.toString();
     }
 
-    private static int returnIndex(String[] words, String word) {
+    private static int findIndex(String[] words, String word) {
         int index = 0;
         for (int i = 0; i < words.length; i++) {
             if (words[i].contains(word)) {
@@ -66,7 +66,7 @@ public class TextWriter {
         return index;
     }
 
-    private static void print(String text) throws InterruptedException {
+    private static void type(String text) throws InterruptedException {
         if (text == null || text.isEmpty()) {
             System.out.println("Передана пустая строка, либо null");
             return;
