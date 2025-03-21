@@ -1,6 +1,6 @@
 package com.startjava.lession2_3_4.array;
 
-public class TypewriterTextWriter {
+public class TypewriterEffect {
     public static void main(String[] args) throws InterruptedException {
         String[] texts = {
                 "Java - это C++, из которого убрали все пистолеты, ножи и дубинки. \n- James Gosling",
