@@ -3,9 +3,9 @@ package com.startjava.lession2_3_4.array;
 public class TypewriterEffect {
     public static void main(String[] args) throws InterruptedException {
         String[] texts = {
-                "Java - это C++, из которого убрали все пистолеты, ножи и дубинки. \n- James Gosling",
+                "Java - это C++, из которого убрали все пистолеты, ножи и дубинки.\n- James Gosling",
                 "Чтобы написать чистый код, мы сначала пишем грязный код, " +
-                        "затем рефакторим его. \n- Robert Martin",
+                        "затем рефакторим его.\n- Robert Martin",
                 null,
                 ""
         };
