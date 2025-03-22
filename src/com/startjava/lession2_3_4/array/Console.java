@@ -7,44 +7,19 @@ public class Console {
 
     }
 
-    public static void displayHeader(String title) {
-        System.out.println("\n--- " + title + " ---\n");
-    }
-
-    public static void printIntegers(int[] numbers) {
-        if (numbers == null) {
-            return;
-        }
-        System.out.println(Arrays.toString(numbers));
-    }
-
-    public static void printFloats(float[] floats, int numbersPerLine) {
-        if (floats == null) {
-            return;
-        }
-        for (int i = 0; i < floats.length; i++) {
-            if (i > 0 && i % numbersPerLine == 0) {
-                System.out.println();
-            }
-            System.out.printf("%.3f%s", floats[i], "");
-            if (i < (floats.length - 1)) {
-                System.out.print(", ");
-            }
-        }
-        System.out.println();
-    }
-
     public static void displayError(String message) {
         System.out.println("Ошибка: " + message);
     }
 
-    public static void printReversed(int[] numbers, int[] reversed) {
-        if (numbers != null && numbers.length != 0) {
-            System.out.print("   До реверса: ");
-            printIntegers(numbers);
-            System.out.print("После реверса: ");
-            printIntegers(reversed);
+    public static void displayHeader(String header) {
+        System.out.println("\n--- " + header + " ---\n");
+    }
+
+    public static void draw(StringBuilder triangle) {
+        if (triangle == null) {
+            return;
         }
+        System.out.println(triangle);
     }
 
     public static void printFactorial(int[] original, long[] factorials) {
@@ -71,26 +46,28 @@ public class Console {
         System.out.println();
     }
 
-    public static void printLines(int[] numbers, int numbersPerLine) {
-        if (numbers == null) {
+    public static void printFloats(float[] floats, int numbersPerLine) {
+        if (floats == null) {
             return;
         }
-        for (int i = 0; i < numbers.length; i++) {
-            if (i > 0 && (i % numbersPerLine) == 0) {
+        for (int i = 0; i < floats.length; i++) {
+            if (i > 0 && i % numbersPerLine == 0) {
                 System.out.println();
             }
-            System.out.printf("%3d%s", numbers[i], (i < numbers.length - 1) ? ", " : "");
+            System.out.printf("%.3f%s", floats[i], "");
+            if (i < (floats.length - 1)) {
+                System.out.print(", ");
+            }
         }
         System.out.println();
     }
 
     public static void printFloatsLines(float[][] values, int index) {
         if (values == null) {
-            displayError("Переданы пустые массивы");
             return;
         }
         int numberPerLine = 8;
-        System.out.print("Исходный массив: ");
+        System.out.print("\nИсходный массив: ");
         printFloats(values[0], numberPerLine);
         System.out.print("Измененный массив: ");
         printFloats(values[1], numberPerLine);
@@ -103,10 +80,36 @@ public class Console {
         System.out.println("Количество обнуленных ячеек - " + zeroCounter);
     }
 
-    public static void draw(StringBuilder triangle) {
-        if (triangle == null) {
+    public static void printLines(int[] numbers, int numbersPerLine) {
+        if (numbers == null) {
             return;
         }
-        System.out.println(triangle);
+        System.out.println();
+        for (int i = 0; i < numbers.length; i++) {
+            if (i > 0 && (i % numbersPerLine) == 0) {
+                System.out.println();
+            }
+            System.out.printf("%3d%s", numbers[i], (i < numbers.length - 1) ? ", " : "");
+        }
+        System.out.println();
+    }
+
+    public static void printReversed(int[] numbers, int[] reversed) {
+        if (numbers != null && numbers.length != 0) {
+            System.out.print("\n   До реверса: " + Arrays.toString(numbers));
+            System.out.print("После реверса: " + Arrays.toString(reversed));
+        }
+    }
+
+    public static void printTypewriterEffect(String text) throws InterruptedException {
+        if (text == null || text.isEmpty()) {
+            return;
+        }
+        char[] chars = text.toCharArray();
+        for (char symbols : chars) {
+            System.out.print(symbols);
+            Thread.sleep(100);
+        }
+        System.out.println();
     }
 }

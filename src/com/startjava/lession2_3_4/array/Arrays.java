@@ -88,7 +88,7 @@ public class Arrays {
 
     public static float[][] createAndReset(int index) {
         int length = 15;
-        if (index < 0 || index > length) {
+        if (index < 0 || index > length - 1) {
             Console.displayError("Индекс массива выходит за пределы массива");
             return null;
         }
@@ -128,6 +128,46 @@ public class Arrays {
                     .append("\n");
         }
         return triangle;
+    }
+
+    public static String typewriter(String text) {
+        if (text == null || text.isEmpty()) {
+            Console.displayError("Передана пустая строка, либо null");
+            return null;
+        }
+        String[] words = text.split(" ");
+        String longest = words[0];
+        String shortest = words[0];
+        int shortIndex = 0;
+        int longIndex = 0;
+
+        for (int i = 0; i < words.length; i++) {
+            String cleanWord = words[i].replaceAll("\\p{P}", "");
+            if (shortest.length() > cleanWord.length()) {
+                if (cleanWord.isEmpty()) {
+                    continue;
+                }
+                shortest = cleanWord;
+                shortIndex = i;
+            }
+            if (longest.length() < cleanWord.length()) {
+                longest = cleanWord;
+                longIndex = i;
+            }
+        }
+        StringBuilder result = new StringBuilder();
+
+        int start = Math.min(shortIndex, longIndex);
+        int end = Math.max(shortIndex, longIndex);
+        for (int i = 0; i < words.length; i++) {
+            if (i < start || i > end) {
+                result.append(words[i]).append(" ");
+            }
+            if (i >= start && i <= end) {
+                result.append(words[i].toUpperCase()).append(" ");
+            }
+        }
+        return result.toString();
     }
 }
 

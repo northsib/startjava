@@ -1,5 +1,7 @@
 package com.startjava.lession2_3_4.array;
 
+import java.util.Arrays;
+
 public class TypewriterEffect {
     public static void main(String[] args) throws InterruptedException {
         String[] texts = {
@@ -24,23 +26,23 @@ public class TypewriterEffect {
         String[] words = text.split(" ");
         String longest = words[0];
         String shortest = words[0];
+        int shortIndex = 0;
+        int longIndex = 0;
 
-        for (String word : words) {
-            String cleanWord = word.replaceAll("\\p{P}", "");
+        for (int i = 0; i < words.length; i++) {
+            String cleanWord = words[i].replaceAll("\\p{P}", "");
             if (shortest.length() > cleanWord.length()) {
                 if (cleanWord.isEmpty()) {
                     continue;
                 }
                 shortest = cleanWord;
+                shortIndex = i;
             }
             if (longest.length() < cleanWord.length()) {
                 longest = cleanWord;
+                longIndex = i;
             }
         }
-
-        int shortIndex = findIndex(words, shortest);
-        int longIndex = findIndex(words, longest);
-
         StringBuilder result = new StringBuilder();
 
         int start = Math.min(shortIndex, longIndex);
@@ -54,16 +56,6 @@ public class TypewriterEffect {
             }
         }
         return result.toString();
-    }
-
-    private static int findIndex(String[] words, String word) {
-        int index = 0;
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].contains(word)) {
-                index = i;
-            }
-        }
-        return index;
     }
 
     private static void type(String text) throws InterruptedException {
