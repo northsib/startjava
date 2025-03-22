@@ -2,36 +2,31 @@ package com.startjava.lession2_3_4.array;
 
 import java.util.Random;
 
-public class Arrays {
-    private Arrays() {
+public class Arrays { private Arrays() {}
 
-    }
-
-    public static int[] reverse(int[] numbers) {
-        if (numbers == null) {
-            Console.displayError("Передан массив null");
+    public static float[][] createAndReset(int index) {
+        int length = 15;
+        if (index < 0 || index > length - 1) {
+            Console.displayError("Индекс массива выходит за пределы массива");
             return null;
         }
-        if (numbers.length == 0) {
-            Console.displayError("Передан пустой массив");
-            return numbers;
+
+        float[] floats = new float[length];
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            floats[i] = random.nextFloat();
         }
 
-        int[] reversed = new int[numbers.length];
-        int index = numbers.length;
-        for (int number : numbers) {
-            reversed[--index] = number;
+        float[] changed = new float[length];
+        float limit = floats[index];
+        for (int i = 0; i < length; i++) {
+            changed[i] = floats[i] > limit ? 0 : floats[i];
         }
-        return reversed;
+        return new float[][] {floats, changed};
     }
 
     public static long[] factorials(int[] numbers) {
-        if (numbers == null) {
-            Console.displayError("Передан массив null");
-            return null;
-        }
-        if (numbers.length == 0) {
-            Console.displayError("Передан пустой массив");
+        if (!isValid(numbers)) {
             return null;
         }
 
@@ -52,7 +47,7 @@ public class Arrays {
     public static int[] fill(int start, int end, int numbersPerLine) {
         if (numbersPerLine < 1) {
             Console.displayError("Количество чисел в строке не должно быть < 1 (" +
-                    numbersPerLine + ")");
+                    numbersPerLine + ")\n");
             return null;
         }
         if (start > end) {
@@ -64,11 +59,12 @@ public class Arrays {
             Console.displayError("Длина массива должна быть > 0 (" + length + ")\n");
             return null;
         }
+
         int[] uniqueNumbers = new int[length];
         int numbersCounter = 0;
+        Random random = new Random();
 
         while (numbersCounter < length) {
-            Random random = new Random();
             int randomNumber = random.nextInt(start, end + 1);
             boolean isUnique = true;
             for (int i = 0; i < numbersCounter; i++) {
@@ -86,29 +82,29 @@ public class Arrays {
         return uniqueNumbers;
     }
 
-    public static float[][] createAndReset(int index) {
-        int length = 15;
-        if (index < 0 || index > length - 1) {
-            Console.displayError("Индекс массива выходит за пределы массива");
+    public static boolean isValid(int[] numbers) {
+        if (numbers == null) {
+            Console.displayError("Передан массив null");
+            return false;
+        }
+        if (numbers.length == 0) {
+            Console.displayError("Передан пустой массив");
+            return false;
+        }
+        return true;
+    }
+
+    public static int[] reverse(int[] numbers) {
+        if (!isValid(numbers)) {
             return null;
         }
 
-        float[] floats = new float[length];
-        Random random = new Random();
-        for (int i = 0; i < floats.length; i++) {
-            floats[i] = random.nextFloat();
+        int[] reversed = new int[numbers.length];
+        int index = numbers.length;
+        for (int number : numbers) {
+            reversed[--index] = number;
         }
-
-        float[] changed = new float[floats.length];
-        float limit = floats[index];
-        for (int i = 0; i < floats.length; i++) {
-            if (floats[i] > limit) {
-                changed[i] = 0;
-                continue;
-            }
-            changed[i] = floats[i];
-        }
-        return new float[][] {floats, changed};
+        return reversed;
     }
 
     public static StringBuilder triangle(char start, char end, boolean ascending) {
@@ -170,19 +166,3 @@ public class Arrays {
         return result.toString();
     }
 }
-
-//
-//public static boolean setFunction(int number) {
-//    switch (number) {
-//        case 1:
-//        case 2:
-//        case 3:
-//        case 4:
-//        case 5:
-//        case 6:
-//            return true;
-//        default:
-//            Console.displayError("Вы указали неверное значение");
-//            return false;
-//    }
-//}

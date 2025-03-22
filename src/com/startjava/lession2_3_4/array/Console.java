@@ -2,10 +2,7 @@ package com.startjava.lession2_3_4.array;
 
 import java.util.Arrays;
 
-public class Console {
-    private Console() {
-
-    }
+public class Console { private Console() {}
 
     public static void displayError(String message) {
         System.out.println("Ошибка: " + message);
@@ -15,6 +12,24 @@ public class Console {
         System.out.println("\n--- " + header + " ---\n");
     }
 
+    public static void displayValueLimiter(float[][] values, int index) {
+        if (values == null || values.length == 0) {
+            return;
+        }
+        int numberPerLine = 8;
+        System.out.print("\nИсходный массив: ");
+        printFloats(values[0], numberPerLine);
+        System.out.print("Измененный массив: ");
+        printFloats(values[1], numberPerLine);
+        System.out.printf("Значение ячейки по переданному индексу: %.3f%n", values[0][index]);
+        int zeroCounter = 0;
+        for (float value : values[1])
+            if (value == 0) {
+                zeroCounter++;
+            }
+        System.out.println("Количество обнуленных ячеек - " + zeroCounter);
+    }
+
     public static void draw(StringBuilder triangle) {
         if (triangle == null) {
             return;
@@ -22,8 +37,26 @@ public class Console {
         System.out.println(triangle);
     }
 
+    public static boolean isValid(int[] numbers) {
+        return numbers != null && numbers.length > 0;
+    }
+
+    public static <T> void print(T[] array, int numbersPerLine, String format) {
+        if (array == null || array.length == 0) {
+            return;
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            if (i > 0 && (i % numbersPerLine) == 0) {
+                System.out.println();
+            }
+            System.out.printf(format + "%s", array[i], (i < array.length - 1) ? ", " : "");
+        }
+        System.out.println();
+    }
+
     public static void printFactorial(int[] original, long[] factorials) {
-        if (original == null || original.length == 0) {
+        if (!isValid(original)) {
             return;
         }
         StringBuilder factorialExpression = new StringBuilder();
@@ -47,58 +80,32 @@ public class Console {
     }
 
     public static void printFloats(float[] floats, int numbersPerLine) {
-        if (floats == null) {
+        if (floats == null || floats.length == 0) {
             return;
         }
+        Float[] floatObjects = new Float[floats.length];
         for (int i = 0; i < floats.length; i++) {
-            if (i > 0 && i % numbersPerLine == 0) {
-                System.out.println();
-            }
-            System.out.printf("%.3f%s", floats[i], "");
-            if (i < (floats.length - 1)) {
-                System.out.print(", ");
-            }
+            floatObjects[i] = floats[i];
         }
+        print(floatObjects, numbersPerLine, "%.3f");
         System.out.println();
     }
 
-    public static void printFloatsLines(float[][] values, int index) {
-        if (values == null) {
+    public static void printIntegers(int[] numbers, int numbersPerLine) {
+        if (!isValid(numbers)) {
             return;
         }
-        int numberPerLine = 8;
-        System.out.print("\nИсходный массив: ");
-        printFloats(values[0], numberPerLine);
-        System.out.print("Измененный массив: ");
-        printFloats(values[1], numberPerLine);
-        System.out.printf("Значение ячейки по переданному индексу: %.3f%n", (float) values[0][index]);
-        int zeroCounter = 0;
-        for (float value : values[1])
-            if (value == 0) {
-                zeroCounter++;
-            }
-        System.out.println("Количество обнуленных ячеек - " + zeroCounter);
-    }
-
-    public static void printLines(int[] numbers, int numbersPerLine) {
-        if (numbers == null) {
-            return;
-        }
-        System.out.println();
-        for (int i = 0; i < numbers.length; i++) {
-            if (i > 0 && (i % numbersPerLine) == 0) {
-                System.out.println();
-            }
-            System.out.printf("%3d%s", numbers[i], (i < numbers.length - 1) ? ", " : "");
-        }
+        Integer[] integerObjects = Arrays.stream(numbers).boxed().toArray(Integer[]::new);
+        print(integerObjects, numbersPerLine, "%3d");
         System.out.println();
     }
 
     public static void printReversed(int[] numbers, int[] reversed) {
-        if (numbers != null && numbers.length != 0) {
-            System.out.print("\n   До реверса: " + Arrays.toString(numbers));
-            System.out.print("После реверса: " + Arrays.toString(reversed));
+        if (!isValid(numbers)) {
+            return;
         }
+        System.out.println("\n   До реверса: " + Arrays.toString(numbers));
+        System.out.println("После реверса: " + Arrays.toString(reversed));
     }
 
     public static void printTypewriterEffect(String text) throws InterruptedException {
