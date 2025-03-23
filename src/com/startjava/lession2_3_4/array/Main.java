@@ -35,14 +35,15 @@ public class Main {
         typewriterEffect(texts);
     }
 
-    public static void calculateFactorial(int[][] numbers) {
+    private static void calculateFactorial(int[][] numbers) {
         for (int[] num : numbers) {
             long[] factorials = Arrays.factorials(num);
             Console.printFactorial(num, factorials);
+            System.out.println();
         }
     }
 
-    public static void drawTriangle(char[][] symbols, boolean[] ascend) {
+    private static void drawTriangle(char[][] symbols, boolean[] ascend) {
         for (int i = 0; i < symbols.length; i++) {
             int index = 0;
             StringBuilder triangle = Arrays.triangle(symbols[i][index], symbols[i][index + 1], ascend[i]);
@@ -50,32 +51,36 @@ public class Main {
         }
     }
 
-    public static void fillUniqueNumbers(int[][] segments, int[] numbersPerLine) {
+    private static void fillUniqueNumbers(int[][] segments, int[] numbersPerLine) {
         for (int i = 0; i < segments.length; i++) {
             int index = 0;
             int[] unique = Arrays.fill(segments[i][index], segments[i][index + 1], numbersPerLine[i]);
-            Console.printIntegers(unique, numbersPerLine[i]);
+            Console.printIntegers(unique, numbersPerLine[i], "%3d");
+            System.out.println();
         }
     }
 
-    public static void resetExceedingValues(int[] indexes) {
+    private static void resetExceedingValues(int[] indexes) {
         for (int index : indexes) {
-            float[][] values = Arrays.createAndReset(index);
+            float[][] values = Arrays.resetFloatsByIndex(index);
             Console.displayValueLimiter(values, index);
+            System.out.println();
         }
     }
 
-    public static void reverseArray(int[][] numbers) {
-        for (int[] num : numbers) {
-            int[] reversed = Arrays.reverse(num);
-            Console.printReversed(num, reversed);
+    private static void reverseArray(int[][] numbers) {
+        for (int[] number : numbers) {
+            int[] reversed = Arrays.reverse(number);
+            Console.displayBeforeAfter(number, reversed);
+            System.out.println();
         }
     }
 
-    public static void typewriterEffect(String[] texts) throws InterruptedException {
+    private static void typewriterEffect(String[] texts) throws InterruptedException {
         for (String text : texts) {
             String result = Arrays.typewriter(text);
             Console.printTypewriterEffect(result);
+            System.out.println();
         }
     }
 }

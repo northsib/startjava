@@ -2,27 +2,13 @@ package com.startjava.lession2_3_4.array;
 
 import java.util.Random;
 
-public class Arrays { private Arrays() {}
+public class Arrays {
+    private static int zeroCounter;
 
-    public static float[][] createAndReset(int index) {
-        int length = 15;
-        if (index < 0 || index > length - 1) {
-            Console.displayError("Индекс массива выходит за пределы массива");
-            return null;
-        }
+    private Arrays() {}
 
-        float[] floats = new float[length];
-        Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            floats[i] = random.nextFloat();
-        }
-
-        float[] changed = new float[length];
-        float limit = floats[index];
-        for (int i = 0; i < length; i++) {
-            changed[i] = floats[i] > limit ? 0 : floats[i];
-        }
-        return new float[][] {floats, changed};
+    public static int getZeroCounter() {
+        return zeroCounter;
     }
 
     public static long[] factorials(int[] numbers) {
@@ -47,16 +33,16 @@ public class Arrays { private Arrays() {}
     public static int[] fill(int start, int end, int numbersPerLine) {
         if (numbersPerLine < 1) {
             Console.displayError("Количество чисел в строке не должно быть < 1 (" +
-                    numbersPerLine + ")\n");
+                    numbersPerLine + ")");
             return null;
         }
         if (start > end) {
-            Console.displayError("Левая граница (" + start + ") > правой (" + end + ")\n");
+            Console.displayError("Левая граница (" + start + ") > правой (" + end + ")");
             return null;
         }
         int length = (int) (0.75 * (end - start + 1));
         if (length <= 0) {
-            Console.displayError("Длина массива должна быть > 0 (" + length + ")\n");
+            Console.displayError("Длина массива должна быть > 0 (" + length + ")");
             return null;
         }
 
@@ -92,6 +78,35 @@ public class Arrays { private Arrays() {}
             return false;
         }
         return true;
+    }
+
+    public static float[][] resetFloatsByIndex(int index) {
+        int length = 15;
+        if (index < 0 || index > length - 1) {
+            Console.displayError("Индекс массива выходит за пределы массива " +
+                    "(введено значение: " + index + ", допустимо: [0; " + (length - 1) + "])");
+            return null;
+        }
+
+        float[] floats = new float[length];
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            floats[i] = random.nextFloat();
+        }
+
+        float[] changed = new float[length];
+        float limit = floats[index];
+        for (int i = 0; i < length; i++) {
+            changed[i] = floats[i] > limit ? 0 : floats[i];
+        }
+        zeroCounter = 0;
+
+        for (float value : changed)
+            if (value == 0) {
+                zeroCounter++;
+            }
+
+        return new float[][] {floats, changed};
     }
 
     public static int[] reverse(int[] numbers) {

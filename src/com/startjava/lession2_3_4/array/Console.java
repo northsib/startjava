@@ -2,14 +2,25 @@ package com.startjava.lession2_3_4.array;
 
 import java.util.Arrays;
 
-public class Console { private Console() {}
+public class Console {
+    private Console() {}
+
+    public static void displayBeforeAfter(int[] numbers, int[] reversed) {
+        if (!isValid(numbers)) {
+            return;
+        }
+        System.out.print("   До реверса: ");
+        printIntegers(numbers, numbers.length, "%d");
+        System.out.print("После реверса: ");
+        printIntegers(reversed, reversed.length, "%d");
+    }
 
     public static void displayError(String message) {
         System.out.println("Ошибка: " + message);
     }
 
     public static void displayHeader(String header) {
-        System.out.println("\n--- " + header + " ---\n");
+        System.out.println("--- " + header + " ---\n");
     }
 
     public static void displayValueLimiter(float[][] values, int index) {
@@ -17,17 +28,13 @@ public class Console { private Console() {}
             return;
         }
         int numberPerLine = 8;
-        System.out.print("\nИсходный массив: ");
+        System.out.println("Исходный массив: ");
         printFloats(values[0], numberPerLine);
-        System.out.print("Измененный массив: ");
+        System.out.println("Измененный массив: ");
         printFloats(values[1], numberPerLine);
         System.out.printf("Значение ячейки по переданному индексу: %.3f%n", values[0][index]);
-        int zeroCounter = 0;
-        for (float value : values[1])
-            if (value == 0) {
-                zeroCounter++;
-            }
-        System.out.println("Количество обнуленных ячеек - " + zeroCounter);
+        System.out.println("Количество обнуленных ячеек - " +
+                com.startjava.lession2_3_4.array.Arrays.getZeroCounter());
     }
 
     public static void draw(StringBuilder triangle) {
@@ -76,7 +83,6 @@ public class Console { private Console() {}
             System.out.println(factorialExpression.append(" = ").append(factorials[i]));
             factorialExpression.setLength(0);
         }
-        System.out.println();
     }
 
     public static void printFloats(float[] floats, int numbersPerLine) {
@@ -88,24 +94,14 @@ public class Console { private Console() {}
             floatObjects[i] = floats[i];
         }
         print(floatObjects, numbersPerLine, "%.3f");
-        System.out.println();
     }
 
-    public static void printIntegers(int[] numbers, int numbersPerLine) {
+    public static void printIntegers(int[] numbers, int numbersPerLine, String format) {
         if (!isValid(numbers)) {
             return;
         }
         Integer[] integerObjects = Arrays.stream(numbers).boxed().toArray(Integer[]::new);
-        print(integerObjects, numbersPerLine, "%3d");
-        System.out.println();
-    }
-
-    public static void printReversed(int[] numbers, int[] reversed) {
-        if (!isValid(numbers)) {
-            return;
-        }
-        System.out.println("\n   До реверса: " + Arrays.toString(numbers));
-        System.out.println("После реверса: " + Arrays.toString(reversed));
+        print(integerObjects, numbersPerLine, format);
     }
 
     public static void printTypewriterEffect(String text) throws InterruptedException {
