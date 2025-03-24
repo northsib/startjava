@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class HangmanGameMain {
     public static void main(String[] args) {
-        HangmanGame game = new HangmanGame("МАМА");
+        HangmanGame game = new HangmanGame();
         while (!game.isGameWon() && game.getAttemptsLeft() > 0) {
             System.out.println("Загаданное слово - " + game.getMaskedWord());
             if (!HangmanGame.getUsedLetters().isEmpty()) {

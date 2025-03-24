@@ -1,8 +1,11 @@
 package com.startjava.lession2_3_4.hangman;
 
+import java.util.Random;
+
 public class HangmanGame {
     private static final String[] HANG = {
             "_______",
+            "|     |",
             "|     |",
             "|     @",
             "|    /|\\",
@@ -14,10 +17,10 @@ public class HangmanGame {
     private static boolean[] guessedLetters;
     private int attemptsLeft;
 
-    public HangmanGame(String word) {
-        secretWord = word.toUpperCase();
+    public HangmanGame() {
+        secretWord = getRandomWord().toUpperCase();
         maskedWord = "_".repeat(secretWord.length());
-        guessedLetters = new boolean['Я' - 'А'];
+        guessedLetters = new boolean['Я' - 'А' + 1];
         attemptsLeft = HANG.length;
     }
 
@@ -87,7 +90,9 @@ public class HangmanGame {
     }
 
     private String getRandomWord() {
-        String[] words = {"Перекрёсток", "Путешествие", "Снегопад", "Библиотека", "Преподаватель", "Консерватория", "Электричка", "Фотография", "Вокзал", "Автомобиль"};
-        return "test";
+        String[] words = {"Перекрёсток", "Путешествие", "Снегопад", "Библиотека", "Преподаватель",
+                "Консерватория", "Электричка", "Фотография", "Вокзал", "Автомобиль"};
+        Random random = new Random();
+        return words[random.nextInt(words.length)];
     }
 }
