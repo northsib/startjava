@@ -1,10 +1,6 @@
 package com.startjava.lession2_3_4.hangman;
 
 public class HangmanGame {
-    private String secretWord;
-    private String maskedWord;
-    private boolean[] guessedLetters;
-    private int attemptsLeft;
     private static final String[] HANG = {
             "_______",
             "|     |",
@@ -13,12 +9,16 @@ public class HangmanGame {
             "|    / \\",
             "| GAME OVER!"
     };
+    private String secretWord;
+    private String maskedWord;
+    private static boolean[] guessedLetters;
+    private int attemptsLeft;
 
     public HangmanGame(String word) {
-        secretWord = word.toLowerCase();
+        secretWord = word.toUpperCase();
         maskedWord = "_".repeat(secretWord.length());
-        guessedLetters = new boolean['я' - 'А'];
-        attemptsLeft = 6;
+        guessedLetters = new boolean['Я' - 'А'];
+        attemptsLeft = HANG.length;
     }
 
     public int getAttemptsLeft() {
@@ -34,20 +34,37 @@ public class HangmanGame {
     }
 
     public void makeGuess(char guess) {
-        guess = Character.toLowerCase(guess);
+        guess = Character.toUpperCase(guess);
+
+        if (guessedLetters[getLetterIndex(guess)]) {
+            System.out.println("Вы уже вводили такую букву");
+            return;
+        }
+        guessedLetters[getLetterIndex(guess)] = true;
+
         if (secretWord.indexOf(guess) != -1) {
             for (int i = 0; i < secretWord.length(); i++) {
                 if (secretWord.charAt(i) == guess) {
                     maskedWord = maskedWord.substring(0, i) + guess + maskedWord.substring(i + 1);
                 }
             }
-            guessedLetters[getLetterIndex(guess)] = true;
             System.out.println("Угадал");
         } else {
             attemptsLeft--;
-            System.out.println("Не угадал");
+            System.out.println("Не угадал, осталось попыток: " + attemptsLeft);
             displayHang();
         }
+        System.out.println();
+    }
+
+    public static String getUsedLetters() {
+        StringBuilder usedLetters = new StringBuilder();
+        for (int i = 0; i < guessedLetters.length; i++) {
+            if (guessedLetters[i]) {
+                usedLetters.append((char) ('А' + i)).append(" ");
+            }
+        }
+        return usedLetters.toString().trim();
     }
 
     public boolean isGameWon() {
@@ -67,5 +84,10 @@ public class HangmanGame {
         for (int i = 0; i < HANG.length - attemptsLeft; i++) {
             System.out.println(HANG[i]);
         }
+    }
+
+    private String getRandomWord() {
+        String[] words = {"Перекрёсток", "Путешествие", "Снегопад", "Библиотека", "Преподаватель", "Консерватория", "Электричка", "Фотография", "Вокзал", "Автомобиль"};
+        return "test";
     }
 }
