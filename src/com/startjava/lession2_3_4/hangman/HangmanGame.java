@@ -12,15 +12,15 @@ public class HangmanGame {
             "|    / \\",
             "| GAME OVER!"
     };
-    private String secretWord;
+    private final String secretWord;
     private String maskedWord;
-    private static boolean[] guessedLetters;
+    private static boolean[] usedLetters;
     private int attemptsLeft;
 
     public HangmanGame() {
         secretWord = getRandomWord().toUpperCase();
         maskedWord = "_".repeat(secretWord.length());
-        guessedLetters = new boolean['Я' - 'А' + 1];
+        usedLetters = new boolean['Я' - 'А' + 1];
         attemptsLeft = HANG.length;
     }
 
@@ -36,57 +36,77 @@ public class HangmanGame {
         return maskedWord;
     }
 
+//    public void play() {
+//        while ()
+//    }
+
     public void makeGuess(char guess) {
         guess = Character.toUpperCase(guess);
-
-        if (guessedLetters[getLetterIndex(guess)]) {
-            System.out.println("Вы уже вводили такую букву");
+        if (!isValidInput(guess)) {
             return;
         }
-        guessedLetters[getLetterIndex(guess)] = true;
+        if (!isUsedLetter(guess)) {
+            return;
+        }
 
+        findGuess(guess);
+        displayHang();
+    }
+
+    private boolean isValidInput(char guess) {
+        if (guess < 'А' || guess > 'Я') {
+            System.out.println("Некорректный ввод (допустимо: буквы на кириллице от А до Я)\n");
+            return false;
+        }
+        return true;
+    }
+
+    private boolean isUsedLetter(char guess) {
+        int guessIndex = guess - 'А';
+        if (!usedLetters[guessIndex]) {
+            return usedLetters[guessIndex] = true;
+        } else {
+            System.out.println("Вы уже вводили букву " + guess + "\n");
+            return false;
+        }
+    }
+
+    private void findGuess(char guess) {
         if (secretWord.indexOf(guess) != -1) {
             for (int i = 0; i < secretWord.length(); i++) {
                 if (secretWord.charAt(i) == guess) {
                     maskedWord = maskedWord.substring(0, i) + guess + maskedWord.substring(i + 1);
                 }
             }
-            System.out.println("Угадал");
+            System.out.println("Вы угадали букву!");
+            if (attemptsLeft < HANG.length) {
+                attemptsLeft++;
+            }
         } else {
             attemptsLeft--;
-            System.out.println("Не угадал, осталось попыток: " + attemptsLeft);
-            displayHang();
+            System.out.println("Вы не угадали букву. Осталось попыток: " + attemptsLeft);
         }
-        System.out.println();
     }
 
     public static String getUsedLetters() {
-        StringBuilder usedLetters = new StringBuilder();
-        for (int i = 0; i < guessedLetters.length; i++) {
-            if (guessedLetters[i]) {
-                usedLetters.append((char) ('А' + i)).append(" ");
+        StringBuilder letters = new StringBuilder();
+        for (int i = 0; i < usedLetters.length; i++) {
+            if (usedLetters[i]) {
+                letters.append((char) ('А' + i)).append(i < usedLetters.length - 1 ? ", " : "");
             }
         }
-        return usedLetters.toString().trim();
+        return letters.toString();
     }
 
     public boolean isGameWon() {
         return maskedWord.equals(secretWord);
     }
 
-    private int getLetterIndex(char guess) {
-        return guess - 'А';
-    }
-
-    // Простая проверка кириллических символов
-    private boolean isValid(char guess) {
-        return (guess >= 'а' && guess <= 'я') || (guess >= 'А' && guess <= 'Я');
-    }
-
-    public void displayHang() {
+    private void displayHang() {
         for (int i = 0; i < HANG.length - attemptsLeft; i++) {
             System.out.println(HANG[i]);
         }
+        System.out.println();
     }
 
     private String getRandomWord() {

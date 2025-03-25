@@ -6,7 +6,8 @@ public class HangmanGameMain {
     public static void main(String[] args) {
         HangmanGame game = new HangmanGame();
         while (!game.isGameWon() && game.getAttemptsLeft() > 0) {
-            System.out.println("Загаданное слово - " + game.getMaskedWord());
+            System.out.println("Загаданное слово - " + game.getMaskedWord() +
+                    "\nКоличество попыток - " + game.getAttemptsLeft());
             if (!HangmanGame.getUsedLetters().isEmpty()) {
                 System.out.println("Использованные буквы: " + HangmanGame.getUsedLetters());
             }
