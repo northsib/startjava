@@ -1,6 +1,7 @@
 package com.startjava.lession2_3_4.hangman;
 
 import java.util.Random;
+import java.util.Scanner;
 
 public class HangmanGame {
     private static final String[] HANG = {
@@ -36,9 +37,25 @@ public class HangmanGame {
         return maskedWord;
     }
 
-//    public void play() {
-//        while ()
-//    }
+    public void play() {
+        while (true) {
+            System.out.println("Загаданное слово - " + getMaskedWord() +
+                    "\nКоличество попыток - " + getAttemptsLeft());
+            if (!getUsedLetters().isEmpty()) {
+                System.out.println("Использованные буквы: " + getUsedLetters());
+            }
+            char guess = getUserInput();
+            makeGuess(guess);
+            if (isGameWon()) {
+                System.out.println("Вы выиграли! Загаданное слово: " + getSecretWord());
+                break;
+            }
+            if (attemptsLeft == 0) {
+                System.out.println("Игра окончена. Загаданное слово: " + getSecretWord());
+                break;
+            }
+        }
+    }
 
     public void makeGuess(char guess) {
         guess = Character.toUpperCase(guess);
@@ -48,7 +65,6 @@ public class HangmanGame {
         if (!isUsedLetter(guess)) {
             return;
         }
-
         findGuess(guess);
         displayHang();
     }
@@ -92,10 +108,10 @@ public class HangmanGame {
         StringBuilder letters = new StringBuilder();
         for (int i = 0; i < usedLetters.length; i++) {
             if (usedLetters[i]) {
-                letters.append((char) ('А' + i)).append(i < usedLetters.length - 1 ? ", " : "");
+                letters.append((char) ('А' + i)).append(" ");
             }
         }
-        return letters.toString();
+        return letters.toString().trim();
     }
 
     public boolean isGameWon() {
@@ -114,5 +130,11 @@ public class HangmanGame {
                 "Консерватория", "Электричка", "Фотография", "Вокзал", "Автомобиль"};
         Random random = new Random();
         return words[random.nextInt(words.length)];
+    }
+
+    public char getUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите букву (А - Я): ");
+        return scanner.next().charAt(0);
     }
 }
