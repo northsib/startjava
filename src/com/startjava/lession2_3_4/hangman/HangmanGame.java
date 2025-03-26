@@ -7,7 +7,6 @@ public class HangmanGame {
     private static final String[] HANG = {
             "_______",
             "|     |",
-            "|     |",
             "|     @",
             "|    /|\\",
             "|    / \\",
@@ -25,39 +24,50 @@ public class HangmanGame {
         attemptsLeft = HANG.length;
     }
 
-    public int getAttemptsLeft() {
-        return attemptsLeft;
-    }
-
-    public String getSecretWord() {
-        return secretWord;
-    }
-
-    public String getMaskedWord() {
-        return maskedWord;
-    }
-
     public void play() {
         while (true) {
-            System.out.println("Загаданное слово - " + getMaskedWord() +
-                    "\nКоличество попыток - " + getAttemptsLeft());
+            System.out.println("Загаданное слово - " + maskedWord +
+                    "\nКоличество попыток - " + attemptsLeft);
             if (!getUsedLetters().isEmpty()) {
                 System.out.println("Использованные буквы: " + getUsedLetters());
             }
             char guess = getUserInput();
             makeGuess(guess);
             if (isGameWon()) {
-                System.out.println("Вы выиграли! Загаданное слово: " + getSecretWord());
+                System.out.println("Вы выиграли! Загаданное слово: " + secretWord);
                 break;
             }
             if (attemptsLeft == 0) {
-                System.out.println("Игра окончена. Загаданное слово: " + getSecretWord());
+                System.out.println("Игра окончена. Загаданное слово: " + secretWord);
                 break;
             }
         }
     }
 
-    public void makeGuess(char guess) {
+    private String getRandomWord() {
+        String[] words = {"Перекресток", "Путешествие", "Снегопад", "Библиотека", "Преподаватель",
+                "Консерватория", "Электричка", "Фотография", "Вокзал", "Автомобиль"};
+        Random random = new Random();
+        return words[random.nextInt(words.length)];
+    }
+
+    private static String getUsedLetters() {
+        StringBuilder letters = new StringBuilder();
+        for (int i = 0; i < usedLetters.length; i++) {
+            if (usedLetters[i]) {
+                letters.append((char) ('А' + i)).append(" ");
+            }
+        }
+        return letters.toString().trim();
+    }
+
+    private char getUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Введите букву (А - Я): ");
+        return scanner.next().charAt(0);
+    }
+
+    private void makeGuess(char guess) {
         guess = Character.toUpperCase(guess);
         if (!isValidInput(guess)) {
             return;
@@ -104,20 +114,6 @@ public class HangmanGame {
         }
     }
 
-    public static String getUsedLetters() {
-        StringBuilder letters = new StringBuilder();
-        for (int i = 0; i < usedLetters.length; i++) {
-            if (usedLetters[i]) {
-                letters.append((char) ('А' + i)).append(" ");
-            }
-        }
-        return letters.toString().trim();
-    }
-
-    public boolean isGameWon() {
-        return maskedWord.equals(secretWord);
-    }
-
     private void displayHang() {
         for (int i = 0; i < HANG.length - attemptsLeft; i++) {
             System.out.println(HANG[i]);
@@ -125,16 +121,7 @@ public class HangmanGame {
         System.out.println();
     }
 
-    private String getRandomWord() {
-        String[] words = {"Перекрёсток", "Путешествие", "Снегопад", "Библиотека", "Преподаватель",
-                "Консерватория", "Электричка", "Фотография", "Вокзал", "Автомобиль"};
-        Random random = new Random();
-        return words[random.nextInt(words.length)];
-    }
-
-    public char getUserInput() {
-        Scanner scanner = new Scanner(System.in);
-        System.out.print("Введите букву (А - Я): ");
-        return scanner.next().charAt(0);
+    private boolean isGameWon() {
+        return maskedWord.equals(secretWord);
     }
 }

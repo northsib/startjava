@@ -15,7 +15,7 @@ public class HangmanGameMain {
                 if (playerChoose.equals("yes") || playerChoose.equals("no")) {
                     break;
                 } else {
-                    System.out.println("Некоректный ввод, пожалуйста введите \"yes\" или \"no\"");
+                    System.out.println("Некорректный ввод, пожалуйста введите \"yes\" или \"no\"");
                     playerChoose = scanner.nextLine().toLowerCase();
                 }
             }
