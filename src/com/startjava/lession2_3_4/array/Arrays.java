@@ -3,13 +3,7 @@ package com.startjava.lession2_3_4.array;
 import java.util.Random;
 
 public class Arrays {
-    private static int zeroCounter;
-
     private Arrays() {}
-
-    public static int getZeroCounter() {
-        return zeroCounter;
-    }
 
     public static long[] factorials(int[] numbers) {
         if (!isValid(numbers)) {
@@ -68,80 +62,7 @@ public class Arrays {
         return uniqueNumbers;
     }
 
-    public static boolean isValid(int[] numbers) {
-        if (numbers == null) {
-            Console.displayError("Передан массив null");
-            return false;
-        }
-        if (numbers.length == 0) {
-            Console.displayError("Передан пустой массив");
-            return false;
-        }
-        return true;
-    }
-
-    public static float[][] resetFloatsByIndex(int index) {
-        int length = 15;
-        if (index < 0 || index > length - 1) {
-            Console.displayError("Индекс массива выходит за пределы массива " +
-                    "(введено значение: " + index + ", допустимо: [0; " + (length - 1) + "])");
-            return null;
-        }
-
-        float[] floats = new float[length];
-        Random random = new Random();
-        for (int i = 0; i < length; i++) {
-            floats[i] = random.nextFloat();
-        }
-
-        float[] changed = new float[length];
-        float limit = floats[index];
-        for (int i = 0; i < length; i++) {
-            changed[i] = floats[i] > limit ? 0 : floats[i];
-        }
-        zeroCounter = 0;
-
-        for (float value : changed)
-            if (value == 0) {
-                zeroCounter++;
-            }
-
-        return new float[][] {floats, changed};
-    }
-
-    public static int[] reverse(int[] numbers) {
-        if (!isValid(numbers)) {
-            return null;
-        }
-
-        int[] reversed = new int[numbers.length];
-        int index = numbers.length;
-        for (int number : numbers) {
-            reversed[--index] = number;
-        }
-        return reversed;
-    }
-
-    public static StringBuilder triangle(char start, char end, boolean ascending) {
-        if (start > end) {
-            Console.displayError("левая граница (" + start + ") > (" + end + ")\n");
-            return null;
-        }
-
-        int triangleHeight = end - start + 1;
-        char startPrint = ascending ? end : start;
-
-        StringBuilder triangle = new StringBuilder();
-        for (int i = 0; i < triangleHeight; i++) {
-            char currentChar = (char) (ascending ? startPrint - i : startPrint + i);
-            triangle.append(" ".repeat(Math.max(0, (triangleHeight - 1) - i)))
-                    .append(String.valueOf(currentChar).repeat(2 * i + 1))
-                    .append("\n");
-        }
-        return triangle;
-    }
-
-    public static String typewriter(String text) {
+    public static String findShortLongWord(String text) {
         if (text == null || text.isEmpty()) {
             Console.displayError("Передана пустая строка, либо null");
             return null;
@@ -179,5 +100,80 @@ public class Arrays {
             }
         }
         return result.toString();
+    }
+
+    public static int getZeroCounter(float[] changed) {
+        int zeroCounter = 0;
+        for (float value : changed)
+            if (value == 0) {
+                zeroCounter++;
+            }
+        return zeroCounter;
+    }
+
+    public static float[][] resetFloatsByIndex(int index) {
+        int length = 15;
+        if (index < 0 || index > length - 1) {
+            Console.displayError("Индекс массива выходит за пределы массива " +
+                    "(введено значение: " + index + ", допустимо: [0; " + (length - 1) + "])");
+            return null;
+        }
+
+        float[] floats = new float[length];
+        Random random = new Random();
+        for (int i = 0; i < length; i++) {
+            floats[i] = random.nextFloat();
+        }
+
+        float[] changed = new float[length];
+        float limit = floats[index];
+        for (int i = 0; i < length; i++) {
+            changed[i] = floats[i] > limit ? 0 : floats[i];
+        }
+        return new float[][] {floats, changed};
+    }
+
+    public static int[] reverse(int[] numbers) {
+        if (!isValid(numbers)) {
+            return null;
+        }
+
+        int[] reversed = new int[numbers.length];
+        int index = numbers.length;
+        for (int number : numbers) {
+            reversed[--index] = number;
+        }
+        return reversed;
+    }
+
+    public static StringBuilder triangle(char start, char end, boolean ascending) {
+        if (start > end) {
+            Console.displayError("левая граница (" + start + ") > (" + end + ")\n");
+            return null;
+        }
+
+        int triangleHeight = end - start + 1;
+        char startPrint = ascending ? end : start;
+
+        StringBuilder triangle = new StringBuilder();
+        for (int i = 0; i < triangleHeight; i++) {
+            char currentChar = (char) (ascending ? startPrint - i : startPrint + i);
+            triangle.append(" ".repeat(Math.max(0, (triangleHeight - 1) - i)))
+                    .append(String.valueOf(currentChar).repeat(2 * i + 1))
+                    .append("\n");
+        }
+        return triangle;
+    }
+
+    private static boolean isValid(int[] numbers) {
+        if (numbers == null) {
+            Console.displayError("Передан массив null");
+            return false;
+        }
+        if (numbers.length == 0) {
+            Console.displayError("Передан пустой массив");
+            return false;
+        }
+        return true;
     }
 }

@@ -39,7 +39,6 @@ public class Main {
         for (int[] number : numbers) {
             int[] reversed = Arrays.reverse(number);
             Console.displayBeforeAfter(number, reversed);
-            System.out.println();
         }
     }
 
@@ -47,7 +46,6 @@ public class Main {
         for (int[] number : numbers) {
             long[] factorials = Arrays.factorials(number);
             Console.printFactorial(number, factorials);
-            System.out.println();
         }
     }
 
@@ -55,7 +53,6 @@ public class Main {
         for (int index : indexes) {
             float[][] values = Arrays.resetFloatsByIndex(index);
             Console.displayValueLimiter(values, index);
-            System.out.println();
         }
     }
 
@@ -72,15 +69,13 @@ public class Main {
             int index = 0;
             int[] unique = Arrays.fill(segments[i][index], segments[i][index + 1], numbersPerLine[i]);
             Console.printIntegers(unique, numbersPerLine[i], "%3d");
-            System.out.println();
         }
     }
 
     private static void typewriterEffect(String[] texts) throws InterruptedException {
         for (String text : texts) {
-            String result = Arrays.typewriter(text);
+            String result = Arrays.findShortLongWord(text);
             Console.printTypewriterEffect(result);
-            System.out.println();
         }
     }
 }

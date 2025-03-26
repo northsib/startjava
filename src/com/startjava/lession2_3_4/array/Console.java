@@ -13,6 +13,7 @@ public class Console {
         printIntegers(numbers, numbers.length, "%d");
         System.out.print("После реверса: ");
         printIntegers(reversed, reversed.length, "%d");
+        System.out.println();
     }
 
     public static void displayError(String message) {
@@ -34,7 +35,7 @@ public class Console {
         printFloats(values[1], numberPerLine);
         System.out.printf("Значение ячейки по переданному индексу: %.3f%n", values[0][index]);
         System.out.println("Количество обнуленных ячеек - " +
-                com.startjava.lession2_3_4.array.Arrays.getZeroCounter());
+                com.startjava.lession2_3_4.array.Arrays.getZeroCounter(values[1]) + "\n");
     }
 
     public static void draw(StringBuilder triangle) {
@@ -42,24 +43,6 @@ public class Console {
             return;
         }
         System.out.println(triangle);
-    }
-
-    public static boolean isValid(int[] numbers) {
-        return numbers != null && numbers.length > 0;
-    }
-
-    public static <T> void print(T[] array, int numbersPerLine, String format) {
-        if (array == null || array.length == 0) {
-            return;
-        }
-
-        for (int i = 0; i < array.length; i++) {
-            if (i > 0 && (i % numbersPerLine) == 0) {
-                System.out.println();
-            }
-            System.out.printf(format + "%s", array[i], (i < array.length - 1) ? ", " : "");
-        }
-        System.out.println();
     }
 
     public static void printFactorial(int[] original, long[] factorials) {
@@ -83,6 +66,7 @@ public class Console {
             System.out.println(factorialExpression.append(" = ").append(factorials[i]));
             factorialExpression.setLength(0);
         }
+        System.out.println();
     }
 
     public static void printFloats(float[] floats, int numbersPerLine) {
@@ -112,6 +96,24 @@ public class Console {
         for (char symbols : chars) {
             System.out.print(symbols);
             Thread.sleep(100);
+        }
+        System.out.println();
+    }
+
+    private static boolean isValid(int[] numbers) {
+        return numbers != null && numbers.length > 0;
+    }
+
+    private static <T> void print(T[] array, int numbersPerLine, String format) {
+        if (array == null || array.length == 0) {
+            return;
+        }
+
+        for (int i = 0; i < array.length; i++) {
+            if (i > 0 && (i % numbersPerLine) == 0) {
+                System.out.println();
+            }
+            System.out.printf(format + "%s", array[i], (i < array.length - 1) ? ", " : "");
         }
         System.out.println();
     }
