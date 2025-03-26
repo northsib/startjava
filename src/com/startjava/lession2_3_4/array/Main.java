@@ -35,10 +35,26 @@ public class Main {
         typewriterEffect(texts);
     }
 
+    private static void reverseArray(int[][] numbers) {
+        for (int[] number : numbers) {
+            int[] reversed = Arrays.reverse(number);
+            Console.displayBeforeAfter(number, reversed);
+            System.out.println();
+        }
+    }
+
     private static void calculateFactorial(int[][] numbers) {
-        for (int[] num : numbers) {
-            long[] factorials = Arrays.factorials(num);
-            Console.printFactorial(num, factorials);
+        for (int[] number : numbers) {
+            long[] factorials = Arrays.factorials(number);
+            Console.printFactorial(number, factorials);
+            System.out.println();
+        }
+    }
+
+    private static void resetExceedingValues(int[] indexes) {
+        for (int index : indexes) {
+            float[][] values = Arrays.resetFloatsByIndex(index);
+            Console.displayValueLimiter(values, index);
             System.out.println();
         }
     }
@@ -56,22 +72,6 @@ public class Main {
             int index = 0;
             int[] unique = Arrays.fill(segments[i][index], segments[i][index + 1], numbersPerLine[i]);
             Console.printIntegers(unique, numbersPerLine[i], "%3d");
-            System.out.println();
-        }
-    }
-
-    private static void resetExceedingValues(int[] indexes) {
-        for (int index : indexes) {
-            float[][] values = Arrays.resetFloatsByIndex(index);
-            Console.displayValueLimiter(values, index);
-            System.out.println();
-        }
-    }
-
-    private static void reverseArray(int[][] numbers) {
-        for (int[] number : numbers) {
-            int[] reversed = Arrays.reverse(number);
-            Console.displayBeforeAfter(number, reversed);
             System.out.println();
         }
     }
