@@ -9,16 +9,10 @@ public class HangmanGameMain {
         while (playerChoose.equals("yes")) {
             HangmanGame game = new HangmanGame();
             game.play();
-            System.out.println("Хотите начать новую игру игру? [yes/no]:");
-            playerChoose = scanner.nextLine().toLowerCase();
-            while (true) {
-                if (playerChoose.equals("yes") || playerChoose.equals("no")) {
-                    break;
-                } else {
-                    System.out.println("Некорректный ввод, пожалуйста введите \"yes\" или \"no\"");
-                    playerChoose = scanner.nextLine().toLowerCase();
-                }
-            }
+            do {
+                System.out.print("Хотите начать новую игру? [yes/no]: ");
+                playerChoose = scanner.nextLine().toLowerCase();
+            } while (!playerChoose.equals("yes") && !playerChoose.equals("no"));
         }
         scanner.close();
     }
