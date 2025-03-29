@@ -16,8 +16,7 @@ public class HangmanGame {
     private String maskedWord;
     private StringBuilder usedLetters;
     private int attemptsLeft;
-    Scanner scanner;
-
+    private Scanner scanner;
 
     public HangmanGame() {
         secretWord = selectRandomWord().toUpperCase();
@@ -72,22 +71,15 @@ public class HangmanGame {
     }
 
     private void makeGuess(char guess) {
-        guess = Character.toUpperCase(guess);
-        if (!isValidInput(guess)) {
-            return;
+        while (true) {
+            if (!isUsedLetter(guess)) {
+                findGuess(guess);
+                displayGallowsFigure();
+                break;
+            }
+            System.out.print("Вы уже вводили букву " + guess + "\nВведите другую букву: ");
+            guess = Character.toUpperCase(scanner.next().charAt(0));
         }
-        if (!isUsedLetter(guess)) {
-            findGuess(guess);
-            displayGallowsFigure();
-        }
-    }
-
-    private boolean isValidInput(char guess) {
-        if (guess < 'А' || guess > 'Я') {
-            System.out.println("Некорректный ввод (допустимо: буквы на кириллице от А до Я)\n");
-            return false;
-        }
-        return true;
     }
 
     private boolean isUsedLetter(char guess) {
@@ -96,7 +88,6 @@ public class HangmanGame {
             usedLetters.append(guess).append(" ");
             return false;
         }
-        System.out.println("Вы уже вводили букву " + guess + "\n");
         return true;
     }
 
