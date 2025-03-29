@@ -5,9 +5,6 @@ import java.util.Scanner;
 
 public class Test {
     static String[] mathOperators = {"+", "-", "/", "*", "%", "^"};
-    static Integer firstNumber = 0;
-    static Integer secondNumber = 0;
-    static Character mathOperator = '%';
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
@@ -15,11 +12,15 @@ public class Test {
         String expression = scanner.nextLine();
         String[] values = splitExpression(expression);
         System.out.println(Arrays.toString(values));
-        int mathOperatorIndex = parseMathOperatorIndex(values);
-        System.out.println(values[mathOperatorIndex]);
-        System.out.println(mathOperatorIndex);
-        makeExpression(values, mathOperatorIndex);
-        System.out.println(firstNumber + " " + secondNumber + " " + mathOperator);
+
+        int[] mathOperatorsIndex = parseMathOperator(values);
+        System.out.println(Arrays.toString(mathOperatorsIndex));
+        System.out.println(values[mathOperatorsIndex[0]] + " " + values[mathOperatorsIndex[1]]);
+
+        int firstNumber = parseFirstNumber(values, mathOperatorsIndex[0]);
+        System.out.println(firstNumber);
+        int secondNumber = parseSecondNumber(values, mathOperatorsIndex);
+        System.out.println(secondNumber);
     }
 
     public static String[] splitExpression(String expression) {
@@ -35,32 +36,41 @@ public class Test {
         return Arrays.copyOf(temp, index);
     }
 
-    public static int parseMathOperatorIndex(String[] values) {
-        int index = 0;
+    public static int[] parseMathOperator(String[] values) {
+        int index1 = -1;
+        int index2 = -1;
+
         for (int i = 0; i < values.length; i++) {
             for (String mathOperator : mathOperators) {
                 if (values[i].equals(mathOperator)) {
-                    index = i;
-                    break;
+                    if (index1 == -1) {
+                        index1 = i;
+                    } else if (index2 == -1 && i != index1) {
+                        index2 = i;
+                        break;
+                    }
                 }
-                break;
             }
         }
-        return index;
+        return new int[]{index1, index2};
     }
 
-    public static void makeExpression(String[] values, int index) {
+    public static int parseFirstNumber(String[] values, int index) {
         StringBuilder firstNumberString = new StringBuilder();
         for (int i = 0; i < index; i++) {
             firstNumberString.append(values[i]);
         }
-        firstNumber = Integer.parseInt(firstNumberString.toString());
+        return Integer.parseInt(firstNumberString.toString());
+    }
+
+    public static int parseSecondNumber(String[] values, int[] indexes) {
+        int start = indexes[0];
+        int end = indexes[1];
         StringBuilder secondNumberString = new StringBuilder();
-        for (int i = index + 1; i < values.length; i++) {
+        for (int i = start + 1; i < end; i++) {
             secondNumberString.append(values[i]);
         }
-        secondNumber = Integer.parseInt(secondNumberString.toString());
-        mathOperator = values[index].charAt(0);
+        return Integer.parseInt(secondNumberString.toString());
     }
 }
 
