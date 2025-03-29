@@ -36,7 +36,8 @@ public class HangmanGame {
     public void play() {
         while (true) {
             startMessage();
-            makeGuess(inputAndCheckLetter());
+            findGuess(inputAndCheckLetter());
+            displayGallowsFigure();
             if (isGameWon()) {
                 System.out.println("Вы выиграли! Загаданное слово: " + secretWord);
                 break;
@@ -66,19 +67,11 @@ public class HangmanGame {
                         "\nВведите другую букву: ");
                 continue;
             }
-            return guess;
-        }
-    }
-
-    private void makeGuess(char guess) {
-        while (true) {
-            if (!isUsedLetter(guess)) {
-                findGuess(guess);
-                displayGallowsFigure();
-                break;
+            if (isUsedLetter(guess)) {
+                System.out.print("Вы уже вводили букву " + guess + "\nВведите другую букву: ");
+                continue;
             }
-            System.out.print("Вы уже вводили букву " + guess + "\nВведите другую букву: ");
-            guess = Character.toUpperCase(scanner.next().charAt(0));
+            return guess;
         }
     }
 
@@ -102,10 +95,10 @@ public class HangmanGame {
             if (attemptsLeft < gallowsFigure.length) {
                 attemptsLeft++;
             }
-        } else {
-            attemptsLeft--;
-            System.out.println("Вы не угадали букву. Осталось попыток: " + attemptsLeft);
+            return;
         }
+        attemptsLeft--;
+        System.out.println("Вы не угадали букву. Осталось попыток: " + attemptsLeft);
     }
 
     private void displayGallowsFigure() {
