@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class HangmanGame {
-    private String[] gallowsFigure = {
+    private final String[] gallowsFigure = {
             "_______",
             "|     |",
             "|     @",
@@ -76,8 +76,7 @@ public class HangmanGame {
     }
 
     private boolean isUsedLetter(char guess) {
-        String currentUsedLetters = usedLetters.toString();
-        if (currentUsedLetters.indexOf(guess) == -1) {
+        if (usedLetters.toString().indexOf(guess) == -1) {
             usedLetters.append(guess).append(" ");
             return false;
         }
