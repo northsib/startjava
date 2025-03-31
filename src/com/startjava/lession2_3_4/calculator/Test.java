@@ -5,17 +5,38 @@ import java.util.Scanner;
 
 public class Test {
     static String[] mathOperators = {"+", "-", "/", "*", "%", "^"};
+    static final int ARGUMENTS_COUNT = 3;
 
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Введите выражение из 3 аргументов (например: 2 + 1)");
-        String expression = scanner.nextLine();
-        String[] values = splitExpression(expression);
-        System.out.println(Arrays.toString(values));
-        String[] correctExpression = makeCorrectExpression(values);
-        System.out.println(Arrays.toString(correctExpression));
+        System.out.println("Введите выражение из 3 аргументов " +
+                "(используйте только целые числа, например: 2 + 1)");
+        String[] correctExpression = makeCorrectExpression(scanner.nextLine());
         double result = calculate(correctExpression);
         printResult(correctExpression, result);
+    }
+
+    public static String[] makeCorrectExpression(String expression) {
+        String[] splits = splitExpression(expression);
+        if (splits == null || splits.length == 0) {
+            displayError("Введено пустое выражение");
+            return null;
+        }
+        String[] correctExpression = new String[ARGUMENTS_COUNT];
+        int[] mathOperatorIndexes = parseMathOperatorIndex(splits);
+        if (mathOperatorIndexes == null) {
+            displayError("Не введены мат операторы");
+            return null;
+        }
+        correctExpression[0] = parseFirstNumber(splits, mathOperatorIndexes[0]);
+        correctExpression[1] = splits[mathOperatorIndexes[0]];
+        correctExpression[2] = parseSecondNumber(splits, mathOperatorIndexes);
+        if (correctExpression[2] == null) {
+            displayError("Некорректный ввод мат операторов, введено: " + splits[mathOperatorIndexes[0]] +
+                    splits[mathOperatorIndexes[1]] + ", допустимо: " + splits[mathOperatorIndexes[0]]);
+            return null;
+        }
+        return correctExpression;
     }
 
     public static String[] splitExpression(String expression) {
@@ -31,33 +52,13 @@ public class Test {
         return Arrays.copyOf(temp, index);
     }
 
-    public static String[] makeCorrectExpression(String[] values) {
-        if (values == null || values.length == 0) {
-            displayError("Введено пустое выражение");
-            return null;
-        }
-        String[] expression = new String[3];
-        int[] mathOperatorIndexes = parseMathOperatorIndex(values);
-        if (mathOperatorIndexes == null) {
-            displayError("Не введены мат операторы");
-            return null;
-        }
-        expression[0] = parseFirstNumber(values, mathOperatorIndexes[0]);
-        expression[1] = values[mathOperatorIndexes[0]];
-        expression[2] = parseSecondNumber(values, mathOperatorIndexes);
-        if (expression[2] == null) {
-            return null;
-        }
-        return expression;
-    }
-
-    public static int[] parseMathOperatorIndex(String[] values) {
+    public static int[] parseMathOperatorIndex(String[] splits) {
         int index1 = -1;
         int index2 = -1;
 
-        for (int i = 0; i < values.length; i++) {
+        for (int i = 0; i < splits.length; i++) {
             for (String mathOperator : mathOperators) {
-                if (values[i].equals(mathOperator)) {
+                if (splits[i].equals(mathOperator)) {
                     if (index1 == -1) {
                         index1 = i;
                     } else if (index2 == -1 && i != index1) {
@@ -73,25 +74,23 @@ public class Test {
         return new int[]{index1, index2};
     }
 
-    public static String parseFirstNumber(String[] values, int index) {
+    public static String parseFirstNumber(String[] splits, int index) {
         StringBuilder firstNumberString = new StringBuilder();
         for (int i = 0; i < index; i++) {
-            firstNumberString.append(values[i]);
+            firstNumberString.append(splits[i]);
         }
         return firstNumberString.toString();
     }
 
-    public static String parseSecondNumber(String[] values, int[] indexes) {
+    public static String parseSecondNumber(String[] splits, int[] indexes) {
         int start = indexes[0];
-        int end = indexes[1] != -1 ? indexes[1] : values.length;
+        int end = indexes[1] != -1 ? indexes[1] : splits.length;
         StringBuilder secondNumberString = new StringBuilder();
         if (start + 1 == end) {
-            displayError("Некорректный ввод мат операторов, введено: " + values[start] +
-                    values[end] + ", допустимо: " + values[start]);
             return null;
         }
         for (int i = start + 1; i < end; i++) {
-            secondNumberString.append(values[i]);
+            secondNumberString.append(splits[i]);
         }
         return secondNumberString.toString();
     }
@@ -117,14 +116,12 @@ public class Test {
                 }
                 case '^' -> Math.pow(firstNumber, secondNumber);
                 case '%' -> (double) Math.floorMod(firstNumber, secondNumber);
-                default -> {
-                    displayError("некорректный ввод оператора (введено: " + mathOperator + ")");
-                    yield Double.NaN;
-                }
+                default -> Double.NaN;
             };
         } catch (NumberFormatException e) {
-            displayError("Некорректно введено одно из чисел " +
-                    "(допустимо: целые положительные, " +
+            displayError("Некорректно введено одно из чисел " + "(введено: \"" +
+                    correctExpression[0] + "\" " +
+                    "\"" + correctExpression[2] + "\", допустимо: целые положительные, " +
                     "отрицательные числа, либо 0)");
             return Double.NaN;
         }
@@ -145,8 +142,8 @@ public class Test {
             String formattedResult = String.format("%.3f", result);
             resultString = formattedResult.replaceAll("0+$", "");
         }
-        System.out.println("Вы ввели выражение: " + expression[0] + " " + expression[1] + " " + expression[2] +
-                "\nОтвет: " + resultString);
+        System.out.println(expression[0] + " " + expression[1] + " " + expression[2] +
+                " = " + resultString);
     }
 }
 

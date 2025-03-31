@@ -9,7 +9,7 @@ public class CalculatorTest {
         String userChoose = "yes";
 
         while (userChoose.equals("yes")) {
-            System.out.print("Введите первое число: ");
+            System.out.println("Введите выражение из 3 аргументов (например: 2 + 1)");
             calculator.setFirstNumber(scanner.nextInt());
             
             while (true) {
