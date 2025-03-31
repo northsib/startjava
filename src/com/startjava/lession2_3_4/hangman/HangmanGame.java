@@ -4,7 +4,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class HangmanGame {
-    private final String[] gallowsFigure = {
+    private final String[] gallows = {
             "_______",
             "|     |",
             "|     @",
@@ -22,7 +22,7 @@ public class HangmanGame {
         secretWord = selectRandomWord().toUpperCase();
         maskedWord = "_".repeat(secretWord.length());
         usedLetters = new StringBuilder();
-        attemptsLeft = gallowsFigure.length;
+        attemptsLeft = gallows.length;
         scanner = new Scanner(System.in);
     }
 
@@ -36,7 +36,7 @@ public class HangmanGame {
     public void play() {
         while (true) {
             startMessage();
-            findGuess(inputAndCheckLetter());
+            findGuess(inputLetter());
             displayGallowsFigure();
             if (isGameWon()) {
                 System.out.println("Вы выиграли! Загаданное слово: " + secretWord);
@@ -58,7 +58,7 @@ public class HangmanGame {
         System.out.println("Использованные буквы: " + usedLetters.toString().trim());
     }
 
-    private char inputAndCheckLetter() {
+    private char inputLetter() {
         System.out.print("Введите букву (А - Я): ");
         while (true) {
             char guess = Character.toUpperCase(scanner.next().charAt(0));
@@ -91,7 +91,7 @@ public class HangmanGame {
                 }
             }
             System.out.println("Вы угадали букву!");
-            if (attemptsLeft < gallowsFigure.length) {
+            if (attemptsLeft < gallows.length) {
                 attemptsLeft++;
             }
             return;
@@ -101,8 +101,8 @@ public class HangmanGame {
     }
 
     private void displayGallowsFigure() {
-        for (int i = 0; i < gallowsFigure.length - attemptsLeft; i++) {
-            System.out.println(gallowsFigure[i]);
+        for (int i = 0; i < gallows.length - attemptsLeft; i++) {
+            System.out.println(gallows[i]);
         }
         System.out.println();
     }
