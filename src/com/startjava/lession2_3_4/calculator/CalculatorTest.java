@@ -9,7 +9,9 @@ public class CalculatorTest {
 
         while (userChoose.equals("yes")) {
             System.out.println("Введите выражение из 3 аргументов (например: 2 + 1)");
-            Calculator.calculate(scanner.nextLine());
+            String[] correctExpression = Calculator.makeCorrectExpression(scanner.nextLine());
+            double result = Calculator.calculate(correctExpression);
+            Calculator.printResult(correctExpression, result);
             do {
                 System.out.println("Хотите продолжить вычисления? [yes/no]:");
                 userChoose = scanner.nextLine().toLowerCase();

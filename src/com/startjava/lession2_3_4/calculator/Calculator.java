@@ -6,21 +6,17 @@ public class Calculator {
     private static final String[] MATH_OPERATORS = {"+", "-", "/", "*", "%", "^"};
     private static final int ARGUMENTS_COUNT = 3;
 
-    private Calculator() {
-    }
+    private Calculator() {}
 
-    public static void calculate(String expression) {
-        String[] correctExpression = makeCorrectExpression(expression);
-        double result;
-
-        if (correctExpression == null || correctExpression.length != 3) {
-            result = Double.NaN;
+    public static double calculate(String[] correctExpression) {
+        if (!isValidExpression(correctExpression)) {
+            return Double.NaN;
         } else {
             try {
                 int firstNumber = Integer.parseInt(correctExpression[0]);
                 int secondNumber = Integer.parseInt(correctExpression[2]);
                 char mathOperator = correctExpression[1].charAt(0);
-                result = switch (mathOperator) {
+                return switch (mathOperator) {
                     case '+' -> firstNumber + secondNumber;
                     case '-' -> firstNumber - secondNumber;
                     case '*' -> firstNumber * secondNumber;
@@ -36,19 +32,26 @@ public class Calculator {
                     default -> Double.NaN;
                 };
             } catch (NumberFormatException e) {
+                if (correctExpression[0].isEmpty()) {
+                    displayError("Не введено первое число");
+                    return Double.NaN;
+                }
                 displayError("Некорректно введено одно из чисел " + "(введено: \"" +
                         correctExpression[0] + "\" " +
                         "\"" + correctExpression[2] + "\")\nДопустимо: целые положительные, " +
                         "отрицательные числа, либо 0 (в диапазоне значений int)");
-                result = Double.NaN;
+                return Double.NaN;
             }
         }
-        printResult(correctExpression, result);
     }
 
-    private static String[] makeCorrectExpression(String expression) {
+    private static boolean isValidExpression(String[] splits) {
+        return splits != null && splits.length != 0;
+    }
+
+    public static String[] makeCorrectExpression(String expression) {
         String[] splits = splitExpression(expression);
-        if (splits == null || splits.length == 0) {
+        if (!isValidExpression(splits)) {
             displayError("Введено пустое выражение");
             return null;
         }
@@ -58,10 +61,19 @@ public class Calculator {
             displayError("Не введены мат операторы");
             return null;
         }
+
         correctExpression[0] = parseFirstNumber(splits, mathOperatorIndexes[0]);
         correctExpression[1] = splits[mathOperatorIndexes[0]];
         correctExpression[2] = parseSecondNumber(splits, mathOperatorIndexes);
+        if (mathOperatorIndexes[1] != -1) {
+            displayError("Некорректная длина выражения (допустимо: выражение из 3 аргументов например 2 + 1");
+            return null;
+        }
         if (correctExpression[2] == null) {
+            if (mathOperatorIndexes[1] == -1) {
+                displayError("Не введено второе число");
+                return null;
+            }
             displayError("Некорректный ввод мат операторов, введено: \"" + splits[mathOperatorIndexes[0]] +
                     splits[mathOperatorIndexes[1]] + "\", допустимо: \"" +
                     splits[mathOperatorIndexes[0]] + "\"");
@@ -126,11 +138,20 @@ public class Calculator {
         return secondNumberString.toString();
     }
 
+//    private static boolean isCorrectExpressionLength(String[] splits, int[] indexes) {
+//        if (indexes[1] != -1) {
+//            String[] splitsOthers = new String[splits.length - indexes[1]];
+//
+//        }
+//
+//
+//    }
+
     private static void displayError(String message) {
         System.out.println("Ошибка: " + message);
     }
 
-    private static void printResult(String[] expression, double result) {
+    public static void printResult(String[] expression, double result) {
         if (Double.isNaN(result)) {
             return;
         }
