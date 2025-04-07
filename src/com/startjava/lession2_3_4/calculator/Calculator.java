@@ -9,64 +9,65 @@ public class Calculator {
     private Calculator() {}
 
     public static double calculate(String[] correctExpression) {
-        if (!isValidExpression(correctExpression)) {
-            return Double.NaN;
-        } else {
-            try {
-                int firstNumber = Integer.parseInt(correctExpression[0]);
-                int secondNumber = Integer.parseInt(correctExpression[2]);
-                char mathOperator = correctExpression[1].charAt(0);
-                return switch (mathOperator) {
-                    case '+' -> firstNumber + secondNumber;
-                    case '-' -> firstNumber - secondNumber;
-                    case '*' -> firstNumber * secondNumber;
-                    case '/' -> {
-                        if (secondNumber == 0) {
-                            displayError("На ноль делить нельзя!");
-                            yield Double.NaN;
-                        }
-                        yield (double) firstNumber / secondNumber;
+        try {
+            isValidInput(correctExpression);
+            int firstNumber = Integer.parseInt(correctExpression[0]);
+            int secondNumber = Integer.parseInt(correctExpression[2]);
+            char mathOperator = correctExpression[1].charAt(0);
+            return switch (mathOperator) {
+                case '+' -> firstNumber + secondNumber;
+                case '-' -> firstNumber - secondNumber;
+                case '*' -> firstNumber * secondNumber;
+                case '/' -> {
+                    if (secondNumber == 0) {
+                        displayError("На ноль делить нельзя!");
+                        yield Double.NaN;
                     }
-                    case '^' -> Math.pow(firstNumber, secondNumber);
-                    case '%' -> (double) Math.floorMod(firstNumber, secondNumber);
-                    default -> Double.NaN;
-                };
-            } catch (NumberFormatException e) {
-                if (correctExpression[0].isEmpty()) {
-                    displayError("Не введено первое число");
-                    return Double.NaN;
+                    yield (double) firstNumber / secondNumber;
                 }
-                displayError("Некорректно введено одно из чисел " + "(введено: \"" +
-                        correctExpression[0] + "\" " +
-                        "\"" + correctExpression[2] + "\")\nДопустимо: целые положительные, " +
-                        "отрицательные числа, либо 0 (в диапазоне значений int)");
+                case '^' -> Math.pow(firstNumber, secondNumber);
+                case '%' -> (double) Math.floorMod(firstNumber, secondNumber);
+                default -> Double.NaN;
+            };
+        } catch (InvalidInputExceprion e) {
+            displayError(e.getMessage());
+            return Double.NaN;
+        } catch (NumberFormatException e) {
+            if (correctExpression[0].isEmpty()) {
+                displayError("Не введено первое число");
                 return Double.NaN;
             }
+            displayError("Некорректно введено одно из чисел " + "(введено: \"" +
+                    correctExpression[0] + "\" " +
+                    "\"" + correctExpression[2] + "\")\nДопустимо: целые положительные, " +
+                    "отрицательные числа, либо 0 (в диапазоне значений int)");
+            return Double.NaN;
         }
     }
 
-    private static boolean isValidExpression(String[] splits) {
-        return splits != null && splits.length != 0;
+    private static boolean isValidInput(String[] splits) throws InvalidInputExceprion {
+        if (splits == null || splits.length == 0) {
+            throw new InvalidInputExceprion("Введено пустое выражение");
+        }
+        return true;
     }
 
     public static String[] makeCorrectExpression(String expression) {
         String[] splits = splitExpression(expression);
-        if (!isValidExpression(splits)) {
-            displayError("Введено пустое выражение");
+        if (splits == null || splits.length == 0) {
             return null;
         }
         String[] correctExpression = new String[ARGUMENTS_COUNT];
         int[] mathOperatorIndexes = parseMathOperatorIndex(splits);
         if (mathOperatorIndexes == null) {
-            displayError("Не введены мат операторы");
-            return null;
+            throw new IllegalArgumentException("Введено пустое выражение");
         }
 
         correctExpression[0] = parseFirstNumber(splits, mathOperatorIndexes[0]);
         correctExpression[1] = splits[mathOperatorIndexes[0]];
         correctExpression[2] = parseSecondNumber(splits, mathOperatorIndexes);
         if (mathOperatorIndexes[1] != -1) {
-            displayError("Некорректная длина выражения (допустимо: выражение из 3 аргументов например 2 + 1");
+            displayError("Некорректная длина выражения (допустимо: выражение из 3 аргументов например 2 + 1)");
             return null;
         }
         if (correctExpression[2] == null) {
@@ -137,15 +138,6 @@ public class Calculator {
         }
         return secondNumberString.toString();
     }
-
-//    private static boolean isCorrectExpressionLength(String[] splits, int[] indexes) {
-//        if (indexes[1] != -1) {
-//            String[] splitsOthers = new String[splits.length - indexes[1]];
-//
-//        }
-//
-//
-//    }
 
     private static void displayError(String message) {
         System.out.println("Ошибка: " + message);
