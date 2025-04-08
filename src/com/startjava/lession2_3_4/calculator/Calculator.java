@@ -5,7 +5,9 @@ import java.util.Arrays;
 public class Calculator {
     private static final String[] MATH_OPERATORS = {"+", "-", "/", "*", "%", "^"};
     private static final int ARGUMENTS_COUNT = 3;
-
+    private static final int NUMBERS_COUNT = 2;
+    private static final int OPERATORS_COUNT = 1;
+    
     private Calculator() {}
 
     public static double calculate(String[] correctExpression) {
@@ -156,5 +158,73 @@ public class Calculator {
         }
         System.out.println(expression[0] + " " + expression[1] + " " + expression[2] +
                 " = " + resultString);
+    }
+
+    private static void checkExpression(String expression) throws InvalidInputExceprion {
+        expression = expression.replaceAll("\\s+", "");
+        if (expression.isEmpty()) {
+            throw new InvalidInputExceprion("Введено пустое выражение");
+        }
+        int mathOperatorCount = getMathOperatorCount(expression);
+
+        String[] tempNumbers = expression.split(Arrays.toString(MATH_OPERATORS));
+        int numbersCount = 0;
+        for (String number : tempNumbers) {
+            if (number.isBlank()) {
+                continue;
+            }
+            tempNumbers[numbersCount] = number;
+            numbersCount++;
+        }
+        String[] numbers = Arrays.copyOf(tempNumbers, numbersCount);
+
+        if (mathOperatorCount > 1 || numbers.length > 2) {
+            throw new InvalidInputExceprion("Неверная длина выражения " +
+                    "(допустимо: выражение из 3 аргументов, например 2 + 1)");
+        }
+
+        for (String number : numbers) {
+            if (!isValidNumber(number)) {
+                throw new InvalidInputExceprion("Вводимые вами числа должны быть " +
+                        "целыми (введено: " + number + ")");
+            }
+        }
+    }
+
+    private static int getMathOperatorCount(String expression) throws InvalidInputExceprion {
+        for (String operator : MATH_OPERATORS) {
+            if (expression.contains(operator + operator + operator)) {
+                throw new InvalidInputExceprion("Некорректно введен знак математического оператора " +
+                        "(введено: " + operator +
+                        operator + operator +
+                        " допустимо: " + operator + ")");
+            }
+            if (expression.contains(operator + operator)) {
+                throw new InvalidInputExceprion("Некорректно введен знак математического оператора " +
+                        "(введено: " + operator +
+                        operator + " допустимо: " +
+                        operator + ")");
+            }
+        }
+
+        String[] splits = expression.split("");
+        int mathOperatorCount = 0;
+        for (String split : splits) {
+            for (String mathOperator : MATH_OPERATORS) {
+                if (split.equals(mathOperator)) {
+                    mathOperatorCount++;
+                }
+            }
+        }
+        return mathOperatorCount;
+    }
+
+    private static boolean isValidNumber(String number) {
+        try {
+            Integer.parseInt(number);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
     }
 }
