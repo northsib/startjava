@@ -8,11 +8,10 @@ public class Calculator {
     }
 
     public static double calculate(String expression) {
-        String[] parts;
         try {
             checkInput(expression);
             expression = formatExpression(expression);
-            parts = splitParts(expression);
+            String[] parts = splitParts(expression);
             int firstNumber = Integer.parseInt(parts[0]);
             int secondNumber = Integer.parseInt(parts[2]);
             char mathOperator = parts[1].charAt(0);
@@ -20,15 +19,18 @@ public class Calculator {
                 case '+' -> firstNumber + secondNumber;
                 case '-' -> firstNumber - secondNumber;
                 case '*' -> firstNumber * secondNumber;
-                case '/' -> (double) firstNumber / secondNumber;
+                case '/' -> {
+                    if (secondNumber == 0) {
+                        throw new ArithmeticException("Деление на 0 невозможно");
+                    }
+                    yield (double) firstNumber / secondNumber;
+                }
                 case '^' -> Math.pow(firstNumber, secondNumber);
                 case '%' -> (double) Math.floorMod(firstNumber, secondNumber);
                 default -> throw new IllegalStateException("Некорректное значение: " + mathOperator);
             };
         } catch (InvalidInputException e) {
             displayError(e.getMessage());
-        } catch (ArithmeticException e) {
-            displayError("Деление на 0 невозможно");
         } catch (NumberFormatException e) {
             displayError("Некорректный ввод выражения " +
                     "(допустимо: выражение из 3 аргументов, например: 2 + 1)");
