@@ -9,20 +9,35 @@ public class CalculatorTest {
 
         while (userChoose.equals("yes")) {
             System.out.println("Введите выражение из 3 аргументов (например: 2 + 1)");
-            String expression = scanner.nextLine();
+            String expression = formatExpression(scanner.nextLine());
             double result = Calculator.calculate(expression);
-            Calculator.printResult(expression, result);
+            printResult(expression, result);
             System.out.println("Хотите продолжить вычисления? [yes/no]:");
             userChoose = scanner.nextLine().toLowerCase();
-            while (true) {
-                if (!userChoose.equals("yes") && !userChoose.equals("no")) {
-                    System.out.println("Введите корректный ответ [yes/no]:");
-                    userChoose = scanner.nextLine().toLowerCase();
-                } else {
-                    break;
-                }
+            while (!userChoose.equals("yes") && !userChoose.equals("no")) {
+                System.out.println("Введите корректный ответ [yes/no]:");
+                userChoose = scanner.nextLine().toLowerCase();
             }
         }
         scanner.close();
+    }
+
+    private static String formatExpression(String expression) {
+        expression = expression.replaceAll("\\s+", " ").trim();
+        return expression;
+    }
+
+    private static void printResult(String expression, double result) {
+        if (Double.isNaN(result)) {
+            return;
+        }
+        String resultString;
+        if (result == (int) result) {
+            resultString = String.valueOf((int) result);
+        } else {
+            String formattedResult = String.format("%.3f", result);
+            resultString = formattedResult.replaceAll("0+$", "");
+        }
+        System.out.println(expression + " = " + resultString);
     }
 }
