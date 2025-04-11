@@ -29,7 +29,7 @@ public class Calculator {
             };
         } catch (InvalidInputException | ArithmeticException | IllegalStateException e) {
             displayError(e.getMessage());
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             displayError("Недопустимый ввод чисел (допустимо: " +
                     "целые положительные и отрицательные числа или 0)");
         }
