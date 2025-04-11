@@ -8,7 +8,8 @@ public class CalculatorTest {
         String userChoose = "yes";
 
         while (userChoose.equals("yes")) {
-            System.out.println("Введите выражение из 3 аргументов (например: 2 + 1)");
+            System.out.println("Введите выражение из 3 аргументов," +
+                    "отделяя каждый аргумент пробелом (например: 2 + 1)");
             String expression = formatExpression(scanner.nextLine());
             double result = Calculator.calculate(expression);
             printResult(expression, result);
