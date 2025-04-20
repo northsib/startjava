@@ -8,27 +8,24 @@ public class Calculator {
 
     public static double calculate(String expression) {
         checkExpression(expression);
-        String[] parts = splitExpression(expression);
-        int firstNumber = getInteger(parts[0]);
-        int secondNumber = getInteger(parts[2]);
+        String[] parts = split(expression);
+        int firstNumber = parseInteger(parts[0]);
+        int secondNumber = parseInteger(parts[2]);
         String mathOperator = parts[1];
         return switch (mathOperator) {
             case "+" -> firstNumber + secondNumber;
             case "-" -> firstNumber - secondNumber;
             case "*" -> firstNumber * secondNumber;
-            case "/" -> {
+            case "/", "%" -> {
                 if (secondNumber == 0) {
                     throw new ArithmeticException("Деление на 0 невозможно");
                 }
-                yield (double) firstNumber / secondNumber;
-            }
-            case "^" -> Math.pow(firstNumber, secondNumber);
-            case "%" -> {
-                if (secondNumber == 0) {
-                    throw new ArithmeticException("Деление на 0 невозможно");
+                if (mathOperator.equals("/")) {
+                    yield (double) firstNumber / secondNumber;
                 }
                 yield (double) Math.floorMod(firstNumber, secondNumber);
             }
+            case "^" -> Math.pow(firstNumber, secondNumber);
             default -> throw new UnsupportedOperationException("Некорректный ввод математического оператора" +
                     " (введено: " + parts[1] + ", допустимо: +, -, *, /, %, ^)");
         };
@@ -40,7 +37,7 @@ public class Calculator {
         }
     }
 
-    private static String[] splitExpression(String expression) {
+    private static String[] split(String expression) {
         String[] parts = expression.split(" ");
         if (parts.length > ARGS_COUNT) {
             throw new InvalidExpressionLengthException("Недопустимая длина выражения (допустимо: выражение " +
@@ -49,7 +46,7 @@ public class Calculator {
         return parts;
     }
 
-    private static int getInteger(String number) {
+    private static int parseInteger(String number) {
         try {
             return Integer.parseInt(number);
         } catch (NumberFormatException e) {

@@ -4,11 +4,11 @@ import java.text.DecimalFormat;
 import java.util.Scanner;
 
 public class CalculatorTest {
-    public static void main(String[] args) throws InvalidInputException {
+    public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         String userChoose = "yes";
 
-        while (true) {
+        while (!userChoose.equals("no")) {
             if (userChoose.equals("yes")) {
                 try {
                     String expression = inputExpression(scanner);
@@ -18,9 +18,6 @@ public class CalculatorTest {
                     System.out.println("Ошибка: " + e.getMessage());
                 }
                 System.out.println("Хотите продолжить вычисления? [yes/no]:");
-            }
-            if (userChoose.equals("no")) {
-                break;
             }
             if (!userChoose.equals("yes")) {
                 System.out.println("Введите корректный ответ [yes/no]:");
@@ -39,12 +36,7 @@ public class CalculatorTest {
 
     private static void printResult(String expression, double result) {
         DecimalFormat formattedResult = new DecimalFormat("#.###");
-        String resultString;
-        if (result == (int) result) {
-            resultString = String.valueOf((int) result);
-        } else {
-            resultString = formattedResult.format(result);
-        }
+        String resultString = formattedResult.format(result);
         System.out.println(expression + " = " + resultString);
     }
 }
