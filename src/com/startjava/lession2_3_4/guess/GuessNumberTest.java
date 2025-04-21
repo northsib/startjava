@@ -30,6 +30,8 @@ public class GuessNumberTest {
         Player player1 = new Player(scanner.nextLine());
         System.out.print("Введите имя игрока 2: ");
         Player player2 = new Player(scanner.nextLine());
-        return new Player[] {player1, player2};
+        System.out.print("Введите имя игрока 3: ");
+        Player player3 = new Player(scanner.nextLine());
+        return new Player[] {player1, player2, player3};
     }
 }
