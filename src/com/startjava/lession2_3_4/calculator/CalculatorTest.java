@@ -18,8 +18,7 @@ public class CalculatorTest {
                     System.out.println("Ошибка: " + e.getMessage());
                 }
                 System.out.println("Хотите продолжить вычисления? [yes/no]:");
-            }
-            if (!userChoose.equals("yes")) {
+            } else {
                 System.out.println("Введите корректный ответ [yes/no]:");
             }
             userChoose = scanner.nextLine().toLowerCase();

@@ -39,7 +39,7 @@ public class Calculator {
 
     private static String[] split(String expression) {
         String[] parts = expression.split(" ");
-        if (parts.length > ARGS_COUNT) {
+        if (parts.length != ARGS_COUNT) {
             throw new InvalidExpressionLengthException("Недопустимая длина выражения (допустимо: выражение " +
                     "из 3 аргументов, например: 2 + 1, или -2 + -1)");
         }
