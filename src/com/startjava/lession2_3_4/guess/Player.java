@@ -27,6 +27,8 @@ public class Player {
             throw new IllegalArgumentException("Введенное число должно быть от " + START_RANGE +
                      " до " + END_RANGE);
         }
+        attempts[currentAttempt - 1] = number;
+        currentAttempt++;
         return number;
     }
 
@@ -34,19 +36,7 @@ public class Player {
         return Arrays.copyOf(attempts, currentAttempt - 1);
     }
 
-    public boolean hasAttemptsLeft(int number) {
-        if (currentAttempt == ATTEMPTS_COUNT) {
-            System.out.println("Попытки у " + name + " закончились!");
-        }
-        attempts[currentAttempt - 1] = number;
-        return true;
-    }
-
     public int getRemainingAttempts() {
         return ATTEMPTS_COUNT - currentAttempt;
-    }
-
-    public void attemptIncrease() {
-        currentAttempt++;
     }
 }
