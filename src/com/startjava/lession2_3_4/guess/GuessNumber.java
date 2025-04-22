@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 public class GuessNumber {
     public static final int PLAYERS_COUNT = 3;
+    private static final int ROUNDS_COUNT = 3;
 
     private int guessNumber;
     private Player[] players;
@@ -15,29 +16,35 @@ public class GuessNumber {
 
     public GuessNumber(Player[] players) {
         this.players = players;
-        this.guessNumber = (int) (Math.random() * 100) + 1;
         this.scanner = new Scanner(System.in);
     }
 
     public void play() {
         welcomeMessage();
         castLots(players);
-        while (currentPlayer.getRemainingAttempts() >= 0) {
-            System.out.print("Попытка " + currentPlayer.getCurrentAttempt() +
-                    "\nЧисло вводит " + currentPlayer.getName() + ": ");
-            int inputNumber = inputNumber();
-            if (checkGuess(inputNumber)) {
-                printWinGameMessage();
-                break;
+        for (int i = 0; i < ROUNDS_COUNT; i++) {
+            System.out.println("Начинается раунд № " + (i + 1));
+            guessNumber = (int) (Math.random() * 100) + 1;
+            while (currentPlayer.getRemainingAttempts() >= 0) {
+                System.out.print("Попытка " + currentPlayer.getCurrentAttempt() +
+                        "\nЧисло вводит " + currentPlayer.getName() + ": ");
+                int inputNumber = inputNumber();
+                if (checkGuess(inputNumber)) {
+                    printWinGameMessage();
+                    break;
+                }
+                if (currentPlayer.getCurrentAttempt() > Player.ATTEMPTS_COUNT) {
+                    System.out.println("У " + currentPlayer.getName() + " закончились попытки!");
+                }
+                switchPlayer();
             }
-            if (currentPlayer.getCurrentAttempt() > Player.ATTEMPTS_COUNT) {
-                System.out.println("У " + currentPlayer.getName() + " закончились попытки!");
+            if (currentPlayer.getRemainingAttempts() < 0) {
+                printLoseGameMessage();
             }
-            switchPlayer();
+            resetPlayersAttempts();
+            currentPlayer = players[0];
         }
-        if (currentPlayer.getRemainingAttempts() < 0) {
-            printLoseGameMessage();
-        }
+        findWinner();
     }
 
     private static void welcomeMessage() {
@@ -97,20 +104,19 @@ public class GuessNumber {
         System.out.println("Поздравляем! Игрок " + currentPlayer.getName() +
                 " отгадал загаданное число - " + guessNumber +
                 " c " + (currentPlayer.getCurrentAttempt() - 1) + "-й попытки");
+        currentPlayer.addScore();
         printAllPlayersNumbers();
     }
 
     private void printAllPlayersNumbers() {
-        printPlayerGuessedNumbers();
-        switchPlayer();
-        printPlayerGuessedNumbers();
-        switchPlayer();
-        printPlayerGuessedNumbers();
+        for (Player player : players) {
+            printPlayerGuessedNumbers(player);
+        }
     }
 
-    private void printPlayerGuessedNumbers() {
-        int[] guessedNumbers = currentPlayer.getAttempts();
-        System.out.println("Числа названные " + currentPlayer.getName() + ": ");
+    private void printPlayerGuessedNumbers(Player player) {
+        int[] guessedNumbers = player.getAttempts();
+        System.out.println("Числа названные " + player.getName() + ": ");
 
         for (int i = 0; i < guessedNumbers.length; i++) {
             if (i == 4) {
@@ -122,5 +128,24 @@ public class GuessNumber {
             System.out.print(guessedNumbers[i] + " ");
         }
         System.out.println();
+    }
+
+    private void resetPlayersAttempts() {
+        for (Player player : players) {
+            player.resetCurrentAttempt();
+        }
+    }
+
+    private void findWinner() {
+        int[] playersScores = new int[PLAYERS_COUNT];
+        for (int i = 0; i < PLAYERS_COUNT; i++) {
+            playersScores[i] = players[i].getScore();
+        }
+        int maxScore = Math.max(Math.max(playersScores[0], playersScores[1]), playersScores[2]);
+        for (int i = 0; i < PLAYERS_COUNT; i++) {
+            if (playersScores[i] == maxScore) {
+                System.out.println("Победу в трёх раундах одержал " + players[i].getName());
+            }
+        }
     }
 }

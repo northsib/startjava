@@ -7,6 +7,12 @@ public class Player {
     private static final int START_RANGE = 1;
     private static final int END_RANGE = 100;
     private int[] attempts = new int[ATTEMPTS_COUNT];
+
+    public int getScore() {
+        return score;
+    }
+
+    private int score = 0;
     private int currentAttempt = 1;
     private String name;
 
@@ -20,6 +26,14 @@ public class Player {
 
     public int getCurrentAttempt() {
         return currentAttempt;
+    }
+
+    public void resetCurrentAttempt() {
+        currentAttempt = 1;
+    }
+
+    public int addScore() {
+        return score++;
     }
 
     public int addNumber(int number) {
