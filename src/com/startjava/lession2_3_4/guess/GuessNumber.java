@@ -5,7 +5,7 @@ import java.util.Random;
 import java.util.Scanner;
 
 public class GuessNumber {
-    private static final int PLAYERS_COUNT = 3;
+    public static final int PLAYERS_COUNT = 3;
     private final int[] playerNumberSequence = new int[PLAYERS_COUNT];
     private int player1number = 1;
     private int player2number = 2;
@@ -29,6 +29,7 @@ public class GuessNumber {
     }
 
     public void play() {
+        welcomeMessage();
         castLots();
         while (currentPlayer.getRemainingAttempts() >= 0) {
             System.out.print("Попытка " + currentPlayer.getCurrentAttempt() +
@@ -43,6 +44,10 @@ public class GuessNumber {
         if (currentPlayer.getRemainingAttempts() < 0) {
             printLoseGameMessage();
         }
+    }
+
+    private static void welcomeMessage() {
+        System.out.println("Игра началась! У каждого игрока по " + Player.ATTEMPTS_COUNT + " попыток");
     }
 
     private void printPlayerGuessedNumbers() {
@@ -86,7 +91,7 @@ public class GuessNumber {
         while (true) {
             try {
                 int inputNumber = scanner.nextInt();
-                return currentPlayer.setNumber(inputNumber);
+                return currentPlayer.addNumber(inputNumber);
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка: " + e.getMessage() + "\nПопробуйте еще раз: ");
             } catch (InputMismatchException e) {
