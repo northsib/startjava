@@ -8,10 +8,7 @@ public class GuessNumber {
     public static final int PLAYERS_COUNT = 3;
     private static final int ROUNDS_COUNT = 3;
     private Player[] players;
-//    private Player currentPlayer;
-
     private int guessNumber;
-//    private int currentPlayerIndex = 0;
     private Scanner scanner;
 
     public GuessNumber(Player[] players) {
@@ -25,24 +22,30 @@ public class GuessNumber {
         for (int i = 0; i < ROUNDS_COUNT; i++) {
             System.out.println("Начинается раунд № " + (i + 1));
             guessNumber = (int) (Math.random() * 100) + 1;
-            while (players[i].getRemainingAttempts() >= 0) {
-                System.out.print("Попытка " + players[i].getCurrentAttempt() +
-                        "\nЧисло вводит " + players[i].getName() + ": ");
-                int inputNumber = inputNumber();
-                players[i].addNumber(inputNumber);
-                if (checkGuess(inputNumber)) {
-                    printWinGameMessage();
+            for (int j = 1; j <= Player.ATTEMPTS_COUNT; j++) {
+                boolean isEndGame = false;
+                for (int k = 0; k < PLAYERS_COUNT; k++) {
+                    System.out.print("Попытка " + j +
+                            "\nЧисло вводит " + players[k].getName() + ": ");
+                    int inputNumber = inputNumber();
+                    players[k].addNumber(inputNumber);
+                    if (checkGuess(inputNumber)) {
+                        printWinGameMessage(players[k]);
+                        isEndGame = true;
+                        break;
+                    }
+                    if (players[k].getCurrentAttempt() > Player.ATTEMPTS_COUNT) {
+                        System.out.println("У " + players[k].getName() + " закончились попытки!");
+                    }
+                }
+                if (isEndGame || j == Player.ATTEMPTS_COUNT) {
+                    resetPlayersAttempts();
                     break;
                 }
-                if (players[i].getCurrentAttempt() > Player.ATTEMPTS_COUNT) {
-                    System.out.println("У " + players[i].getName() + " закончились попытки!");
-                }
-                switchPlayer();
             }
             if (players[i].getRemainingAttempts() < 0) {
                 printLoseGameMessage();
             }
-            resetPlayersAttempts();
         }
         findWinner();
     }
@@ -88,21 +91,16 @@ public class GuessNumber {
         return false;
     }
 
-    private void switchPlayer() {
-        currentPlayerIndex = (currentPlayerIndex + 1) % PLAYERS_COUNT;
-        currentPlayer = players[currentPlayerIndex];
-    }
-
     private void printLoseGameMessage() {
         System.out.println("Игра окончена! Никто не выиграл");
         printAllPlayersNumbers();
     }
 
-    private void printWinGameMessage() {
-        System.out.println("Поздравляем! Игрок " + currentPlayer.getName() +
+    private void printWinGameMessage(Player player) {
+        System.out.println("Поздравляем! Игрок " + player.getName() +
                 " отгадал загаданное число - " + guessNumber +
-                " c " + (currentPlayer.getCurrentAttempt() - 1) + "-й попытки");
-        currentPlayer.upScore();
+                " c " + (player.getCurrentAttempt() - 1) + "-й попытки");
+        player.upScore();
         printAllPlayersNumbers();
     }
 
