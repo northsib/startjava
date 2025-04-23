@@ -38,13 +38,13 @@ public class GuessNumber {
                         System.out.println("У " + players[k].getName() + " закончились попытки!");
                     }
                 }
-                if (isEndGame || j == Player.ATTEMPTS_COUNT) {
-                    resetPlayersAttempts();
+                if (isEndGame) {
                     break;
                 }
-            }
-            if (players[i].getRemainingAttempts() < 0) {
-                printLoseGameMessage();
+                if (j == Player.ATTEMPTS_COUNT) {
+                    printLoseGameMessage();
+                    break;
+                }
             }
         }
         findWinner();
@@ -97,6 +97,7 @@ public class GuessNumber {
     private void printLoseGameMessage() {
         System.out.println("Игра окончена! Никто не выиграл");
         printAllPlayersNumbers();
+        resetPlayersAttempts();
     }
 
     private void printWinGameMessage(Player player) {
@@ -105,6 +106,7 @@ public class GuessNumber {
                 " c " + (player.getCurrentAttempt() - 1) + "-й попытки");
         player.upScore();
         printAllPlayersNumbers();
+        resetPlayersAttempts();
     }
 
     private void printAllPlayersNumbers() {
