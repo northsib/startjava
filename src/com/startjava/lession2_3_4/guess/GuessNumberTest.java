@@ -21,7 +21,7 @@ public class GuessNumberTest {
 
     private static Player[] createPlayers(Scanner scanner) {
         Player[] players = new Player[GuessNumber.PLAYERS_COUNT];
-        for (int i = 1; (i - 1) < GuessNumber.PLAYERS_COUNT; i++) {
+        for (int i = 1; i <= GuessNumber.PLAYERS_COUNT; i++) {
             System.out.print("Введите имя игрока " + i + ": ");
             players[i - 1] = new Player(scanner.nextLine());
         }

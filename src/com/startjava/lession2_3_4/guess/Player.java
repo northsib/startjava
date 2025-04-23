@@ -7,11 +7,6 @@ public class Player {
     private static final int START_RANGE = 1;
     private static final int END_RANGE = 100;
     private int[] attempts = new int[ATTEMPTS_COUNT];
-
-    public int getScore() {
-        return score;
-    }
-
     private int score = 0;
     private int currentAttempt = 1;
     private String name;
@@ -20,37 +15,41 @@ public class Player {
         this.name = name;
     }
 
-    public String getName() {
-        return name;
+    public int[] getAttempts() {
+        return Arrays.copyOf(attempts, currentAttempt - 1);
+    }
+
+    public int getScore() {
+        return score;
     }
 
     public int getCurrentAttempt() {
         return currentAttempt;
     }
 
-    public void resetCurrentAttempt() {
-        currentAttempt = 1;
-    }
-
-    public int addScore() {
-        return score++;
+    public String getName() {
+        return name;
     }
 
     public int addNumber(int number) {
         if (number < START_RANGE || number > END_RANGE) {
-            throw new IllegalArgumentException("Введенное число должно быть от " + START_RANGE +
-                     " до " + END_RANGE);
+            throw new IllegalArgumentException("Введенное число должно быть от " +
+                    START_RANGE + " до " + END_RANGE);
         }
         attempts[currentAttempt - 1] = number;
         currentAttempt++;
         return number;
     }
 
-    public int[] getAttempts() {
-        return Arrays.copyOf(attempts, currentAttempt - 1);
+    public int upScore() {
+        return score++;
     }
 
     public int getRemainingAttempts() {
         return ATTEMPTS_COUNT - currentAttempt;
+    }
+
+    public void resetCurrentAttempt() {
+        currentAttempt = 1;
     }
 }
