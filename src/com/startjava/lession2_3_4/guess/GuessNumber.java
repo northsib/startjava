@@ -1,5 +1,6 @@
 package com.startjava.lession2_3_4.guess;
 
+import java.util.Arrays;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
@@ -27,8 +28,7 @@ public class GuessNumber {
                 for (int k = 0; k < PLAYERS_COUNT; k++) {
                     System.out.print("Попытка " + j +
                             "\nЧисло вводит " + players[k].getName() + ": ");
-                    int inputNumber = inputNumber();
-                    players[k].addNumber(inputNumber);
+                    int inputNumber = inputNumber(players[k]);
                     if (checkGuess(inputNumber)) {
                         printWinGameMessage(players[k]);
                         isEndGame = true;
@@ -69,12 +69,15 @@ public class GuessNumber {
         System.out.println("Жребий выиграл " + players[0].getName());
     }
 
-    private int inputNumber() {
+    private int inputNumber(Player player) {
         while (true) {
             try {
-                return scanner.nextInt();
+                int inputNumber = scanner.nextInt();
+                player.addNumber(inputNumber);
+                return inputNumber;
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка: " + e.getMessage() + "\nПопробуйте еще раз: ");
+                scanner.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Ошибка: некорректный ввод числа\nПопробуйте еще раз: ");
                 scanner.nextLine();
@@ -133,42 +136,38 @@ public class GuessNumber {
     }
 
     private void findWinner() {
-        int[] playersScores = new int[PLAYERS_COUNT];
-        for (int i = 0; i < PLAYERS_COUNT; i++) {
-            playersScores[i] = players[i].getScore();
-        }
-        int maxScore = Math.max(Math.max(playersScores[0], playersScores[1]), playersScores[2]);
-        if (maxScore == 0) {
-            System.out.println("Никто из игроков не смог победить");
-            return;
-        }
-
-        if (!checkDraw(playersScores)) {
-            for (int i = 0; i < PLAYERS_COUNT; i++) {
-                if (playersScores[i] == maxScore) {
-                    System.out.println("Победу в трёх раундах одержал " + players[i].getName() +
-                            " набрав " + players[i].getScore() + " очков!");
+        Player[] sortedByWinPlayers = Arrays.copyOf(players, PLAYERS_COUNT);
+        for (int i = 0; i < sortedByWinPlayers.length; i++) {
+            for (int j = 0; j < sortedByWinPlayers.length - i - 1; j++) {
+                if (sortedByWinPlayers[j].getScore() < sortedByWinPlayers[j + 1].getScore()) {
+                    Player temp = sortedByWinPlayers[j];
+                    sortedByWinPlayers[j] = sortedByWinPlayers[j + 1];
+                    sortedByWinPlayers[j + 1] = temp;
                 }
             }
         }
+        if (sortedByWinPlayers[0].getScore() == 0) {
+            System.out.println("Никто из игроков не смог победить");
+            return;
+        }
+        if (checkDraw(sortedByWinPlayers)) {
+            return;
+        }
+        System.out.println("Победу в трёх раундах одержал " + sortedByWinPlayers[0].getName() +
+                " набрав " + sortedByWinPlayers[0].getScore() + " очков!");
     }
 
-    private boolean checkDraw(int[] playersScores) {
-        if (playersScores[0] == playersScores[1] && playersScores[0] > playersScores[2]) {
-            System.out.println("Ничья, " + players[0].getName() + " и " +
-                    players[1].getName() + " набрали одинаковое количество очков - " +
-                    players[1].getScore());
-            return true;
-        }
-        if (playersScores[1] == playersScores[2] && playersScores[1] > playersScores[0]) {
-            System.out.println("Ничья, " + players[1].getName() + " и " +
-                    players[2].getName() + " набрали одинаковое количество очков - " +
-                    players[1].getScore());
-            return true;
-        }
-        if (playersScores[0] == playersScores[1] && playersScores[0] == playersScores[2]) {
+    private boolean checkDraw(Player[] sortedByWinPlayers) {
+        if (sortedByWinPlayers[0].getScore() == sortedByWinPlayers[1].getScore() &&
+                sortedByWinPlayers[1].getScore() == sortedByWinPlayers[2].getScore()) {
             System.out.println("Ничья, все игроки набрали одинаковое количество очков - " +
-                    players[1].getScore());
+                    sortedByWinPlayers[0].getScore());
+            return true;
+        }
+        if (sortedByWinPlayers[0].getScore() == sortedByWinPlayers[1].getScore()) {
+            System.out.println("Ничья, " + sortedByWinPlayers[0].getName() + " и " +
+                    sortedByWinPlayers[1].getName() + " набрали одинаковое количество очков - " +
+                    sortedByWinPlayers[0].getScore());
             return true;
         }
         return false;
