@@ -142,10 +142,35 @@ public class GuessNumber {
             playersScores[i] = players[i].getScore();
         }
         int maxScore = Math.max(Math.max(playersScores[0], playersScores[1]), playersScores[2]);
-        for (int i = 0; i < PLAYERS_COUNT; i++) {
-            if (playersScores[i] == maxScore) {
-                System.out.println("Победу в трёх раундах одержал " + players[i].getName());
+        if (maxScore == 0) {
+            System.out.println("Никто из игроков не смог победить");
+            return;
+        }
+
+        if (!checkDraw(playersScores)) {
+            for (int i = 0; i < PLAYERS_COUNT; i++) {
+                if (playersScores[i] == maxScore) {
+                    System.out.println("Победу в трёх раундах одержал " + players[i].getName());
+                }
             }
         }
+    }
+
+    private boolean checkDraw(int[] playersScores) {
+        if (playersScores[0] == playersScores[1] && playersScores[0] > playersScores[2]) {
+            System.out.println("Ничья, " + players[0].getName() + " и " +
+                    players[1].getName() + " набрали одинаковое количество очков");
+            return true;
+        }
+        if (playersScores[1] == playersScores[2] && playersScores[1] > playersScores[0]) {
+            System.out.println("Ничья, " + players[1].getName() + " и " +
+                    players[2].getName() + " набрали одинаковое количество очков");
+            return true;
+        }
+        if (playersScores[0] == playersScores[1] && playersScores[0] == playersScores[2]) {
+            System.out.println("Ничья, все игроки набрали одинаковое количество очков");
+            return true;
+        }
+        return false;
     }
 }
