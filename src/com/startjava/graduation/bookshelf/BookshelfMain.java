@@ -3,10 +3,11 @@ package com.startjava.graduation.bookshelf;
 import java.util.Scanner;
 
 public class BookshelfMain {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         Bookshelf bookshelf = new Bookshelf();
         boolean isActive = true;
         Scanner scanner = new Scanner(System.in);
+        welcomeMessage();
 
         while (isActive) {
             Bookshelf.printMainMenu();
@@ -44,7 +45,7 @@ public class BookshelfMain {
                     isActive = false;
                     break;
                 default:
-                    System.out.println("Введите число, соответствующее пункту меню!");
+                    System.out.println("Введите номер, соответствующий пункту меню!");
                     break;
             }
             wait(scanner);
@@ -71,5 +72,15 @@ public class BookshelfMain {
     private static void wait(Scanner scanner) {
         System.out.println("Для продолжения работы нажмите клавишу <Enter>");
         scanner.nextLine();
+    }
+
+    private static void welcomeMessage() throws InterruptedException {
+        String message = "Добро пожаловать в программу \"Книжный шкаф\"";
+        char[] chars = message.toCharArray();
+        for (char symbols : chars) {
+            System.out.print(symbols);
+            Thread.sleep(100);
+        }
+        System.out.println();
     }
 }
