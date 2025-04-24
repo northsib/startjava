@@ -23,6 +23,7 @@ public class Bookshelf {
             if (books[i].getTitle().equals(title)) {
                 books[i] = null;
                 shiftBooks(i);
+                System.out.println("Книга удалена");
                 return;
             }
         }
@@ -32,6 +33,7 @@ public class Bookshelf {
     public String findBook(String title) {
         for (int i = 0; i < booksCount; i++) {
             if (books[i].getTitle().equals(title)) {
+                System.out.print("Результат поиска: ");
                 return books[i].toString();
             }
         }
@@ -49,6 +51,7 @@ public class Bookshelf {
     public void clear() {
         books = new Book[CAPACITY];
         booksCount = 0;
+        System.out.println("Книжный шкаф очищен");
     }
 
     public void displayAllBooks() {

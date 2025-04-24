@@ -26,7 +26,7 @@ public class BookshelfMain {
                     break;
                 case 3:
                     String bookToFind = bookTitleInput(scanner);
-                    bookshelf.findBook(bookToFind);
+                    System.out.println(bookshelf.findBook(bookToFind));
                     break;
                 case 4:
                     bookshelf.displayAllBooks();
@@ -47,6 +47,7 @@ public class BookshelfMain {
                     System.out.println("Введите число, соответствующее пункту меню!");
                     break;
             }
+            wait(scanner);
         }
         scanner.close();
     }
@@ -65,5 +66,10 @@ public class BookshelfMain {
     private static String bookTitleInput(Scanner scanner) {
         System.out.println("Введите название книги: ");
         return scanner.nextLine();
+    }
+
+    private static void wait(Scanner scanner) {
+        System.out.println("Для продолжения работы нажмите клавишу <Enter>");
+        scanner.nextLine();
     }
 }
