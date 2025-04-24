@@ -11,6 +11,7 @@ public class GuessNumber {
     private Player[] players;
     private int guessNumber;
     private Scanner scanner;
+    private boolean isEndRound;
 
     public GuessNumber(Player[] players) {
         this.players = players;
@@ -24,21 +25,19 @@ public class GuessNumber {
             System.out.println("Начинается раунд № " + (i + 1));
             guessNumber = (int) (Math.random() * 100) + 1;
             for (int j = 1; j <= Player.ATTEMPTS_COUNT; j++) {
-                boolean isEndGame = false;
+                isEndRound = false;
                 for (int k = 0; k < PLAYERS_COUNT; k++) {
                     System.out.print("Попытка " + j +
                             "\nЧисло вводит " + players[k].getName() + ": ");
                     int inputNumber = inputNumber(players[k]);
-                    if (checkGuess(inputNumber)) {
-                        printWinGameMessage(players[k]);
-                        isEndGame = true;
+                    if (checkTry(inputNumber, players[k])) {
                         break;
                     }
                     if (players[k].getCurrentAttempt() > Player.ATTEMPTS_COUNT) {
                         System.out.println("У " + players[k].getName() + " закончились попытки!");
                     }
                 }
-                if (isEndGame) {
+                if (isEndRound) {
                     break;
                 }
                 if (j == Player.ATTEMPTS_COUNT) {
@@ -48,6 +47,15 @@ public class GuessNumber {
             }
         }
         findWinner();
+    }
+
+    private boolean checkTry(int inputNumber, Player player) {
+        if (checkGuess(inputNumber)) {
+            printWinGameMessage(player);
+            isEndRound = true;
+            return true;
+        }
+        return false;
     }
 
     private static void welcomeMessage() {
@@ -139,15 +147,9 @@ public class GuessNumber {
 
     private void findWinner() {
         Player[] sortedByWinPlayers = Arrays.copyOf(players, PLAYERS_COUNT);
-        for (int i = 0; i < sortedByWinPlayers.length; i++) {
-            for (int j = 0; j < sortedByWinPlayers.length - i - 1; j++) {
-                if (sortedByWinPlayers[j].getScore() < sortedByWinPlayers[j + 1].getScore()) {
-                    Player temp = sortedByWinPlayers[j];
-                    sortedByWinPlayers[j] = sortedByWinPlayers[j + 1];
-                    sortedByWinPlayers[j + 1] = temp;
-                }
-            }
-        }
+        Arrays.sort(sortedByWinPlayers, (player1, player2) ->
+                Integer.compare(player2.getScore(), player1.getScore()));
+
         if (sortedByWinPlayers[0].getScore() == 0) {
             System.out.println("Никто из игроков не смог победить");
             return;
