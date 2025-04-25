@@ -11,57 +11,51 @@ public class BookshelfMain {
 
         while (isActive) {
             Bookshelf.printMainMenu();
-            int choice = userInput(scanner);
-            switch (choice) {
-                case 1:
-                    String title = bookTitleInput(scanner);
-                    System.out.println("Введите автора: ");
-                    String author = scanner.nextLine();
-                    System.out.println("Введите год: ");
-                    int year = Integer.parseInt(scanner.nextLine());
-                    bookshelf.addBook(new Book(author, title, year));
-                    break;
-                case 2:
-                    String bookToRemove = bookTitleInput(scanner);
-                    bookshelf.removeBook(bookToRemove);
-                    break;
-                case 3:
-                    String bookToFind = bookTitleInput(scanner);
-                    System.out.println(bookshelf.findBook(bookToFind));
-                    break;
-                case 4:
-                    bookshelf.displayAllBooks();
-                    break;
-                case 5:
-                    bookshelf.displayBooksCount();
-                    break;
-                case 6:
-                    bookshelf.displayFreeShelf();
-                    break;
-                case 7:
-                    bookshelf.clear();
-                    break;
-                case 8:
-                    isActive = false;
-                    break;
-                default:
-                    System.out.println("Введите номер, соответствующий пункту меню!");
-                    break;
+            int choice = scanner.nextInt();
+            scanner.nextLine();
+            try {
+                switch (choice) {
+                    case 1:
+                        String title = bookTitleInput(scanner);
+                        System.out.println("Введите автора: ");
+                        String author = scanner.nextLine();
+                        System.out.println("Введите год: ");
+                        int year = scanner.nextInt();
+                        bookshelf.addBook(new Book(author, title, year));
+                        break;
+                    case 2:
+                        String bookToRemove = bookTitleInput(scanner);
+                        bookshelf.removeBook(bookToRemove);
+                        break;
+                    case 3:
+                        String bookToFind = bookTitleInput(scanner);
+                        System.out.println(bookshelf.findBook(bookToFind));
+                        break;
+                    case 4:
+                        bookshelf.displayAllBooks();
+                        break;
+                    case 5:
+                        bookshelf.displayBooksCount();
+                        break;
+                    case 6:
+                        bookshelf.displayFreeShelf();
+                        break;
+                    case 7:
+                        bookshelf.clear();
+                        break;
+                    case 8:
+                        isActive = false;
+                        break;
+                    default:
+                        throw new IllegalArgumentException("Введенный Вами номер " +
+                                "не соответствует пункту меню!");
+                }
+            } catch (RuntimeException e) {
+                System.out.println("Ошибка: " + e.getMessage());
             }
             wait(scanner);
         }
         scanner.close();
-    }
-
-    private static int userInput(Scanner scanner) {
-        while (true) {
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-            if (choice >= 1 && choice <= 8) {
-                return choice;
-            }
-            System.out.println("Введите число, соответствующее пункту меню!");
-        }
     }
 
     private static String bookTitleInput(Scanner scanner) {

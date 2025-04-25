@@ -15,7 +15,7 @@ public class Bookshelf {
             System.out.println("Книга добавлена");
             return;
         }
-        System.out.println("Книжный шкаф полон");
+        throw new RuntimeException("Книжный шкаф полон");
     }
 
     public void removeBook(String title) {
@@ -27,7 +27,7 @@ public class Bookshelf {
                 return;
             }
         }
-        System.out.println("Указанная Вами книга не найдена");
+        throw new IllegalArgumentException("Указанная Вами книга не найдена");
     }
 
     public String findBook(String title) {
@@ -37,7 +37,7 @@ public class Bookshelf {
                 return books[i].toString();
             }
         }
-        return "Указанная Вами книга не найдена";
+        throw new IllegalArgumentException("Указанная Вами книга не найдена");
     }
 
     public void displayBooksCount() {
