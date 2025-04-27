@@ -1,5 +1,7 @@
 package com.startjava.graduation.bookshelf;
 
+import com.startjava.lession2_3_4.calculator.MenuOptions;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BookshelfMain {
@@ -10,40 +12,40 @@ public class BookshelfMain {
         welcomeMessage();
 
         while (isActive) {
+            bookshelf.displayBookshelfStatus();
             Bookshelf.printMainMenu();
-            int choice = scanner.nextInt();
+            int choice = userMenuInput(scanner);
             scanner.nextLine();
             try {
-                switch (choice) {
-                    case 1:
+                MenuOptions option = MenuOptions.getByValue(choice);
+
+                switch (option) {
+                    case ADD_BOOK:
                         String title = bookTitleInput(scanner);
                         System.out.println("Введите автора: ");
                         String author = scanner.nextLine();
-                        System.out.println("Введите год: ");
-                        int year = scanner.nextInt();
+                        int year = inputBookYear(scanner);
                         bookshelf.addBook(new Book(author, title, year));
+                        scanner.nextLine();
                         break;
-                    case 2:
+                    case REMOVE_BOOK:
                         String bookToRemove = bookTitleInput(scanner);
                         bookshelf.removeBook(bookToRemove);
                         break;
-                    case 3:
+                    case FIND_BOOK:
                         String bookToFind = bookTitleInput(scanner);
                         System.out.println(bookshelf.findBook(bookToFind));
                         break;
-                    case 4:
+                    case DISPLAY_ALL:
                         bookshelf.displayAllBooks();
                         break;
-                    case 5:
+                    case SHOW_COUNT:
                         bookshelf.displayBooksCount();
                         break;
-                    case 6:
-                        bookshelf.displayFreeShelf();
-                        break;
-                    case 7:
+                    case CLEAR_SHELF:
                         bookshelf.clear();
                         break;
-                    case 8:
+                    case EXIT:
                         isActive = false;
                         break;
                     default:
@@ -52,8 +54,13 @@ public class BookshelfMain {
                 }
             } catch (RuntimeException e) {
                 System.out.println("Ошибка: " + e.getMessage());
+                wait(scanner);
+                continue;
             }
-            wait(scanner);
+            if (isActive) {
+                bookshelf.displayBookshelfStatus();
+                wait(scanner);
+            }
         }
         scanner.close();
     }
@@ -63,9 +70,38 @@ public class BookshelfMain {
         return scanner.nextLine();
     }
 
+    private static int inputBookYear(Scanner scanner) {
+        while (true) {
+            try {
+                System.out.println("Введите год: ");
+                int year = scanner.nextInt();
+                if (year < 0 || year > 2025) {
+                    throw new InputMismatchException();
+                }
+                return year;
+            } catch (InputMismatchException e) {
+                scanner.nextLine();
+                System.out.println("Ошибка: некорректный ввод года издания книги " +
+                        "(допустимо: целые числа от 0 до 2025)");
+            }
+        }
+    }
+
     private static void wait(Scanner scanner) {
         System.out.println("Для продолжения работы нажмите клавишу <Enter>");
         scanner.nextLine();
+    }
+
+    private static int userMenuInput(Scanner scanner) {
+        while (true) {
+            try {
+                return scanner.nextInt();
+            } catch (InputMismatchException e) {
+                scanner.nextLine();
+                System.out.print("Ошибка: для выбора пункта меню введите число!" +
+                        "\nВведите число, соответствующее пункту меню: ");
+            }
+        }
     }
 
     private static void welcomeMessage() throws InterruptedException {

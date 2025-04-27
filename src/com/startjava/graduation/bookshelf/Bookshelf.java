@@ -1,7 +1,10 @@
 package com.startjava.graduation.bookshelf;
 
+import com.startjava.lession2_3_4.calculator.MenuOptions;
+
 public class Bookshelf {
     private static final int CAPACITY = 10;
+    private static final int MIN_WIDTH = 40;
     private Book[] books = new Book[CAPACITY];
     private int booksCount = 0;
 
@@ -15,7 +18,7 @@ public class Bookshelf {
             System.out.println("Книга добавлена");
             return;
         }
-        throw new RuntimeException("Книжный шкаф полон");
+        throw new RuntimeException("Книга не добавлена, книжный шкаф полон");
     }
 
     public void removeBook(String title) {
@@ -67,17 +70,43 @@ public class Bookshelf {
         books[booksCount] = null;
     }
 
+    public void displayBookshelfStatus() {
+        if (booksCount == 0) {
+            System.out.println("Книжный шкаф пуст: Вы можете добавить в него первую книгу");
+            return;
+        }
+        System.out.println("В шкафу книг - " + booksCount +
+                ", свободно полок - " + (CAPACITY - booksCount) + "\n");
+
+        StringBuilder shelfCreator = new StringBuilder();
+        int maxTitleLength = findMaxTitleLength();
+
+        shelfCreator.append("|").append("-".repeat(maxTitleLength)).append("|");
+
+        for (int i = 0; i < CAPACITY; i++) {
+            if (books[i] != null) {
+                System.out.printf("|%-" + maxTitleLength + "s|%n", books[i].toString());
+                System.out.println(shelfCreator);
+            }
+        }
+    }
+
+    private int findMaxTitleLength() {
+        int maxLength = MIN_WIDTH;
+        for (int i = 0; i < booksCount; i++) {
+            char[] titleChars = books[i].toString().toCharArray();
+            int tempLength = titleChars.length;
+            if (tempLength > maxLength) {
+                maxLength = tempLength;
+            }
+        }
+        return maxLength;
+    }
+
     public static void printMainMenu() {
-        System.out.print("""
-                Меню:
-                1.Добавить книгу
-                2.Удалить книгу
-                3.Найти книгу
-                4.Показать все книги
-                5.Показать количество книг
-                6.Показать количество свободных полок
-                7.Очистить шкаф
-                8.Выйти
-                Введите в консоль требуемое действие:\s""");
+        for (MenuOptions option : MenuOptions.values()) {
+            System.out.println(option.getValue() + ". " + option.getDescription());
+        }
+        System.out.print("Введите в консоль требуемое значение меню: ");
     }
 }
