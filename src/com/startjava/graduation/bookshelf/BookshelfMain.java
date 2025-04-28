@@ -1,6 +1,5 @@
 package com.startjava.graduation.bookshelf;
 
-import com.startjava.lession2_3_4.calculator.MenuOptions;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -12,8 +11,7 @@ public class BookshelfMain {
         welcomeMessage();
 
         while (isActive) {
-            bookshelf.displayBookshelfStatus();
-            Bookshelf.printMainMenu();
+            bookshelf.printMainMenu();
             int choice = userMenuInput(scanner);
             scanner.nextLine();
             try {
@@ -24,7 +22,7 @@ public class BookshelfMain {
                         String title = bookTitleInput(scanner);
                         System.out.println("Введите автора: ");
                         String author = scanner.nextLine();
-                        int year = inputBookYear(scanner);
+                        int year = bookYearInput(scanner);
                         bookshelf.addBook(new Book(author, title, year));
                         scanner.nextLine();
                         break;
@@ -65,12 +63,34 @@ public class BookshelfMain {
         scanner.close();
     }
 
+    private static void welcomeMessage() throws InterruptedException {
+        String message = "Добро пожаловать в программу \"Книжный шкаф\"";
+        char[] chars = message.toCharArray();
+        for (char symbols : chars) {
+            System.out.print(symbols);
+            Thread.sleep(100);
+        }
+        System.out.println();
+    }
+
+    private static int userMenuInput(Scanner scanner) {
+        while (true) {
+            try {
+                return scanner.nextInt();
+            } catch (InputMismatchException e) {
+                scanner.nextLine();
+                System.out.print("Ошибка: для выбора пункта меню введите число!" +
+                        "\nВведите число, соответствующее пункту меню: ");
+            }
+        }
+    }
+
     private static String bookTitleInput(Scanner scanner) {
         System.out.println("Введите название книги: ");
         return scanner.nextLine();
     }
 
-    private static int inputBookYear(Scanner scanner) {
+    private static int bookYearInput(Scanner scanner) {
         while (true) {
             try {
                 System.out.println("Введите год: ");
@@ -90,27 +110,5 @@ public class BookshelfMain {
     private static void wait(Scanner scanner) {
         System.out.println("Для продолжения работы нажмите клавишу <Enter>");
         scanner.nextLine();
-    }
-
-    private static int userMenuInput(Scanner scanner) {
-        while (true) {
-            try {
-                return scanner.nextInt();
-            } catch (InputMismatchException e) {
-                scanner.nextLine();
-                System.out.print("Ошибка: для выбора пункта меню введите число!" +
-                        "\nВведите число, соответствующее пункту меню: ");
-            }
-        }
-    }
-
-    private static void welcomeMessage() throws InterruptedException {
-        String message = "Добро пожаловать в программу \"Книжный шкаф\"";
-        char[] chars = message.toCharArray();
-        for (char symbols : chars) {
-            System.out.print(symbols);
-            Thread.sleep(100);
-        }
-        System.out.println();
     }
 }

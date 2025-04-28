@@ -1,15 +1,13 @@
 package com.startjava.graduation.bookshelf;
 
-import com.startjava.lession2_3_4.calculator.MenuOptions;
+import com.startjava.graduation.bookshelf.exceptions.BookNotFoundException;
+import com.startjava.graduation.bookshelf.exceptions.BookshelfFullException;
 
 public class Bookshelf {
     private static final int CAPACITY = 10;
     private static final int MIN_WIDTH = 40;
     private Book[] books = new Book[CAPACITY];
     private int booksCount = 0;
-
-    public Bookshelf() {
-    }
 
     public void addBook(Book book) {
         if (booksCount < CAPACITY) {
@@ -18,7 +16,7 @@ public class Bookshelf {
             System.out.println("Книга добавлена");
             return;
         }
-        throw new RuntimeException("Книга не добавлена, книжный шкаф полон");
+        throw new BookshelfFullException("Книга не добавлена, книжный шкаф полон");
     }
 
     public void removeBook(String title) {
@@ -30,7 +28,7 @@ public class Bookshelf {
                 return;
             }
         }
-        throw new IllegalArgumentException("Указанная Вами книга не найдена");
+        throw new BookNotFoundException("Указанная Вами книга не найдена");
     }
 
     public String findBook(String title) {
@@ -40,21 +38,7 @@ public class Bookshelf {
                 return books[i].toString();
             }
         }
-        throw new IllegalArgumentException("Указанная Вами книга не найдена");
-    }
-
-    public void displayBooksCount() {
-        System.out.println("Количество книг в шкафу: " + booksCount);
-    }
-
-    public void displayFreeShelf() {
-        System.out.println("Количество свободных мест в шкафу: " + (CAPACITY - booksCount));
-    }
-
-    public void clear() {
-        books = new Book[CAPACITY];
-        booksCount = 0;
-        System.out.println("Книжный шкаф очищен");
+        throw new BookNotFoundException("Указанная Вами книга не найдена");
     }
 
     public void displayAllBooks() {
@@ -64,15 +48,18 @@ public class Bookshelf {
         }
     }
 
-    private void shiftBooks(int index) {
-        System.arraycopy(books, index + 1, books, index, booksCount - index - 1);
-        booksCount--;
-        books[booksCount] = null;
+    public void displayBooksCount() {
+        System.out.println("Количество книг в шкафу: " + booksCount);
+    }
+
+    public void clear() {
+        books = new Book[CAPACITY];
+        booksCount = 0;
+        System.out.println("Книжный шкаф очищен");
     }
 
     public void displayBookshelfStatus() {
         if (booksCount == 0) {
-            System.out.println("Книжный шкаф пуст: Вы можете добавить в него первую книгу");
             return;
         }
         System.out.println("В шкафу книг - " + booksCount +
@@ -91,6 +78,22 @@ public class Bookshelf {
         }
     }
 
+    public void printMainMenu() {
+        if (booksCount == 0) {
+            System.out.println("Книжный шкаф пуст: Вы можете добавить в него первую книгу");
+        }
+        for (MenuOptions option : MenuOptions.values()) {
+            System.out.println(option.getValue() + ". " + option.getDescription());
+        }
+        System.out.print("Введите в консоль требуемое значение меню: ");
+    }
+
+    private void shiftBooks(int index) {
+        System.arraycopy(books, index + 1, books, index, booksCount - index - 1);
+        booksCount--;
+        books[booksCount] = null;
+    }
+
     private int findMaxTitleLength() {
         int maxLength = MIN_WIDTH;
         for (int i = 0; i < booksCount; i++) {
@@ -101,12 +104,5 @@ public class Bookshelf {
             }
         }
         return maxLength;
-    }
-
-    public static void printMainMenu() {
-        for (MenuOptions option : MenuOptions.values()) {
-            System.out.println(option.getValue() + ". " + option.getDescription());
-        }
-        System.out.print("Введите в консоль требуемое значение меню: ");
     }
 }

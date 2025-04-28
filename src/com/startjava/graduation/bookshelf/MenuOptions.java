@@ -1,4 +1,4 @@
-package com.startjava.lession2_3_4.calculator;
+package com.startjava.graduation.bookshelf;
 
 public enum MenuOptions {
     ADD_BOOK(1, "Добавить книгу"),
@@ -6,7 +6,7 @@ public enum MenuOptions {
     FIND_BOOK(3, "Найти книгу"),
     DISPLAY_ALL(4, "Показать все книги"),
     SHOW_COUNT(5, "Показать количество книг"),
-    CLEAR_SHELF(6, "Очистить полку"),
+    CLEAR_SHELF(6, "Очистить шкаф"),
     EXIT(7, "Выход");
 
     private final int value;
