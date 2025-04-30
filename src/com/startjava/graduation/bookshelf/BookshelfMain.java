@@ -11,7 +11,7 @@ public class BookshelfMain {
         welcomeMessage();
 
         while (isActive) {
-            bookshelf.printMainMenu();
+            printMainMenu(bookshelf);
             int choice = userMenuInput(scanner);
             scanner.nextLine();
             try {
@@ -20,28 +20,24 @@ public class BookshelfMain {
                 switch (option) {
                     case ADD_BOOK:
                         String title = bookTitleInput(scanner);
-                        System.out.println("Введите автора: ");
+                        System.out.print("Введите автора: ");
                         String author = scanner.nextLine();
                         int year = bookYearInput(scanner);
                         bookshelf.addBook(new Book(author, title, year));
-                        scanner.nextLine();
+                        System.out.println("Книга добавлена");
                         break;
                     case REMOVE_BOOK:
                         String bookToRemove = bookTitleInput(scanner);
                         bookshelf.removeBook(bookToRemove);
+                        System.out.println("Книга удалена");
                         break;
                     case FIND_BOOK:
                         String bookToFind = bookTitleInput(scanner);
-                        System.out.println(bookshelf.findBook(bookToFind));
-                        break;
-                    case DISPLAY_ALL:
-                        bookshelf.displayAllBooks();
-                        break;
-                    case SHOW_COUNT:
-                        bookshelf.displayBooksCount();
+                        System.out.println("Результат поиска: " + bookshelf.findBook(bookToFind));
                         break;
                     case CLEAR_SHELF:
                         bookshelf.clear();
+                        System.out.println("Книжный шкаф очищен");
                         break;
                     case EXIT:
                         isActive = false;
@@ -52,8 +48,6 @@ public class BookshelfMain {
                 }
             } catch (RuntimeException e) {
                 System.out.println("Ошибка: " + e.getMessage());
-                wait(scanner);
-                continue;
             }
             if (isActive) {
                 bookshelf.displayBookshelfStatus();
@@ -73,6 +67,16 @@ public class BookshelfMain {
         System.out.println();
     }
 
+    private static void printMainMenu(Bookshelf bookshelf) {
+        if (bookshelf.getBooksCount() == 0) {
+            System.out.println("Книжный шкаф пуст: Вы можете добавить в него первую книгу");
+        }
+        for (MenuOptions option : MenuOptions.values()) {
+            System.out.println(option.getValue() + ". " + option.getDescription());
+        }
+        System.out.print("Введите в консоль требуемое значение меню: ");
+    }
+
     private static int userMenuInput(Scanner scanner) {
         while (true) {
             try {
@@ -86,23 +90,33 @@ public class BookshelfMain {
     }
 
     private static String bookTitleInput(Scanner scanner) {
-        System.out.println("Введите название книги: ");
-        return scanner.nextLine();
+        while (true) {
+            try {
+                System.out.print("Введите название книги: ");
+                String title = scanner.nextLine();
+                if (title.isBlank()) {
+                    throw new IllegalArgumentException("Название книги не должно быть пустым!");
+                }
+                return title;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Ошибка: " + e.getMessage());
+            }
+        }
     }
 
     private static int bookYearInput(Scanner scanner) {
         while (true) {
             try {
-                System.out.println("Введите год: ");
+                System.out.print("Введите год: ");
                 int year = scanner.nextInt();
                 if (year < 0 || year > 2025) {
-                    throw new InputMismatchException();
+                    throw new InputMismatchException("Некорректный ввод года издания книги " +
+                            "(допустимо: целые числа от 0 до 2025)");
                 }
+                scanner.nextLine();
                 return year;
             } catch (InputMismatchException e) {
-                scanner.nextLine();
-                System.out.println("Ошибка: некорректный ввод года издания книги " +
-                        "(допустимо: целые числа от 0 до 2025)");
+                System.out.println("Ошибка: " + e.getMessage());
             }
         }
     }
