@@ -5,18 +5,34 @@ import com.startjava.graduation.bookshelf.exceptions.BookshelfFullException;
 import java.util.Arrays;
 
 public class Bookshelf {
-    private static final int CAPACITY = 2;
+    private static final int CAPACITY = 5;
     private Book[] books = new Book[CAPACITY];
     private int booksCount = 0;
+    private int bookshelfLength = 0;
+
+    public Book[] getBooks() {
+        return books;
+    }
 
     public int getBooksCount() {
         return booksCount;
+    }
+
+    public int getBookshelfLength() {
+        return bookshelfLength;
+    }
+
+    public int getFreeShelves() {
+        return CAPACITY - booksCount;
     }
 
     public void addBook(Book book) {
         if (booksCount < CAPACITY) {
             books[booksCount] = book;
             booksCount++;
+            if (book.toString().length() > bookshelfLength) {
+                bookshelfLength = updateShelvesLength();
+            }
             return;
         }
         throw new BookshelfFullException("Книга не добавлена, книжный шкаф полон");
@@ -25,7 +41,11 @@ public class Bookshelf {
     public void removeBook(String title) {
         for (int i = 0; i < booksCount; i++) {
             if (books[i].getTitle().equals(title)) {
+                int removedLength = books[i].toString().length();
                 shiftBooks(i);
+                if (removedLength == bookshelfLength) {
+                    bookshelfLength = updateShelvesLength();
+                }
                 return;
             }
         }
@@ -48,38 +68,15 @@ public class Bookshelf {
     }
 
     public void clear() {
-        Arrays.fill(books, null);
+        Arrays.fill(books, 0, booksCount - 1, null);
         booksCount = 0;
     }
 
-    public void displayBookshelfStatus() {
-        if (booksCount == 0) {
-            return;
-        }
-        System.out.println("В шкафу книг - " + booksCount +
-                ", свободно полок - " + (CAPACITY - booksCount) + "\n");
-
-        StringBuilder shelfCreator = new StringBuilder();
-        int maxTitleLength = findMaxTitleLength();
-
-        shelfCreator.append("|").append("-".repeat(maxTitleLength)).append("|");
-
-        for (int i = 0; i < CAPACITY; i++) {
-            if (books[i] != null) {
-                System.out.printf("|%-" + maxTitleLength + "s|%n", books[i]);
-                System.out.println(shelfCreator);
-            }
-        }
-    }
-
-    private int findMaxTitleLength() {
-        int maxLength = books[0].toString().length();
+    private int updateShelvesLength() {
+        int newBookshelfLength = 0;
         for (int i = 0; i < booksCount; i++) {
-            int tempLength = books[i].toString().length();
-            if (tempLength > maxLength) {
-                maxLength = tempLength;
-            }
+            newBookshelfLength = Math.max(newBookshelfLength, books[i].toString().length());
         }
-        return maxLength;
+        return newBookshelfLength;
     }
 }

@@ -50,7 +50,7 @@ public class BookshelfMain {
                 System.out.println("Ошибка: " + e.getMessage());
             }
             if (isActive) {
-                bookshelf.displayBookshelfStatus();
+                displayBookshelf(bookshelf);
                 wait(scanner);
             }
         }
@@ -117,6 +117,24 @@ public class BookshelfMain {
                 return year;
             } catch (InputMismatchException e) {
                 System.out.println("Ошибка: " + e.getMessage());
+            }
+        }
+    }
+
+    private static void displayBookshelf(Bookshelf bookshelf) {
+        if (bookshelf.getBooksCount() == 0) {
+            return;
+        }
+        System.out.println("В шкафу книг - " + bookshelf.getBooksCount() +
+                ", свободно полок - " + bookshelf.getFreeShelves() + "\n");
+
+        StringBuilder shelf = new StringBuilder();
+        shelf.append("|").append("-".repeat(bookshelf.getBookshelfLength())).append("|");
+
+        for (Book book : bookshelf.getBooks()) {
+            if (book != null) {
+                System.out.printf("|%-" + bookshelf.getBookshelfLength() + "s|%n", book);
+                System.out.println(shelf);
             }
         }
     }
