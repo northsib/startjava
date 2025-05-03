@@ -6,27 +6,25 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BookshelfMain {
-    private static boolean isActive;
-
     public static void main(String[] args) throws InterruptedException {
         Bookshelf bookshelf = new Bookshelf();
-        isActive = true;
         Scanner scanner = new Scanner(System.in);
         welcomeMessage();
-        while (isActive) {
+        while (true) {
             printMainMenu(bookshelf);
             int choice = inputMenuItem(scanner);
             scanner.nextLine();
             try {
                 MenuItems item = MenuItems.getByItemNumber(choice);
+                if (item == MenuItems.EXIT) {
+                    break;
+                }
                 switchItem(item, scanner, bookshelf);
             } catch (RuntimeException e) {
                 System.out.println("Ошибка: " + e.getMessage());
             }
-            if (isActive) {
-                displayBookshelf(bookshelf);
-                wait(scanner);
-            }
+            displayBookshelf(bookshelf);
+            wait(scanner);
         }
         scanner.close();
     }
@@ -42,11 +40,11 @@ public class BookshelfMain {
     }
 
     private static void printMainMenu(Bookshelf bookshelf) {
-        if (bookshelf.getBooksCount() == 0) {
+        if (bookshelf.getBookCount() == 0) {
             System.out.println("Книжный шкаф пуст: Вы можете добавить в него первую книгу");
         }
-        for (MenuItems option : MenuItems.values()) {
-            System.out.println(option.getItemNumber() + ". " + option.getDescription());
+        for (MenuItems item : MenuItems.values()) {
+            System.out.println(item.getItemNumber() + ". " + item.getDescription());
         }
         System.out.print("Введите в консоль требуемое значение меню: ");
     }
@@ -77,9 +75,6 @@ public class BookshelfMain {
             case CLEAR_SHELF:
                 bookshelf.clear();
                 System.out.println("Книжный шкаф очищен");
-                break;
-            case EXIT:
-                isActive = false;
                 break;
             default:
                 throw new IllegalArgumentException("Введенный Вами номер " +
@@ -143,10 +138,10 @@ public class BookshelfMain {
     }
 
     private static void displayBookshelf(Bookshelf bookshelf) {
-        if (bookshelf.getBooksCount() == 0) {
+        if (bookshelf.getBookCount() == 0) {
             return;
         }
-        System.out.println("В шкафу книг - " + bookshelf.getBooksCount() +
+        System.out.println("В шкафу книг - " + bookshelf.getBookCount() +
                 ", свободно полок - " + bookshelf.getFreeShelves() + "\n");
 
         StringBuilder shelf = new StringBuilder();

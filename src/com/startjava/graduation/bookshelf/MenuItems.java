@@ -24,10 +24,8 @@ public enum MenuItems {
     }
 
     public static MenuItems getByItemNumber(int itemNumber) {
-        for (MenuItems item : values()) {
-            if (item.getItemNumber() == itemNumber) {
-                return item;
-            }
+        if (itemNumber >= 0 && itemNumber <= values().length) {
+            return values()[itemNumber - 1];
         }
         throw new IllegalArgumentException("Неверное значение меню (" + itemNumber + ")");
     }
