@@ -1,51 +1,25 @@
 package com.startjava.graduation.bookshelf;
 
+import com.startjava.graduation.bookshelf.exceptions.BookNotFoundException;
+import java.time.Year;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class BookshelfMain {
+    private static boolean isActive;
+
     public static void main(String[] args) throws InterruptedException {
         Bookshelf bookshelf = new Bookshelf();
-        boolean isActive = true;
+        isActive = true;
         Scanner scanner = new Scanner(System.in);
         welcomeMessage();
-
         while (isActive) {
             printMainMenu(bookshelf);
-            int choice = userMenuInput(scanner);
+            int choice = inputMenuItem(scanner);
             scanner.nextLine();
             try {
-                MenuOptions option = MenuOptions.getByValue(choice);
-
-                switch (option) {
-                    case ADD_BOOK:
-                        String title = bookTitleInput(scanner);
-                        System.out.print("Введите автора: ");
-                        String author = scanner.nextLine();
-                        int year = bookYearInput(scanner);
-                        bookshelf.addBook(new Book(author, title, year));
-                        System.out.println("Книга добавлена");
-                        break;
-                    case REMOVE_BOOK:
-                        String bookToRemove = bookTitleInput(scanner);
-                        bookshelf.removeBook(bookToRemove);
-                        System.out.println("Книга удалена");
-                        break;
-                    case FIND_BOOK:
-                        String bookToFind = bookTitleInput(scanner);
-                        System.out.println("Результат поиска: " + bookshelf.findBook(bookToFind));
-                        break;
-                    case CLEAR_SHELF:
-                        bookshelf.clear();
-                        System.out.println("Книжный шкаф очищен");
-                        break;
-                    case EXIT:
-                        isActive = false;
-                        break;
-                    default:
-                        throw new IllegalArgumentException("Введенный Вами номер " +
-                                "не соответствует пункту меню!");
-                }
+                MenuItems item = MenuItems.getByItemNumber(choice);
+                switchItem(item, scanner, bookshelf);
             } catch (RuntimeException e) {
                 System.out.println("Ошибка: " + e.getMessage());
             }
@@ -60,8 +34,8 @@ public class BookshelfMain {
     private static void welcomeMessage() throws InterruptedException {
         String message = "Добро пожаловать в программу \"Книжный шкаф\"";
         char[] chars = message.toCharArray();
-        for (char symbols : chars) {
-            System.out.print(symbols);
+        for (char ch : chars) {
+            System.out.print(ch);
             Thread.sleep(100);
         }
         System.out.println();
@@ -71,13 +45,13 @@ public class BookshelfMain {
         if (bookshelf.getBooksCount() == 0) {
             System.out.println("Книжный шкаф пуст: Вы можете добавить в него первую книгу");
         }
-        for (MenuOptions option : MenuOptions.values()) {
-            System.out.println(option.getValue() + ". " + option.getDescription());
+        for (MenuItems option : MenuItems.values()) {
+            System.out.println(option.getItemNumber() + ". " + option.getDescription());
         }
         System.out.print("Введите в консоль требуемое значение меню: ");
     }
 
-    private static int userMenuInput(Scanner scanner) {
+    private static int inputMenuItem(Scanner scanner) {
         while (true) {
             try {
                 return scanner.nextInt();
@@ -89,7 +63,54 @@ public class BookshelfMain {
         }
     }
 
-    private static String bookTitleInput(Scanner scanner) {
+    private static void switchItem(MenuItems item, Scanner scanner, Bookshelf bookshelf) {
+        switch (item) {
+            case ADD_BOOK:
+                add(scanner, bookshelf);
+                break;
+            case REMOVE_BOOK:
+                remove(scanner, bookshelf);
+                break;
+            case FIND_BOOK:
+                find(scanner, bookshelf);
+                break;
+            case CLEAR_SHELF:
+                bookshelf.clear();
+                System.out.println("Книжный шкаф очищен");
+                break;
+            case EXIT:
+                isActive = false;
+                break;
+            default:
+                throw new IllegalArgumentException("Введенный Вами номер " +
+                        "не соответствует пункту меню!");
+        }
+    }
+
+    private static void add(Scanner scanner, Bookshelf bookshelf) {
+        String title = inputBookTitle(scanner);
+        System.out.print("Введите автора: ");
+        String author = scanner.nextLine();
+        int year = inputBookYear(scanner);
+        bookshelf.addBook(new Book(author, title, year));
+        System.out.println("Книга добавлена");
+    }
+
+    private static void remove(Scanner scanner, Bookshelf bookshelf) {
+        String title = inputBookTitle(scanner);
+        bookshelf.removeBook(title);
+        System.out.println("Книга удалена");
+    }
+
+    private static void find(Scanner scanner, Bookshelf bookshelf) {
+        String title = inputBookTitle(scanner);
+        if (bookshelf.findBook(title) == null) {
+            throw new BookNotFoundException("Указанная Вами книга не найдена");
+        }
+        System.out.println("Результат поиска: " + bookshelf.findBook(title));
+    }
+
+    private static String inputBookTitle(Scanner scanner) {
         while (true) {
             try {
                 System.out.print("Введите название книги: ");
@@ -104,12 +125,12 @@ public class BookshelfMain {
         }
     }
 
-    private static int bookYearInput(Scanner scanner) {
+    private static int inputBookYear(Scanner scanner) {
         while (true) {
             try {
                 System.out.print("Введите год: ");
                 int year = scanner.nextInt();
-                if (year < 0 || year > 2025) {
+                if (year < 0 || year > Year.now().getValue()) {
                     throw new InputMismatchException("Некорректный ввод года издания книги " +
                             "(допустимо: целые числа от 0 до 2025)");
                 }
@@ -132,10 +153,8 @@ public class BookshelfMain {
         shelf.append("|").append("-".repeat(bookshelf.getBookshelfLength())).append("|");
 
         for (Book book : bookshelf.getBooks()) {
-            if (book != null) {
-                System.out.printf("|%-" + bookshelf.getBookshelfLength() + "s|%n", book);
-                System.out.println(shelf);
-            }
+            System.out.printf("|%-" + bookshelf.getBookshelfLength() + "s|%n", book);
+            System.out.println(shelf);
         }
     }
 

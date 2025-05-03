@@ -11,7 +11,7 @@ public class Bookshelf {
     private int bookshelfLength = 0;
 
     public Book[] getBooks() {
-        return books;
+        return Arrays.copyOf(books, booksCount);
     }
 
     public int getBooksCount() {
@@ -27,15 +27,14 @@ public class Bookshelf {
     }
 
     public void addBook(Book book) {
-        if (booksCount < CAPACITY) {
-            books[booksCount] = book;
-            booksCount++;
-            if (book.toString().length() > bookshelfLength) {
-                bookshelfLength = updateShelvesLength();
-            }
-            return;
+        if (booksCount > CAPACITY) {
+            throw new BookshelfFullException("Книга не добавлена, книжный шкаф полон");
         }
-        throw new BookshelfFullException("Книга не добавлена, книжный шкаф полон");
+        books[booksCount] = book;
+        booksCount++;
+        if (book.toString().length() > bookshelfLength) {
+            bookshelfLength = updateShelvesLength();
+        }
     }
 
     public void removeBook(String title) {
@@ -64,7 +63,7 @@ public class Bookshelf {
                 return books[i];
             }
         }
-        throw new BookNotFoundException("Указанная Вами книга не найдена");
+        return null;
     }
 
     public void clear() {
