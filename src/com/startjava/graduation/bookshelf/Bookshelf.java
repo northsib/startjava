@@ -27,7 +27,7 @@ public class Bookshelf {
     }
 
     public void addBook(Book book) {
-        if (bookCount > CAPACITY) {
+        if (bookCount >= CAPACITY) {
             throw new BookshelfFullException("Книга не добавлена, книжный шкаф полон");
         }
         books[bookCount] = book;

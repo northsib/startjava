@@ -54,8 +54,8 @@ public class BookshelfMain {
                 scanner.nextLine();
                 return MenuItems.getByItemNumber(userChoice);
             } catch (InputMismatchException e) {
-                System.out.print("Ошибка: для выбора пункта меню введите число!" +
-                        "\nВведите число, соответствующее пункту меню: ");
+                System.out.print("Ошибка: для выбора пункта меню введите число!");
+                scanner.nextLine();
             } catch (RuntimeException e) {
                 System.out.println("Ошибка: " + e.getMessage());
             }
@@ -126,13 +126,16 @@ public class BookshelfMain {
             try {
                 System.out.print("Введите год: ");
                 int year = scanner.nextInt();
+                scanner.nextLine();
                 if (year < 0 || year > Year.now().getValue()) {
-                    throw new InputMismatchException("Некорректный ввод года издания книги " +
+                    throw new IllegalArgumentException("Некорректный ввод года издания книги " +
                             "(допустимо: целые числа от 0 до 2025)");
                 }
-                scanner.nextLine();
                 return year;
             } catch (InputMismatchException e) {
+                System.out.print("Недопустимый ввод (допустимо: целые числа от 0 до 2025)");
+                scanner.nextLine();
+            } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка: " + e.getMessage());
             }
         }
