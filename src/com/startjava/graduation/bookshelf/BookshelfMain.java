@@ -12,10 +12,8 @@ public class BookshelfMain {
         welcomeMessage();
         while (true) {
             printMainMenu(bookshelf);
-            int choice = inputMenuItem(scanner);
-            scanner.nextLine();
             try {
-                MenuItems item = MenuItems.getByItemNumber(choice);
+                MenuItems item = inputMenuItem(scanner);
                 if (item == MenuItems.EXIT) {
                     break;
                 }
@@ -46,17 +44,21 @@ public class BookshelfMain {
         for (MenuItems item : MenuItems.values()) {
             System.out.println(item.getItemNumber() + ". " + item.getDescription());
         }
-        System.out.print("Введите в консоль требуемое значение меню: ");
     }
 
-    private static int inputMenuItem(Scanner scanner) {
+    private static MenuItems inputMenuItem(Scanner scanner) {
         while (true) {
             try {
-                return scanner.nextInt();
+                System.out.print("Введите в консоль требуемое значение меню: ");
+                int userChoice = scanner.nextInt();
+                scanner.nextLine();
+                return MenuItems.getByItemNumber(userChoice);
             } catch (InputMismatchException e) {
                 scanner.nextLine();
                 System.out.print("Ошибка: для выбора пункта меню введите число!" +
                         "\nВведите число, соответствующее пункту меню: ");
+            } catch (RuntimeException e) {
+                System.out.println("Ошибка: " + e.getMessage());
             }
         }
     }
