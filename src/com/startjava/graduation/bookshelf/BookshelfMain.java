@@ -54,7 +54,6 @@ public class BookshelfMain {
                 scanner.nextLine();
                 return MenuItems.getByItemNumber(userChoice);
             } catch (InputMismatchException e) {
-                scanner.nextLine();
                 System.out.print("Ошибка: для выбора пункта меню введите число!" +
                         "\nВведите число, соответствующее пункту меню: ");
             } catch (RuntimeException e) {
