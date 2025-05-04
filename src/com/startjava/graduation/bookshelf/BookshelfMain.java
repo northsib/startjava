@@ -54,7 +54,7 @@ public class BookshelfMain {
                 scanner.nextLine();
                 return MenuItems.getByItemNumber(userChoice);
             } catch (InputMismatchException e) {
-                System.out.print("Ошибка: для выбора пункта меню введите число!");
+                System.out.println("Ошибка: для выбора пункта меню введите число!");
                 scanner.nextLine();
             } catch (RuntimeException e) {
                 System.out.println("Ошибка: " + e.getMessage());
@@ -133,7 +133,7 @@ public class BookshelfMain {
                 }
                 return year;
             } catch (InputMismatchException e) {
-                System.out.print("Недопустимый ввод (допустимо: целые числа от 0 до 2025)");
+                System.out.println("Недопустимый ввод (допустимо: целые числа от 0 до 2025)");
                 scanner.nextLine();
             } catch (IllegalArgumentException e) {
                 System.out.println("Ошибка: " + e.getMessage());
