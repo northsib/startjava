@@ -29,8 +29,7 @@ public class BookshelfMain {
 
     private static void welcomeMessage() throws InterruptedException {
         String message = "Добро пожаловать в программу \"Книжный шкаф\"";
-        char[] chars = message.toCharArray();
-        for (char ch : chars) {
+        for (char ch : message.toCharArray()) {
             System.out.print(ch);
             Thread.sleep(100);
         }
@@ -52,7 +51,7 @@ public class BookshelfMain {
                 System.out.print("Введите в консоль требуемое значение меню: ");
                 int userChoice = scanner.nextInt();
                 scanner.nextLine();
-                return MenuItems.getByItemNumber(userChoice);
+                return MenuItems.getItem(userChoice);
             } catch (InputMismatchException e) {
                 System.out.println("Ошибка: для выбора пункта меню введите число!");
                 scanner.nextLine();
@@ -84,41 +83,12 @@ public class BookshelfMain {
     }
 
     private static void add(Scanner scanner, Bookshelf bookshelf) {
-        String title = inputBookTitle(scanner);
+        String title = inputTitle(scanner);
         System.out.print("Введите автора: ");
         String author = scanner.nextLine();
         int year = inputBookYear(scanner);
         bookshelf.addBook(new Book(author, title, year));
         System.out.println("Книга добавлена");
-    }
-
-    private static void remove(Scanner scanner, Bookshelf bookshelf) {
-        String title = inputBookTitle(scanner);
-        bookshelf.removeBook(title);
-        System.out.println("Книга удалена");
-    }
-
-    private static void find(Scanner scanner, Bookshelf bookshelf) {
-        String title = inputBookTitle(scanner);
-        if (bookshelf.findBook(title) == null) {
-            throw new BookNotFoundException("Указанная Вами книга не найдена");
-        }
-        System.out.println("Результат поиска: " + bookshelf.findBook(title));
-    }
-
-    private static String inputBookTitle(Scanner scanner) {
-        while (true) {
-            try {
-                System.out.print("Введите название книги: ");
-                String title = scanner.nextLine();
-                if (title.isBlank()) {
-                    throw new IllegalArgumentException("Название книги не должно быть пустым!");
-                }
-                return title;
-            } catch (IllegalArgumentException e) {
-                System.out.println("Ошибка: " + e.getMessage());
-            }
-        }
     }
 
     private static int inputBookYear(Scanner scanner) {
@@ -141,6 +111,35 @@ public class BookshelfMain {
         }
     }
 
+    private static void remove(Scanner scanner, Bookshelf bookshelf) {
+        String title = inputTitle(scanner);
+        bookshelf.removeBook(title);
+        System.out.println("Книга удалена");
+    }
+
+    private static void find(Scanner scanner, Bookshelf bookshelf) {
+        String title = inputTitle(scanner);
+        if (bookshelf.findBook(title) == null) {
+            throw new BookNotFoundException("Указанная Вами книга не найдена");
+        }
+        System.out.println("Результат поиска: " + bookshelf.findBook(title));
+    }
+
+    private static String inputTitle(Scanner scanner) {
+        while (true) {
+            try {
+                System.out.print("Введите название книги: ");
+                String title = scanner.nextLine();
+                if (title.isBlank()) {
+                    throw new IllegalArgumentException("Название книги не должно быть пустым!");
+                }
+                return title;
+            } catch (IllegalArgumentException e) {
+                System.out.println("Ошибка: " + e.getMessage());
+            }
+        }
+    }
+
     private static void displayBookshelf(Bookshelf bookshelf) {
         if (bookshelf.getBookCount() == 0) {
             return;
@@ -149,12 +148,14 @@ public class BookshelfMain {
                 ", свободно полок - " + bookshelf.getFreeShelves() + "\n");
 
         StringBuilder shelf = new StringBuilder();
-        shelf.append("|").append("-".repeat(bookshelf.getBookshelfLength())).append("|");
-
         for (Book book : bookshelf.getBooks()) {
-            System.out.printf("|%-" + bookshelf.getBookshelfLength() + "s|%n", book);
-            System.out.println(shelf);
+            shelf.append("|").append(book.toString())
+                    .append(" ".repeat(bookshelf.getBookshelfLength() - book.toString().length()))
+                    .append("|").append("\n")
+                    .append("|").append("-".repeat(bookshelf.getBookshelfLength()))
+                    .append("|").append("\n");
         }
+        System.out.println(shelf);
     }
 
     private static void wait(Scanner scanner) {

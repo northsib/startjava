@@ -23,13 +23,9 @@ public enum MenuItems {
         return itemNumber;
     }
 
-    public static MenuItems getByItemNumber(int itemNumber) {
+    public static MenuItems getItem(int itemNumber) {
         if (itemNumber > 0 && itemNumber <= values().length) {
             return values()[itemNumber - 1];
-        }
-        if (itemNumber <= 0) {
-            throw new ArrayIndexOutOfBoundsException("Значение меню не может быть 0 " +
-                    "и не может быть отрицательным");
         }
         throw new IllegalArgumentException("Неверное значение меню (" + itemNumber + ")");
     }

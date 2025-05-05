@@ -33,7 +33,7 @@ public class Bookshelf {
         books[bookCount] = book;
         bookCount++;
         if (book.toString().length() > bookshelfLength) {
-            bookshelfLength = updateShelvesLength();
+            updateShelvesLength();
         }
     }
 
@@ -43,7 +43,7 @@ public class Bookshelf {
                 int removedLength = books[i].toString().length();
                 shiftBooks(i);
                 if (removedLength == bookshelfLength) {
-                    bookshelfLength = updateShelvesLength();
+                    updateShelvesLength();
                 }
                 return;
             }
@@ -67,16 +67,15 @@ public class Bookshelf {
     }
 
     public void clear() {
-        Arrays.fill(books, 0, bookCount - 1, null);
+        Arrays.fill(books, 0, bookCount, null);
         bookCount = 0;
         bookshelfLength = 0;
     }
 
-    private int updateShelvesLength() {
-        int newBookshelfLength = 0;
+    private void updateShelvesLength() {
+        bookshelfLength = 0;
         for (int i = 0; i < bookCount; i++) {
-            newBookshelfLength = Math.max(newBookshelfLength, books[i].toString().length());
+            bookshelfLength = Math.max(bookshelfLength, books[i].toString().length());
         }
-        return newBookshelfLength;
     }
 }
