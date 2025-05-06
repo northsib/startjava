@@ -12,8 +12,8 @@ CREATE TABLE jaegers(
     launch DATE,
     kaiju_kill INTEGER);
 
--- Р’РєР»СЋС‡Р°РµРј populate.sql
+-- Включаем populate.sql
 \include_relative populate.sql
 
--- Р’РєР»СЋС‡Р°РµРј queries.sql
+-- Включаем queries.sql
 \include_relative queries.sql

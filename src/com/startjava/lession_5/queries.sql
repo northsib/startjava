@@ -1,31 +1,31 @@
--- РІС‹РІРѕРґ РІСЃРµР№ С‚Р°Р±Р»РёС†С‹
+-- вывод всей таблицы
 SELECT *
   FROM jaegers;
--- РІС‹РІРѕРґ С‚РѕР»СЊРєРѕ РЅРµ СѓРЅРёС‡С‚РѕР¶РµРЅРЅС‹С… СЂРѕР±РѕС‚РѕРІ
+-- вывод только не уничтоженных роботов
 SELECT *
   FROM jaegers
  WHERE status NOT IN ('Destroyed');
--- РІС‹РІРѕРґ СЂРѕР±РѕС‚РѕРІ С‚РѕР»СЊРєРѕ СЃРµСЂРёРё Mark-1 Рё Mark-4
+-- вывод роботов только серии Mark-1 и Mark-4
 SELECT *
   FROM jaegers
  WHERE mark IN ('Mark-1', 'Mark-4');
 /*
-РІС‹РІРѕРґ РІСЃРµС… СЂРѕР±РѕС‚РѕРІ, РєСЂРѕРјРµ Mark-1 Рё Mark-4, СЃ СЃРѕСЂС‚РёСЂРѕРІРєРѕР№
-С‚Р°Р±Р»РёС†С‹ РїРѕ СѓР±С‹РІР°РЅРёСЋ РїРѕ СЃС‚РѕР»Р±С†Сѓ mark
+вывод всех роботов, кроме Mark-1 и Mark-4, с сортировкой
+таблицы по убыванию по столбцу mark
 */
 SELECT *
   FROM jaegers
  WHERE mark NOT IN ('Mark-1', 'Mark-4')
  ORDER BY mark DESC;
--- РІС‹РІРѕРґ РёРЅС„РѕСЂРјР°С†РёРё Рѕ СЃР°РјС‹С… СЃС‚Р°СЂС‹С… СЂРѕР±РѕС‚Р°С…
+-- вывод информации о самых старых роботах
 SELECT *
   FROM jaegers
  WHERE launch =
        (SELECT MIN(launch)
           FROM jaegers);
 /*
-РІС‹РІРѕРґ РёРЅС„РѕСЂРјР°С†РёРё РёР· СЃС‚РѕР»Р±С†РѕРІ: model_name, mark, launch, kaiju_kill,
-С‚РµС… СЂРѕР±РѕС‚РѕРІ, РєРѕС‚РѕСЂС‹Рµ СѓРЅРёС‡С‚РѕР¶РёР»Рё Р±РѕР»СЊС€Рµ РІСЃРµС… kaiju
+вывод информации из столбцов: model_name, mark, launch, kaiju_kill,
+тех роботов, которые уничтожили больше всех kaiju
 */
 SELECT model_name, mark, launch, kaiju_kill
   FROM jaegers
@@ -33,22 +33,22 @@ SELECT model_name, mark, launch, kaiju_kill
        (SELECT MAX(kaiju_kill)
           FROM jaegers);
 /*
-РІС‹РІРѕРґ СЃСЂРµРґРЅРµРіРѕ РІРµСЃР° СЂРѕР±РѕС‚РѕРІ, СЃ РѕРєСЂСѓРіР»РµРЅРёРµРј РґРѕ 3 Р·РЅР°РєРѕРІ
-СЃ РѕС‚РѕР±СЂР°Р¶РµРЅРёРµРј avg_weight
+вывод среднего веса роботов, с округлением до 3 знаков
+с отображением avg_weight
 */
 SELECT ROUND(AVG(weight), 3) AS avg_weight
   FROM jaegers;
--- СѓРІРµР»РёС‡РµРЅРёРµ РЅР° 1 РєРѕР»РёС‡РµСЃС‚РІРѕ СѓРЅРёС‡С‚РѕР¶РµРЅРЅС‹С… kaiju Сѓ РЅРµСЂР°Р·СЂСѓС€РµРЅРЅС‹С… СЂРѕР±РѕС‚РѕРІ
+-- увеличение на 1 количество уничтоженных kaiju у неразрушенных роботов
 UPDATE jaegers
    SET kaiju_kill = kaiju_kill + 1
  WHERE status NOT IN ('Destroyed');
--- РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ С‚Р°Р±Р»РёС†С‹
+-- отображение таблицы
 SELECT *
   FROM jaegers;
--- СѓРґР°Р»РµРЅРёРµ СѓРЅРёС‡С‚РѕР¶РµРЅРЅС‹С… СЂРѕР±РѕС‚РѕРІ
+-- удаление уничтоженных роботов
 DELETE
   FROM jaegers
  WHERE status = 'Destroyed';
--- РѕС‚РѕР±СЂР°Р¶РµРЅРёРµ С‚Р°Р±Р»РёС†С‹
+-- отображение таблицы
 SELECT *
   FROM jaegers;
